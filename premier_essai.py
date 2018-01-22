@@ -7,7 +7,7 @@ Created on Mon Jan 22 17:18:41 2018
 
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
-from soccersimulator.settings import PLAYER_RADIUS, BALL_RADIUS
+from soccersimulator.settings import PLAYER_RADIUS, BALL_RADIUS, GAME_WIDTH, GAME_HEIGHT, GAME_GOAL_HEIGHT
 from soccersimulator import Strategy
 
 import math
@@ -33,9 +33,11 @@ class ShootStrategy(Strategy):
         
         if(loc_ball.distance(loc_player) < PLAYER_RADIUS + BALL_RADIUS): 
             if(id_team == 1):
-                return SoccerAction(shoot =  )
+                loc_goal = Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+                return SoccerAction(shoot = loc_goal - loc_player)
             else:
-                return SoccerAction(shoot = )
+                loc_goal = Vector2D(0, GAME_HEIGHT/2)
+                return SoccerAction(shoot = loc_goal - loc_player)
         else:
             return SoccerAction(loc_ball - loc_player)
 
@@ -45,7 +47,7 @@ class ShootStrategy(Strategy):
 pyteam = SoccerTeam(name="PyTeam")
 thon = SoccerTeam(name="ThonTeam")
 pyteam.add("PyPlayer",ShootStrategy()) #Strategie qui ne fait rien
-thon.add("ThonPlayer",ShootStrategy())   #Strategie aleatoire
+thon.add("ThonPlayer",RandomStrategy())   #Strategie aleatoire
 
 #Creation d'une partie
 simu = Simulation(pyteam,thon)
