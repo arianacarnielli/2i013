@@ -14,3 +14,5 @@ from soccersimulator import Strategy
 from soccersimulator import settings
 
 import math
+
+testando
