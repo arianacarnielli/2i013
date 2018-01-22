@@ -11,17 +11,14 @@ from soccersimulator.settings import PLAYER_RADIUS, BALL_RADIUS, GAME_WIDTH, GAM
 from soccersimulator import Strategy
 
 import math
-
-
 ## Strategie aleatoire
 class RandomStrategy(Strategy):
     def __init__(self):
         Strategy.__init__(self,"Random")
     def compute_strategy(self,state,id_team,id_player):
         return SoccerAction(Vector2D.create_random(-0.5,0.5), Vector2D.create_random(-0.5,0.5))
-        
-        
-# Strategie shoot
+              
+## Strategie shoot
         
 class ShootStrategy(Strategy):
     def __init__(self):
