@@ -46,7 +46,7 @@ class ShootStrategy(Strategy):
 ## Creation d'une equipe
 pyteam = SoccerTeam(name="PyTeam")
 thon = SoccerTeam(name="ThonTeam")
-pyteam.add("PyPlayer",ShootStrategy()) #Strategie qui ne fait rien
+pyteam.add("PyPlayer",ShootStrategy()) #Strategie qui shoot vers le cage
 thon.add("ThonPlayer",RandomStrategy())   #Strategie aleatoire
 
 #Creation d'une partie
