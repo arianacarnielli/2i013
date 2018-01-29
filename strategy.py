@@ -107,6 +107,20 @@ class FonceurStrategy(Strategy):
         Strategy.__init__(self,"Fonceur")
     def compute_strategy(self,state,id_team,id_player):
         return SoccerAction(state.ball.position-state.player_state(id_team,id_player).position,Vector2D((id_player)*GAME_WIDTH,GAME_HEIGHT/2)-state.ball.position)
+
+class FonceurFaible(Strategy):
+    def __init__(self):
+        Strategy.__init__(self,"FonceurFaible")
+    def compute_strategy(self,state,id_team,id_player):
+        
+        tools = ToolBox(state,id_team,id_player)   
+        
+        if(tools.PosBall().distance(tools.PosJoueur()) < PLAYER_RADIUS + BALL_RADIUS): 
+            return SoccerAction(shoot = tools.VecPosGoal().norm_max(4.5))
+        else:
+            return SoccerAction((tools.PosBall() - tools.PosJoueur())* maxPlayerAcceleration)
+                
+        
         
         
 class TesteStrategy(Strategy):
@@ -120,6 +134,8 @@ class TesteStrategy(Strategy):
             return SoccerAction(shoot = tools.VecPosGoal())
         else:
             return SoccerAction(tools.VecPosBall(10)* maxPlayerAcceleration)
+            
+
             
 #class DefNaifStrategy(Strategy):
 #    def __init__(self):
