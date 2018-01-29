@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 22 17:18:41 2018
+Created on Mon Jan 29 16:48:29 2018
 
 @author: 3525837
 """
+
 
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import Simulation, SoccerTeam, Player, show_simu
 from soccersimulator.settings import *
 from soccersimulator import Strategy
+from tools import ToolBox
 
 import math
 
@@ -105,16 +107,27 @@ class FonceurStrategy(Strategy):
         Strategy.__init__(self,"Fonceur")
     def compute_strategy(self,state,id_team,id_player):
         return SoccerAction(state.ball.position-state.player_state(id_team,id_player).position,Vector2D((id_player)*GAME_WIDTH,GAME_HEIGHT/2)-state.ball.position)
-
-## Creation d'une equipe
-pyteam = SoccerTeam(name="PyTeam")
-thon = SoccerTeam(name="ThonTeam")
-pyteam.add("PyPlayer",ShootStrategy())
-#thon.add("ThonPlayer",ShootStrategy())   #Strategie aleatoire0.
-
-#Creation d'une partie
-simu = Simulation(pyteam,thon)
-
-
-#Jouer et afficher la partie
-show_simu(simu)
+        
+        
+class TesteStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self,"Teste")
+    def compute_strategy(self,state,id_team,id_player):
+        
+        tools = ToolBox(state,id_team,id_player)        
+        
+        if tools.CanShoot():
+            return SoccerAction(shoot = tools.VecPosGoal())
+        else:
+            return SoccerAction(tools.VecPosBall(10)* maxPlayerAcceleration)
+            
+#class DefNaifStrategy(Strategy):
+#    def __init__(self):
+#        Strategy.__init__(self,"Teste")
+#    def compute_strategy(self,state,id_team,id_player):
+#        
+#        tools = ToolBox(state,id_team,id_player)        
+#        
+#        if(id_team == 1):
+#            if(tools.PosJoueur() )
+#        
