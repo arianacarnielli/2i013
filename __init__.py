@@ -9,8 +9,8 @@ from .tools import *
 from .strategy import *
 
 def get_team(d):
-    
-     myteam = SoccerTeam(name="MaTeam")
+
+    myteam = SoccerTeam(name="MaTeam")
     for i in range(d):
         myteam.add("Joueur "+str(i) ,TesteStrategy())
     return myteam
