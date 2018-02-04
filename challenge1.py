@@ -2,7 +2,7 @@ from soccersimulator import ChallengeFonceurButeur, SoccerTeam,show_simu
 from strategy import *
 
 team = SoccerTeam("RandomEquipe")
-team.add("RandomJoueur",ShootBallStrategy())
+team.add("RandomJoueur",ShootBallStrategyOptimal())
 
 challenge = ChallengeFonceurButeur(team,max_but=20)
 show_simu(challenge)
