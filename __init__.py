@@ -12,5 +12,5 @@ def get_team(d):
 
     myteam = SoccerTeam(name="MaTeam")
     for i in range(d):
-        myteam.add("Joueur "+str(i) ,TesteStrategy())
+        myteam.add("Joueur "+str(i) ,ShootBallStrategy())
     return myteam
