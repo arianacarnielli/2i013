@@ -12,7 +12,7 @@ for i in range(acc.size):
     print("acc =",acc[i])
     
     team = SoccerTeam("Equipe")
-    team.add("Joueur",ShootBallStrategyOptimal(acc[i]))
+    team.add("Joueur",ShootBallStrategy(acc[i]))
     
     challenge = ChallengeFonceurButeur(team,max_but=10, max_steps = float("inf"))
     challenge.start()

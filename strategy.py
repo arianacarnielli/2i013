@@ -80,6 +80,28 @@ class ShootBallStrategy(Strategy):
         else:
             return SoccerAction(tools.VecPosBall(30, maxPlayerAcceleration))
         
+class ShootBallStrategyTwoAccelerations(Strategy):
+    """
+    Strategie de tir vers le milieu du but que prend en consideration la position attendue de la balle.
+    """
+    def __init__(self, accFirst, accOthers):
+        Strategy.__init__(self,"ShootBallTwoAccelerations")
+        self.accFirst = accFirst
+        self.accOthers = accOthers
+        self.firstShoot = True
+        
+    def compute_strategy(self,state,id_team,id_player):
+        
+        tools = ToolBox(state,id_team,id_player)
+         
+        if tools.CanShoot():
+            if self.firstShoot:
+                return SoccerAction(shoot = tools.VecPosGoal(maxBallAcceleration * self.accFirst))
+                self.firstShoot = False
+            return SoccerAction(shoot = tools.VecPosGoal(maxBallAcceleration * self.accOther))
+        else:
+            return SoccerAction(tools.VecPosBall(30, maxPlayerAcceleration))
+        
 class ShootBallStrategyOptimal(ShootBallStrategy):
     """
     Strategie de tir vers le milieu du but que prend en consideration la position attendue de la balle, avec l'acceleration optimale.
