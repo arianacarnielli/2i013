@@ -20,7 +20,7 @@ thon = SoccerTeam(name="ThonTeam")
 pyteam.add("PyPlayer",module.DefNaifStrategy())
 #pyteam.add("PyPlayer2",module.ShootBallStrategyOptimal())
 
-#thon.add("ThonPlayer",module.DefNaifStrategy())  
+thon.add("ThonPlayer",module.DefNaifStrategy())  
 #thon.add("ThonPlayer2",module.ShootBallStrategyOptimal()) 
 
 #Creation d'une partie
