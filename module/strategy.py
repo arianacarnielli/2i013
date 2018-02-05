@@ -10,7 +10,8 @@ from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import SoccerTeam, Player
 from soccersimulator.settings import *
 from soccersimulator import Strategy
-from .tools import ToolBox
+#from tools import ToolBox
+from .toolbox import *
 
 import math
 
@@ -128,13 +129,19 @@ class FonceurFaible(Strategy):
             return SoccerAction((tools.PosBall() - tools.PosJoueur())* maxPlayerAcceleration)
 
             
-#class DefNaifStrategy(Strategy):
-#    def __init__(self):
-#        Strategy.__init__(self,"Teste")
-#    def compute_strategy(self,state,id_team,id_player):
-#        
-#        tools = ToolBox(state,id_team,id_player)        
-#        
-#        if(id_team == 1):
-#            if(tools.PosJoueur() )
-#        
+class DefNaifStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self,"DefNaif")
+    def compute_strategy(self,state,id_team,id_player):
+        
+        tools = ToolBox(state,id_team,id_player) 
+        
+        if tools.CanShoot():
+            return tools.VecShoot()
+        
+        if tools.EstDef(10):
+            return SoccerAction(tools.VecPosBall(0, maxPlayerAcceleration))
+        
+        return SoccerAction(tools.PosCage())
+        
+        

@@ -46,15 +46,7 @@ class ToolBox(object):
         """
         retourne le vecteur du joueur a la position prevu du ballon en n etapes. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
         """
-        loc_ball = self.state.ball.position
-        vit_ball = self.state.ball.vitesse
-    
-        ball_temp = Ball(loc_ball, vit_ball)
-        
-        while(n > 0):
-            ball_temp.next(Vector2D(0,0))
-            loc_ball = ball_temp.position         
-            n = n - 1
+        loc_ball = self.PosBall(n)
     
         vec_ball = loc_ball - self.state.player_state(self.id_team, self.id_player).position
         
@@ -78,9 +70,38 @@ class ToolBox(object):
         """
         return self.state.player_state(self.id_team, self.id_player).position
           
-    def PosBall(self):
+    def PosBall(self, n = 0):
         """
-        retourne le vecteur position du ballon.
+        retourne le vecteur position du ballon position prevu du ballon en n etapes.
         """
-        return self.state.ball.position
+
+        loc_ball = self.state.ball.position
+        vit_ball = self.state.ball.vitesse
+
+        ball_temp = Ball(loc_ball, vit_ball)
+
+        while(n > 0):
+            ball_temp.next(Vector2D(0,0))
+            loc_ball = ball_temp.position         
+            n = n - 1        
+
+        return loc_ball
     
+    def PosCage(self):
+        """
+        retourne le vecteur position du milieu de la cage du joueur.
+        """
+        if(self.id_team == 1):
+            return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+            
+        return Vector2D(0, GAME_HEIGHT/2)
+    
+    def EstDef(self, n = 0):
+        """
+        retourne True si le ballon est dans le champs defensif d'un joueur en n etapes.
+        """
+        loc_ball = self.PosBall(n)
+        
+        if (self.PosCage().x == 0):    
+            return GAME_WIDTH/2 > loc_ball.x
+        return GAME_WIDTH/2 <= loc_ball.x
