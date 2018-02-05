@@ -10,7 +10,7 @@ from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import SoccerTeam, Player
 from soccersimulator.settings import *
 from soccersimulator import Strategy
-from tools import ToolBox
+from .tools import ToolBox
 
 import math
 

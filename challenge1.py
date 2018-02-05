@@ -1,5 +1,5 @@
-from soccersimulator import ChallengeFonceurButeur, SoccerTeam,show_simu
-from strategy import *
+from soccersimulator import ChallengeFonceurButeur, SoccerTeam, show_simu
+from module.strategy import *
 
 team = SoccerTeam("RandomEquipe")
 team.add("RandomJoueur",ShootBallStrategyOptimal())

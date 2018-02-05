@@ -9,7 +9,7 @@ from soccersimulator import SoccerTeam, Player, show_simu, Simulation
 from soccersimulator.settings import *
 from soccersimulator import Strategy
 
-from strategy import *
+from module.strategy import *
 
 import math
 

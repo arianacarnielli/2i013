@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from soccersimulator import ChallengeFonceurButeur, SoccerTeam, show_simu
-from strategy import *
+from module import *
 
 import numpy as np
 import matplotlib.pyplot as plt
