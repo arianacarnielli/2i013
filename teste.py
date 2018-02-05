@@ -20,7 +20,7 @@ thon = SoccerTeam(name="ThonTeam")
 pyteam.add("PyPlayer2",module.ShootBallStrategyOptimal())
 pyteam.add("PyPlayer",module.DefNaifStrategy())
 thon.add("ThonPlayer",module.DefNaifStrategy())  
-thon.add("ThonPlayer2",module.ShootStrategy()) 
+thon.add("ThonPlayer2",module.ShootBallStrategyOptimal()) 
 
 #Creation d'une partie
 simu = Simulation(pyteam,thon)

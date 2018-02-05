@@ -142,6 +142,6 @@ class DefNaifStrategy(Strategy):
         if tools.EstDef(10):
             return SoccerAction(tools.VecPosBall(0, maxPlayerAcceleration))
         
-        return SoccerAction(tools.PosCage())
+        return SoccerAction(tools.PosCage() - tools.PosJoueur())
         
         

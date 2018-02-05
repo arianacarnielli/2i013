@@ -91,7 +91,7 @@ class ToolBox(object):
         """
         retourne le vecteur position du milieu de la cage du joueur.
         """
-        if(self.id_team == 1):
+        if(self.id_team == 0):
             return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
             
         return Vector2D(0, GAME_HEIGHT/2)
@@ -103,5 +103,5 @@ class ToolBox(object):
         loc_ball = self.PosBall(n)
         
         if (self.PosCage().x == 0):    
-            return GAME_WIDTH/2 > loc_ball.x
-        return GAME_WIDTH/2 <= loc_ball.x
+            return GAME_WIDTH/4 > loc_ball.x
+        return GAME_WIDTH/4 <= loc_ball.x
