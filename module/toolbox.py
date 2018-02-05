@@ -92,9 +92,9 @@ class ToolBox(object):
         retourne le vecteur position du milieu de la cage du joueur.
         """
         if(self.id_team == 1):
-            return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+            return Vector2D(0, GAME_HEIGHT/2)
             
-        return Vector2D(0, GAME_HEIGHT/2)
+        return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
     
     def EstDef(self, n = 0):
         """
@@ -104,4 +104,4 @@ class ToolBox(object):
         
         if (self.PosCage().x == 0):    
             return loc_ball.x < GAME_WIDTH/4
-        return loc_ball.x >= GAME_WIDTH/4
+        return loc_ball.x >= 3*GAME_WIDTH/4
