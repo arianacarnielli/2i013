@@ -1,0 +1,36 @@
+Dans Toolbox :
+
+def CanPass(self):
+"""
+determine si deux joueurs sont a proximite.
+"""
+loc_player1 = self.PosJoueur()
+loc_player2 = self.PosJoueur()
+return loc_player1.distance(loc_player2) < PLAYER_RADIUS*2
+
+def VecPosJoueur(self, norm_acc = None):
+"""
+retourne le vecteur du joueur à un autre. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+"""
+loc_player = Vector2D(self.PosJoueur())
+vec_player = loc_player - self.PosJoueur()
+if norm_acc != None:
+vec_player.norm = norm_acc
+return vec_player
+
+
+
+Dans Strategy.py :
+class PassStrategy(Strategy):
+"""
+Strategie de passe entre deux joueurs.
+"""
+def __init__(self):
+Strategy.__init__(self,"Pass")
+def compute_strategy(self,state,id_team,id_player):
+tools = ToolBox(state,id_team,id_player) 
+if tools.CanPass(): 
+return SoccerAction(shoot = tools.VecPosJoueur(maxBallAcceleration))
+
+
+

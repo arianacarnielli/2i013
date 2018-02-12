@@ -17,14 +17,15 @@ import math
 pyteam = SoccerTeam(name="PyTeam")
 thon = SoccerTeam(name="ThonTeam")
 
-pyteam.add("PyPlayer",module.DefNaifStrategy())
-pyteam.add("PyPlayer2",module.ShootBallStrategyOptimal())
+pyteam.add("PyPlayer",module.PassStrategy())
+pyteam.add("PyPlayer2",module.DefNaifStrategy())
+pyteam.add("PyPlayer3",module.ShootStrategy())
 
-thon.add("ThonPlayer",module.DefNaifStrategy())  
-thon.add("ThonPlayer2",module.ShootBallStrategyOptimal()) 
+thon.add("ThonPlayer",module.ShootStrategy())  
+thon.add("ThonPlayer2",module.DefNaifStrategy()) 
 
 #Creation d'une partie
-simu = Simulation(pyteam,thon)
+simu = Simulation(pyteam, thon)
 
 
 #Jouer et afficher la partie

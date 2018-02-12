@@ -1,0 +1,29 @@
+
+
+ActionAbstr : cours, shoot, passe
+
+
+Action1 : coursr(), shoot)(, passe()
+Action2 : coursr(), shoot)(, passe()
+
+
+Comportement(state,Action): 
+	def tirer()
+		return	action.tirer()
+	def passer():
+		return action.pass'()
+
+def attaque_fonceur(comportement):
+	return comportement.aller_vers_ball()+comportement.tirer()	
+
+def attaqueFort(comportement):
+	if comportemnet.state.proche_delabvalle:
+		return comportement.tire()
+	elif ...:
+		return comportement.drible()
+	return attaque_fonceur(comportement)
+
+class AttaqueStra()
+	def compute_strategi(sstate,idt,idp):
+		state = tools(state,idt,idp)
+		return attaqueFort(Comportement(state,Action))
