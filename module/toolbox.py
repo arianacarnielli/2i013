@@ -7,7 +7,6 @@ Created on Mon Jan 29 16:32:13 2018
 from soccersimulator import Vector2D, SoccerState, SoccerAction
 from soccersimulator import SoccerTeam, Player, Ball
 from soccersimulator.settings import *
-from soccersimulator import Strategy
 
 import math
 
@@ -20,7 +19,9 @@ class ToolBox(object):
         self.id_team = id_team
         self.id_player = id_player
         
-####Booleans###
+###############################################################################
+### Booleans                                                                ###
+###############################################################################
 
     def CanShoot(self):
         """
@@ -38,18 +39,40 @@ class ToolBox(object):
         """
         loc_ball = self.PosBall(n)
         
-        if (self.PosCage().x == 0):    
+        if (self.PosCageDef.x == 0):    
             return loc_ball.x < GAME_WIDTH/4
         return loc_ball.x >= 3*GAME_WIDTH/4
-        
-###Getters###
-            
-    def PosJoueur(self):
+    
+    
+    def CanPass(self, loc_player2):
         """
-        retourne le vecteur position du joueur.
+        determine si une passe peut etre fait entre deux joueurs.
         """
-        return self.state.player_state(self.id_team, self.id_player).position
+        loc_player1 = self.PosJoueur
         
+        return loc_player1.distance(loc_player2) < PLAYER_RADIUS*70 and loc_player1.distance(loc_player2) > PLAYER_RADIUS*30
+
+    def IsCloserToBall(self, n = 0):
+        """
+        determine si le joueur courant est plus proche du ballon que tous les joueurs adversaires.
+        """
+        posAdversaires = self.GetPosAdversaires()
+        posBall = self.PosBall(n)
+        return self.PosJoueur.distance(posBall) < min([posAdv.distance(posBall) for posAdv in posAdversaires])
+
+    def EstGoalDef(self):
+        """
+        determine si le joueur courant est dans sa cage de defense.
+        """
+        loc_player = self.PosJoueur
+        loc_goal = self.PosCageDef
+        
+        return loc_player.y >= (GAME_HEIGHT - GAME_GOAL_HEIGHT)/2 and loc_player.y <= (GAME_HEIGHT + GAME_GOAL_HEIGHT)/2 and abs(loc_player.x - loc_goal.x) < PLAYER_RADIUS*2
+        
+        
+###############################################################################        
+### Getters                                                                 ###
+###############################################################################
           
     def PosBall(self, n = 0):
         """
@@ -68,27 +91,85 @@ class ToolBox(object):
 
         return loc_ball
     
-    def PosCage(self):
+    @property
+    def PosJoueur(self):
         """
-        retourne le vecteur position du milieu de la cage du joueur.
+        retourne le vecteur position du joueur.
+        """
+        return self.state.player_state(self.id_team, self.id_player).position
+        
+    @property    
+    def PosCageDef(self):
+        """
+        retourne le vecteur position du milieu de la cage de defense du joueur courant.
         """
         if(self.id_team == 1):
             return Vector2D(0, GAME_HEIGHT/2)
             
         return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
-        
-    def CanPass(self, idplayer2):
+    
+    @property    
+    def PosCageAtk(self):
         """
-        determine si deux joueurs sont a proximite.
+        retourne le vecteur position du milieu de la cage d'attaque du joueur courant.
         """
-        loc_player1 = self.PosJoueur()
-        loc_player2 = idplayer2
+        if(self.id_team == 1):
+            return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+            
+        return Vector2D(0, GAME_HEIGHT/2)
+    
+    @property
+    def GetPosAmis(self):
+        """
+        retourne une liste avec les positions des joueurs de l'equipe courant, sans le joueur courant. 
+        """
+        return [self.state.player_state(idteam, idplayer).position for idteam, idplayer in self.state.players if idteam == self.id_team and idplayer != self.id_player]
+    
+    @property    
+    def GetPosAdversaires(self):
+        """
+        retourne une liste avec les positions des joueurs de l'equipe adversaire. 
+        """
+        return [self.state.player_state(idteam, idplayer).position for idteam, idplayer in self.state.players if idteam != self.id_team]
+
+###############################################################################
+### Vecteurs                                                                ###
+###############################################################################
+
+    def VecPosGoal(self, norm_acc = None):
+        """
+        retourne le vecteur du joueur au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        """
+        loc_goal = self.PosCageAtk
+        vec_goal = loc_goal - self.PosJoueur
+        if norm_acc != None:
+            vec_goal.norm = norm_acc
+        return vec_goal
         
-        return loc_player1.distance(loc_player2) < PLAYER_RADIUS*70 and loc_player1.distance(loc_player2) > PLAYER_RADIUS*30
-
-
-    def get_amis(self):
         
-        amis = [self.state.player_state(idteam, idplayer).position for idteam, idplayer in self.state.players if idteam == self.id_team]
-        return amis
-
+    def VecPosBall(self, n = 0, norm_acc = None):
+        """
+        retourne le vecteur du joueur a la position prevu du ballon en n etapes. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        """       
+        loc_ball = self.PosBall(n)
+        vec_ball = loc_ball - self.PosJoueur
+        if norm_acc != None:
+            vec_ball.norm = norm_acc  
+        return vec_ball
+        
+        
+    def VecShoot(self,norm_acc = maxBallAcceleration):
+        """
+        retourne un vecteur d'acceleration vers le champ opposé. Si norm_acc n'est pas donnée la norme du vecteur est definie comme maxBallAcceleration.
+        """
+        return Vector2D(angle = (1 - self.id_team) * math.pi, norm = norm_acc)
+        
+    def VecPosJoueur(self, loc_player2, norm_acc = None):
+        """
+        retourne le vecteur du joueur à un autre. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        """
+        loc_player = self.PosJoueur
+        vec_player = loc_player2 - loc_player 
+        if norm_acc != None:
+            vec_player.norm = norm_acc
+        return vec_player

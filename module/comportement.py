@@ -19,89 +19,38 @@ import math
 
 class Comportement(object):
     
-    def __init__(self, state, id_team, id_player):
-        self.state = state
-        self.id_team = id_team
-        self.id_player = id_player
+    def __init__(self, action):
+        self.action = action
         
-    def ComShoot(self, state, id_team, id_player):
-        
-        tools = ToolBox(state,id_team,id_player)
-        act = Action(state,id_team,id_player)
-        
-        if tools.CanShoot(): 
-            return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration))
+    def ComShoot(self, acc = 1, vit = 1, n = 0):
+        """
+        Comportement de base de attaque.
+        """
+        if self.action.tools.CanShoot(): 
+            return self.action.ShootGoal(acc)
         else:
-            return SoccerAction(act.VecPosBall(0, maxPlayerAcceleration))
-            
-    def ComShootSpeed(self, state, id_team, id_player):
+            return self.action.RunToBall(vit, n)
+ 
+    def ComDef(self,  acc = 1, vit = 1, n = 10):
+        """
+        Comportement de base de defense.
+        """
+        if self.action.tools.CanShoot():
+            return self.action.ShootAtk()
         
-        act = Action(state,id_team,id_player)
-        tools = ToolBox(state,id_team,id_player)  
-        vit_ball = state.ball.vitesse
+        if self.action.tools.EstDef(n):
+            return self.action.RunToBall(vit,n)
         
-        if tools.CanShoot(): 
-            return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration) - vit_ball)
-        else:
-            return SoccerAction(act.VecPosBall(1, maxPlayerAcceleration))
-            
-    def ComShootStrategy(self, state, id_team, id_player, acc):
-        self.acc = acc        
-        tools = ToolBox(state,id_team,id_player)
-        act = Action(state,id_team,id_player)
+        if self.action.tools.EstGoalDef():
+            return SoccerAction()
+        return self.action.RunToDefGoal()
 
-        if tools.CanShoot(): 
-            return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration * self.acc))
-        else:
-            return SoccerAction(act.VecPosBall(30, maxPlayerAcceleration))  
-
-    def ComShootStrategyTwoAccelerations(self, state, id_team, id_player, accFirst, accOthers):
-        self.accFirst = accFirst
-        self.accOthers = accOthers
-        tools = ToolBox(state,id_team,id_player)
-        act = Action(state,id_team,id_player)
-        self.firstShoot = True
-        if tools.CanShoot():
-            if self.firstShoot:
-                return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration * self.accFirst))
-                self.firstShoot = False
-            return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration * self.accOthers))
-        else:
-            return SoccerAction(act.VecPosBall(30, maxPlayerAcceleration))  
-    
-#    def ComFonceurStrategy(self, state, id_team, id_player):
-#        
-#        tools = ToolBox(state,id_team,id_player)
-#        return SoccerAction(tools.PosBall()-tools.PosJoueur(),Vector2D(tools.PosCage()-tools.PosBall())
-    
-#    def ComFonceurFaible(self, state, id_team, id_player):
-#        
-#        tools = ToolBox(state,id_team,id_player)
-#        act = Action(state,id_team,id_player)
-#        
-#        if(tools.PosBall().distance(tools.PosJoueur()) < PLAYER_RADIUS + BALL_RADIUS): 
-#            return SoccerAction(shoot = act.VecPosGoal().norm_max(4.5))
-#        else:
-#            return SoccerAction((tools.PosBall() - tools.PosJoueur())* maxPlayerAcceleration)
-#            
-    def ComDefNaifStrategy(self, state, id_team, id_player):
-        
-        tools = ToolBox(state,id_team,id_player)
-        act = Action(state,id_team,id_player)
-        
-        if tools.CanShoot():
-            return SoccerAction(shoot = act.VecShoot())
-        
-        if tools.EstDef(10):
-            return SoccerAction(act.VecPosBall(10, maxPlayerAcceleration))
-        
-        return SoccerAction(tools.PosCage() - tools.PosJoueur())
-
+#######pas prete######
     def ComPassStrategy(self, state, id_team, id_player):
         
         tools = ToolBox(state,id_team,id_player)
         act = Action(state,id_team,id_player)
-        amis = tools.get_amis()      
+        amis = tools.GetPosAmis()      
         
         if tools.CanShoot():
             for idplayer in amis:
