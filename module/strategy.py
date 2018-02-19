@@ -67,12 +67,13 @@ class DefStratOpt(Strategy):
     """
     Strategie de defense de la cage.
     """
-    def __init__(self, p = 0.5):
+    def __init__(self, p = 0.5, n = 3):
         Strategy.__init__(self,"DefOpt")
         self.p = p
+        self.n = n
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef(p = self.p)        
+        return comp.ComDef(p = self.p, n = self.n)        
 
 
 ####pas pret#####

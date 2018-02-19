@@ -3,6 +3,11 @@ from __future__ import print_function, division
 from soccersimulator import SoccerTeam, Simulation, Strategy, show_simu, Vector2D
 from soccersimulator.settings import GAME_WIDTH, GAME_HEIGHT
 
+from .action import *
+from .toolbox import *
+from .strategy import *
+from .comportement import *
+
 
 class ParamSearch(object):
     def __init__(self, strategy, params, simu=None, trials=20, max_steps=1000000,
@@ -14,12 +19,12 @@ class ParamSearch(object):
         self.max_steps = max_steps
         self.max_round_step = max_round_step
 
-    def start(self, show=True):
+    def start(self, show=False):
         if not self.simu:
-            team1 = SoccerTeam("Team 1")
+            team1 = SoccerTeam("Def")
             team2 = SoccerTeam("Team 2")
             team1.add(self.strategy.name, self.strategy)
-            team2.add(Strategy().name, Strategy())
+            team2.add(ShootStrat().name, ShootStrat())
             self.simu = Simulation(team1, team2, max_steps=self.max_steps)
         self.simu.listeners += self
 
@@ -44,8 +49,9 @@ class ParamSearch(object):
         ball.y *= GAME_HEIGHT
 
         # Player and ball postion (random)
-        self.simu.state.states[(1, 0)].position = ball.copy()  # Player position
-        self.simu.state.states[(1, 0)].vitesse = Vector2D()  # Player acceleration
+        self.simu.state.states[(1, 0)].position = Vector2D(0, GAME_HEIGHT/2)
+        self.simu.state.states[(2, 0)].position = ball.copy()  # Player position
+        self.simu.state.states[(2, 0)].vitesse = Vector2D()  # Player acceleration
         self.simu.state.ball.position = ball.copy()  # Ball position
 
         # Last step of the game
