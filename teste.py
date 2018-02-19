@@ -19,9 +19,10 @@ thon = SoccerTeam(name="ThonTeam")
 
 pyteam.add("PyPlayer",module.ShootStrat())
 pyteam.add("PyPlayer2",module.DefStrat())
+pyteam.add("PyPlayer3",module.PassStrat())
 
 
-thon.add("ThonPlayer",module.ShootStrat())  
+thon.add("ThonPlayer",module.PassStrat())  
 thon.add("ThonPlayer2",module.DefStrat()) 
 
 #Creation d'une partie

@@ -31,7 +31,7 @@ class Comportement(object):
         else:
             return self.action.RunToBall(vit, n)
  
-    def ComDef(self,  acc = 1, vit = 1, n = 10):
+    def ComDef(self,  acc = 1, vit = 1, n = 5):
         """
         Comportement de base de defense.
         """
@@ -46,18 +46,17 @@ class Comportement(object):
         return self.action.RunToDefGoal()
 
 #######pas prete######
-    def ComPassStrategy(self, state, id_team, id_player):
+    def ComPass(self):
         
-        tools = ToolBox(state,id_team,id_player)
-        act = Action(state,id_team,id_player)
-        amis = tools.GetPosAmis()      
+              
+        amis = self.action.tools.GetPosAmis   
         
-        if tools.CanShoot():
+        if self.action.tools.CanShoot():
             for idplayer in amis:
-                if tools.CanPass(idplayer) and idplayer != tools.PosJoueur(): 
-                    return SoccerAction(shoot = act.VecPosJoueur(idplayer, maxBallAcceleration))
-            return SoccerAction(shoot = act.VecPosGoal(maxBallAcceleration))
-        return SoccerAction(act.VecPosBall(0, maxPlayerAcceleration))
+                if self.action.tools.CanPass(idplayer) and idplayer != self.action.tools.PosJoueur: 
+                    return SoccerAction(shoot = self.action.tools.VecPosJoueur(idplayer, maxBallAcceleration))
+            return SoccerAction(shoot = self.action.tools.VecPosGoal(maxBallAcceleration))
+        return SoccerAction(self.action.tools.VecPosBall(0, maxPlayerAcceleration))
         
             
             

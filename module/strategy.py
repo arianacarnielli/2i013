@@ -72,8 +72,8 @@ class PassStrat(Strategy):
     def __init__(self):
         Strategy.__init__(self,"Pass")
     def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(state,id_team,id_player)
-        return comp.ComPassStrategy(state,id_team,id_player)
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComPass()
         
         
         
