@@ -62,6 +62,17 @@ class DefStrat(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDef()
+        
+class DefStratOpt(Strategy):
+    """
+    Strategie de defense de la cage.
+    """
+    def __init__(self, p = 0.5):
+        Strategy.__init__(self,"DefOpt")
+        self.p = p
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDef(p = self.p)        
 
 
 ####pas pret#####

@@ -31,14 +31,14 @@ class Comportement(object):
         else:
             return self.action.RunToBall(vit, n)
  
-    def ComDef(self,  acc = 1, vit = 1, n = 5):
+    def ComDef(self, acc = 1, vit = 1, n = 3, p = 0.5):
         """
         Comportement de base de defense.
         """
         if self.action.tools.CanShoot():
             return self.action.ShootAtk()
         
-        if self.action.tools.EstDef(n):
+        if self.action.tools.EstDef(n, p):
             return self.action.RunToBall(vit,n)
         
         if self.action.tools.EstGoalDef():

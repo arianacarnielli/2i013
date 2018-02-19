@@ -33,15 +33,15 @@ class ToolBox(object):
         return loc_ball.distance(loc_player) < PLAYER_RADIUS + BALL_RADIUS
         
     
-    def EstDef(self, n = 0):
+    def EstDef(self, n = 0, p = 1):
         """
-        retourne True si le ballon est dans le champs defensif d'un joueur en n etapes.
+        retourne True si le ballon est dans le champs defensif d'un joueur en n etapes. p = 1 signale le x du milieu du champs, p = 0 signale le x de la cage de defense. 
         """
         loc_ball = self.PosBall(n)
         
         if (self.PosCageDef.x == 0):    
-            return loc_ball.x < GAME_WIDTH/4
-        return loc_ball.x >= 3*GAME_WIDTH/4
+            return loc_ball.x < p*(GAME_WIDTH/2)
+        return loc_ball.x >= GAME_WIDTH *(1 -p/2)
     
     
     def CanPass(self, loc_player2):

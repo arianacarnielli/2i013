@@ -8,6 +8,7 @@ from .action import *
 from .toolbox import *
 from .strategy import *
 from .comportement import *
+from .optimization import *
     
     
 def get_team(nb_players):
