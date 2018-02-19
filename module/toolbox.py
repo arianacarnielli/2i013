@@ -157,7 +157,6 @@ class ToolBox(object):
             vec_ball.norm = norm_acc  
         return vec_ball
         
-        
     def VecShoot(self,norm_acc = maxBallAcceleration):
         """
         retourne un vecteur d'acceleration vers le champ opposé. Si norm_acc n'est pas donnée la norme du vecteur est definie comme maxBallAcceleration.

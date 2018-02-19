@@ -63,18 +63,6 @@ class DefStrat(Strategy):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDef()
         
-class DefStratOpt(Strategy):
-    """
-    Strategie de defense de la cage.
-    """
-    def __init__(self, p = 0.5, n = 3):
-        Strategy.__init__(self,"DefOpt")
-        self.p = p
-        self.n = n
-    def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef(p = self.p, n = self.n)        
-
 
 ####pas pret#####
 class PassStrat(Strategy):
@@ -86,6 +74,34 @@ class PassStrat(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComPass()
+
+
+###############################################################################
+### Strategies de teste  pour optimisation                                  ###
+###############################################################################
+
+class DefStratOpt(Strategy):
+    """
+    Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de la cage.
+    """
+    def __init__(self, p = 0.5, n = 3):
+        Strategy.__init__(self,"DefOpt")
+        self.p = p
+        self.n = n
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDef(p = self.p, n = self.n)        
+
         
-        
+class ShootBallOptimalStrat(Strategy):
+    """
+    Strategie de tir vers le milieu du but que prend en consideration la position attendue de la balle, avec l'acceleration optimale pour 1 x 0.
+    """
+    def __init__(self):
+        Strategy.__init__(self, "ShootBallOptimal")
+        self.acc = 0.64
+        self.n = 30
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComShoot(n = self.n, acc = self.acc)
         

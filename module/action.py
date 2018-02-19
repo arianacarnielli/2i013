@@ -18,11 +18,16 @@ class Action(object):
     def __init__(self, tools):
         self.tools = tools
         
-    def ShootAtk(self):
+        
+###############################################################################
+### Shoots                                                                  ###
+###############################################################################
+        
+    def ShootAtk(self, acc = 1):
         """
-        Renvoie une SoccerAction de tir droit vers le champ adversaire.
+        Renvoie une SoccerAction de tir droit vers le champ adversaire. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
         """
-        return SoccerAction(shoot = self.tools.VecShoot())
+        return SoccerAction(shoot = self.tools.VecShoot(acc * maxBallAcceleration))
 
     def ShootGoal(self, acc = 1):
         """
@@ -30,11 +35,25 @@ class Action(object):
         """
         return SoccerAction(shoot = self.tools.VecPosGoal(acc * maxBallAcceleration))
         
+        
+    def ShootPasse(self, acc = 1, loc_player2):
+        """
+        Renvoie une SoccerAction de tir droit vers un autre joueur. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
+        """
+        return SoccerAction(shoot = self.tools.VecPosJoueur(loc_player2, ))        
+        
+        VecPosJoueur(self, loc_player2, norm_acc = None):
+    
+###############################################################################
+### Run                                                                     ###
+###############################################################################
+        
     def RunToBall(self, vit = 1, n = 0):
         """
         Renvoie une SoocerAction de courir vers la position prevue du ballon en n etapes. Vit determine l'acceleration du joueur. 
         """
         return SoccerAction(self.tools.VecPosBall(n, vit * maxPlayerAcceleration))
+        
         
     def RunToDefGoal(self):
         """

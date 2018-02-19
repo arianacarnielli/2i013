@@ -19,7 +19,7 @@ class ParamSearch(object):
         self.max_steps = max_steps
         self.max_round_step = max_round_step
 
-    def start(self, show=False):
+    def start(self, show=True):
         if not self.simu:
             team1 = SoccerTeam("Def")
             team2 = SoccerTeam("Team 2")
