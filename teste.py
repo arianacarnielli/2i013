@@ -10,8 +10,9 @@ from soccersimulator.settings import *
 from soccersimulator import Strategy
 
 import module
-
 import math
+
+#teste git#
 
 ## Creation d'une equipe
 
