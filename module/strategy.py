@@ -131,3 +131,23 @@ class DribleStratOpt(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDrible(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
+    
+    
+########## TESTE ############   
+    
+class DribleStratOpt2(Strategy):
+    """
+    Strategie d'attaque avec drible.
+    """
+    def __init__(self, accShoot = 0.25, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
+        Strategy.__init__(self,"Def")
+        self.accShoot = accShoot
+        self.accDrible = accDrible
+        self.vit = vit
+        self.n = n
+        self.maxAngle = maxAngle
+        self.tooFar = tooFar
+        
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
