@@ -15,10 +15,10 @@ import math
 def get_team(nb_players):
     myteam = SoccerTeam(name="Brasil")
     if nb_players == 1:
-        myteam.add("Joueur ", ShootBallStratOpt(acc = 1, n = 7))
+        myteam.add("Joueur ", ShootBallStratOpt(acc = 1, n = 4))
     if nb_players == 2:
         #myteam.add("Joueur 1", ShootBallStratOpt(acc = 1))
-        myteam.add("Joueur 1", DribleStratOpt(accShoot = 0.25, maxAngle = math.pi/4, tooFar = 6*maxBallAcceleration))
+        myteam.add("Joueur 1", DribleStratOpt(accShoot = 0.25, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
         myteam.add("Joueur 2", DefStratOpt(0.7))
     if nb_players == 4:
         myteam.add("Joueur 1",ShootBallStratOpt(acc = 1))
