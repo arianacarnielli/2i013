@@ -12,17 +12,22 @@ from soccersimulator import Strategy
 import module
 import math
 
+import autres.ortiz.ia as ia
+
 #teste git#
 
 ## Creation d'une equipe
 
-pyteam = module.get_team(1)
+pyteam = module.get_team(2)
+thon = ia.get_team(2)
+
 #pyteam = SoccerTeam(name = "GermanyWins")
-thon = SoccerTeam(name = "BRBRBR")
+#thon = SoccerTeam(name = "BRBRBR")
+
 #pyteam.add("P1", module.DribleStrat())
 #pyteam.add("P2", module.DefStratOpt())
-thon.add("P3", module.DefStratOpt())
-thon.add("P4", module.ShootStrat())
+#thon.add("P3", module.DefStratOpt())
+#thon.add("P4", module.ShootStrat())
 
 #Creation d'une partie
 simu = Simulation(pyteam, thon)
