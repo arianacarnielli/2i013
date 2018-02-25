@@ -68,7 +68,23 @@ class ToolBox(object):
         loc_goal = self.PosCageDef
         
         return loc_player.y >= (GAME_HEIGHT - GAME_GOAL_HEIGHT)/2 and loc_player.y <= (GAME_HEIGHT + GAME_GOAL_HEIGHT)/2 and abs(loc_player.x - loc_goal.x) < PLAYER_RADIUS*2
-        
+    
+    def EstDevant(self, loc_player2):
+        """
+        determine si le joueur 2 est devant le joueur actuel.
+        """
+        loc_player1 = self.PosJoueur
+        return (loc_player2.x > loc_player1.x and self.id_team == 1) or (loc_player2.x < loc_player1.x and self.id_team == 2)
+    
+    def ExisteAdversaireDevant(self):
+        """
+        determine s'il existe un joueur adversaire devant le joueur actuel.
+        """
+        advPos = self.GetPosAdversaires
+        for pos in advPos:
+            if self.EstDevant(pos):
+                return True
+        return False
         
 ###############################################################################        
 ### Getters                                                                 ###
@@ -142,7 +158,7 @@ class ToolBox(object):
         """
         loc_goal = self.PosCageAtk
         vec_goal = loc_goal - self.PosJoueur
-        if norm_acc != None:
+        if not (norm_acc is None):
             vec_goal.norm = norm_acc
         return vec_goal
         
@@ -153,7 +169,7 @@ class ToolBox(object):
         """       
         loc_ball = self.PosBall(n)
         vec_ball = loc_ball - self.PosJoueur
-        if norm_acc != None:
+        if not (norm_acc is None):
             vec_ball.norm = norm_acc  
         return vec_ball
         
@@ -169,6 +185,28 @@ class ToolBox(object):
         """
         loc_player = self.PosJoueur
         vec_player = loc_player2 - loc_player 
-        if norm_acc != None:
+        if not (norm_acc is None):
             vec_player.norm = norm_acc
         return vec_player
+
+    def VecAngle(self, angle = 0, norm_acc = maxBallAcceleration):
+        """
+        retourne un vecteur d'acceleration avec l'angle passé en paramètre.
+        """
+        return Vector2D(angle = angle, norm = norm_acc)
+ 
+    def VecPosAdvPlusProcheDevant(self, norm_acc = None):
+        """
+        retourne le vecteur du joueur actuel au joueur adversaire le plus proche devant lui. Retourne None s'il n'y a pas d'adversaire devant.
+        """
+        advPos = self.GetPosAdversaires
+        minPos = None
+        for pos in advPos:
+            if self.EstDevant(pos):
+                newVec = self.VecPosJoueur(pos)
+                if minPos is None or newVec.norm < minPos.norm:
+                    minPos = newVec
+        if not (minPos is None) and not (norm_acc is None):
+            minPos.norm = norm_acc
+        return minPos
+        

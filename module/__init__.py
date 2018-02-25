@@ -10,23 +10,25 @@ from .strategy import *
 from .comportement import *
 from .optimization import *
     
+import math
     
 def get_team(nb_players):
-	myteam = SoccerTeam(name="Brasil")
-	if nb_players == 1:
-		myteam.add("Joueur " ,ShootStrat())
-	if nb_players == 2:
-		myteam.add("Joueur 1", ShootStrat())
-		myteam.add("Joueur 2", DefStrat())
-	if nb_players == 4:
-		myteam.add("Joueur 1",ShootStrat())
-		myteam.add("Joueur 2",DefStrat())
-		myteam.add("Joueur 3",PassStrat())
-		myteam.add("Joueur 4",DefStrat())
-	return myteam	
+    myteam = SoccerTeam(name="Brasil")
+    if nb_players == 1:
+        myteam.add("Joueur ", ShootBallStratOpt(acc = 1))
+    if nb_players == 2:
+        #myteam.add("Joueur 1", ShootBallStratOpt(acc = 1))
+        myteam.add("Joueur 1", DribleStratOpt(accShoot = 0.25, maxAngle = math.pi/4, tooFar = 10*maxBallAcceleration))
+        myteam.add("Joueur 2", DefStratOpt(0.7))
+    if nb_players == 4:
+        myteam.add("Joueur 1",ShootBallStratOpt(acc = 1))
+        myteam.add("Joueur 2",DefStratOpt(0.7))
+        myteam.add("Joueur 3",DribleStrat())
+        myteam.add("Joueur 4",DefStratOpt(0.7))
+    return myteam	
 
 def get_team_challenge(num):
-	myteam = SoccerTeam(name="Brasil")
-	if num == 1:
-		myteam.add("Joueur Chal "+str(num),ShootStrat())
-	return myteam
+    myteam = SoccerTeam(name="Brasil")
+    if num == 1:
+        myteam.add("Joueur Chal "+str(num),ShootBallStratOpt())
+    return myteam

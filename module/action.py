@@ -36,13 +36,17 @@ class Action(object):
         return SoccerAction(shoot = self.tools.VecPosGoal(acc * maxBallAcceleration))
         
         
-    def ShootPasse(self, acc = 1, loc_player2):
+    def ShootPasse(self, loc_player2, acc = 1):
         """
         Renvoie une SoccerAction de tir droit vers un autre joueur. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
         """
-        return SoccerAction(shoot = self.tools.VecPosJoueur(loc_player2, ))        
-        
-        VecPosJoueur(self, loc_player2, norm_acc = None):
+        return SoccerAction(shoot = self.tools.VecPosJoueur(loc_player2, acc * maxBallAcceleration))
+    
+    def ShootAngle(self, angle = 0, acc = 1):
+        """
+        Renvoie une SoccerAction de tir avec acceleration donnée et angle par rapport à sa direction d'attaque.
+        """
+        return SoccerAction(shoot = self.tools.VecAngle(angle, acc * maxBallAcceleration))
     
 ###############################################################################
 ### Run                                                                     ###

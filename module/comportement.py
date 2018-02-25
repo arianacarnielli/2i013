@@ -31,7 +31,7 @@ class Comportement(object):
         else:
             return self.action.RunToBall(vit, n)
  
-    def ComDef(self, acc = 1, vit = 1, n = 3, p = 0.5):
+    def ComDef(self, acc = 1, vit = 1, n = 0, p = 0.7):
         """
         Comportement de base de defense.
         """
@@ -44,6 +44,32 @@ class Comportement(object):
         if self.action.tools.EstGoalDef():
             return SoccerAction()
         return self.action.RunToDefGoal()
+
+    def ComDrible(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration):
+        """
+        Comportement de base d'attaque avec drible.
+        """
+        if self.action.tools.CanShoot():
+            minPos = self.action.tools.VecPosAdvPlusProcheDevant()
+            # S'il y a un joueur entre moi et mon but
+            if not (minPos is None):
+                # Si l'autre joueur peut lui aussi tirer, essayer de tirer plus fort
+                #if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
+                #    return self.action.ShootGoal()
+                
+                # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
+                posGoal = self.action.tools.VecPosGoal()
+                theta = minPos.angle - posGoal.angle
+                if abs(theta) > maxAngle or minPos.norm > tooFar:
+                    return self.action.ShootGoal(accShoot)
+                elif theta > 0:
+                    return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
+                else:
+                    return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
+            else:
+                return self.action.ShootGoal(accShoot)
+        else:
+            return self.action.RunToBall(vit, n)
 
 #######pas prete######
     def ComPass(self):
