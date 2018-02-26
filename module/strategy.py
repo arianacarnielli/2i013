@@ -74,16 +74,20 @@ class DribleStrat(Strategy):
         return comp.ComDrible(accShoot = 0.25, accDrible = 0.25, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration)
         
 
-####pas pret#####
 class PassStrat(Strategy):
     """
     Strategie de passe entre deux joueurs.
     """
-    def __init__(self):
-        Strategy.__init__(self,"Pass")
+    def __init__(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):
+        Strategy.__init__(self,"PassOpt")
+        self.accPasse = accPasse
+        self.accShoot = accShoot
+        self.vit = vit
+        self.n = n
+        self.tooClose = tooClose
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComPass()
+        return comp.ComPass(accShoot = self.accShoot, vit = self.vit, n = self.n, tooClose = self.tooClose)
 
 
 ###############################################################################
@@ -151,3 +155,19 @@ class DribleStratOpt2(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
+        
+        
+class PassStratOpt(Strategy):
+    """
+    Strategie de passe entre deux joueurs.
+    """
+    def __init__(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):
+        Strategy.__init__(self,"PassOpt")
+        self.accPasse = accPasse
+        self.accShoot = accShoot
+        self.vit = vit
+        self.n = n
+        self.tooClose = tooClose
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComPass(accShoot = self.accShoot, vit = self.vit, n = self.n, tooClose = self.tooClose)

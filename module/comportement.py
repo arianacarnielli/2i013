@@ -21,7 +21,7 @@ class Comportement(object):
     
     def __init__(self, action):
         self.action = action
-        
+                
     def ComShoot(self, acc = 1, vit = 1, n = 0):
         """
         Comportement de base de attaque.
@@ -112,22 +112,22 @@ class Comportement(object):
 
 
 
-    def ComPass(self, accShoot = 1, vit = 1, n = 4, tooClose = 10 * PLAYER_RADIUS):        
-              
-        #amis = self.action.tools.GetPosAmis   
+    def ComPass(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):        
         
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAmisPlusProcheDevant()
             if not (minPos is None):
-                Pos_joueur2 = minPos - self.action.tools.PosJoueur
-                if Pos_joueur2.norm <= tooClose:
+                Pos_joueur2 = minPos + self.action.tools.PosJoueur
+                if minPos.norm > tooClose:
                     return self.action.ShootGoal(accShoot)
                 else:
-                    return self.action.ShootPasse(Pos_joueur2, accShoot)
+                    return self.action.ShootPasse(Pos_joueur2, accPasse)
             else:
                 return self.action.ShootGoal(accShoot)
         else:
             return self.action.RunToBall(vit, n)         
+            
+    
 
 
 

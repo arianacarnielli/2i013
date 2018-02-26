@@ -1,7 +1,8 @@
 import module
 
-expe = module.ParamSearch(strategy=module.ShootBallStratOpt(acc = 1.),
-                   params={'n': range(21)},  max_round_step= 500, trials = 100)
-expe.start(show = False)
+expe = module.ParamSearch(strategy=module.PassStratOpt(),
+                   params={'tooClose': [50]},  max_round_step= 200, trials = 10)
+expe.start(show = True)
 print(expe.get_res())
 
+#  params={'tooClose': range(100)},  max_round_step= 200, trials = 1)

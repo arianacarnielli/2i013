@@ -87,7 +87,7 @@ class ToolBox(object):
         return False
         
     def ExisteAmiDevant(self):
-         """
+        """
         determine s'il existe un joueur ami devant le joueur actuel.
         """
         amisPos = self.GetPosAmis
@@ -95,7 +95,7 @@ class ToolBox(object):
             if self.EstDevant(pos):
                 return True
         return False
-        
+
         
 ###############################################################################        
 ### Getters                                                                 ###
@@ -221,7 +221,7 @@ class ToolBox(object):
             minPos.norm = norm_acc
         return minPos
         
- def VecPosAmiPlusProcheDevant(self, norm_acc = None):
+    def VecPosAmisPlusProcheDevant(self, norm_acc = None):
         """
         retourne le vecteur du joueur actuel au joueur ami le plus proche devant lui. Retourne None s'il n'y a pas d'adversaire devant.
         """

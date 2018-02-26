@@ -1,4 +1,10 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 26 17:41:23 2018
+
+@author: 3525837
+"""
+
 from __future__ import print_function, division
 from soccersimulator import SoccerTeam, Simulation, Strategy, show_simu, Vector2D
 from soccersimulator.settings import GAME_WIDTH, GAME_HEIGHT, maxBallAcceleration
