@@ -70,11 +70,7 @@ class Comportement(object):
             else:
                 return self.action.ShootGoal(accShoot)
         else:
-            return self.action.RunToBall(vit, n)
-        
-        
-        
-        
+            return self.action.RunToBall(vit, n)   
         
 
 #######pas prete######
@@ -116,18 +112,22 @@ class Comportement(object):
 
 
 
-    def ComPass(self):        
+    def ComPass(self, accShoot = 1, vit = 1, n = 4, tooClose = 10 * PLAYER_RADIUS):        
               
-        amis = self.action.tools.GetPosAmis   
+        #amis = self.action.tools.GetPosAmis   
         
         if self.action.tools.CanShoot():
-            for idplayer in amis:
-                if self.action.tools.CanPass(idplayer) and idplayer != self.action.tools.PosJoueur: 
-                    return SoccerAction(shoot = self.action.tools.VecPosJoueur(idplayer, maxBallAcceleration))
-            return SoccerAction(shoot = self.action.tools.VecPosGoal(maxBallAcceleration))
-        return SoccerAction(self.action.tools.VecPosBall(0, maxPlayerAcceleration))
-        
-            
-            
-            
-             
+            minPos = self.action.tools.VecPosAmisPlusProcheDevant()
+            if not (minPos is None):
+                Pos_joueur2 = minPos - self.action.tools.PosJoueur
+                if Pos_joueur2.norm <= tooClose:
+                    return self.action.ShootGoal(accShoot)
+                else:
+                    return self.action.ShootPasse(Pos_joueur2, accShoot)
+            else:
+                return self.action.ShootGoal(accShoot)
+        else:
+            return self.action.RunToBall(vit, n)         
+
+
+

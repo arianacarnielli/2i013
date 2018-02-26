@@ -16,15 +16,16 @@ import math
 
 ## Creation d'une equipe
 
-pyteam = module.get_team(2)
+#pyteam = module.get_team(4)
 
-#pyteam = SoccerTeam(name = "GermanyWins")
+pyteam = SoccerTeam(name = "GermanyWins")
 thon = SoccerTeam(name = "BRBRBR")
 
-#pyteam.add("P1", module.DribleStrat())
-#pyteam.add("P2", module.DefStratOpt())
-thon.add("P3", module.DefStratOpt())
-thon.add("P4", module.ShootStrat())
+pyteam.add("P1", module.PassStrat())
+pyteam.add("P1b", module.PassStrat())
+pyteam.add("P2", module.DefStratOpt())
+thon.add("P3", module.ShootStrat())
+thon.add("P4", module.DefStratOpt())
 
 #Creation d'une partie
 simu = Simulation(pyteam, thon)
