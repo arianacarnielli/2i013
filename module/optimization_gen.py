@@ -7,7 +7,7 @@ Created on Mon Feb 26 17:41:23 2018
 
 from __future__ import print_function, division
 from soccersimulator import SoccerTeam, Simulation, Strategy, show_simu, Vector2D
-from soccersimulator.settings import GAME_WIDTH, GAME_HEIGHT, maxBallAcceleration
+from soccersimulator.settings import *
 
 from .action import *
 from .toolbox import *
@@ -18,7 +18,19 @@ import random as rd
 import math
 
 
-class ParamSearch(object):
+                
+def genVectAleaStratDribleur():
+    accShoot = rd.randrange(0, 10, 1) / 10.
+    accDrible = rd.randrange(0, 10, 1) / 10.
+    vit = rd.randrange(0, 10, 1) / 10.
+    n = rd.randrange(0, 20, 1)
+    maxAngle = round(rd.uniform(0, math.pi/2), 2)
+    tooFar = rd.randrange(0, 60, 1)
+    
+    return [accShoot, accDrible, vit, n, maxAngle, tooFar]
+
+
+class ParamSearch_gen(object):
     def __init__(self, strategy, params, simu=None, trials=20, max_steps=1000000,
                  max_round_step=40):
         self.strategy = strategy
@@ -122,3 +134,6 @@ class ParamSearch(object):
     def get_res(self):
         return self.res
 
+
+
+#### pas important ####

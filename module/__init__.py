@@ -9,6 +9,7 @@ from .toolbox import *
 from .strategy import *
 from .comportement import *
 from .optimization import *
+from .optimization_gen import *
     
 import math
     
