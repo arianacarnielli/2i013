@@ -21,6 +21,7 @@ class Comportement(object):
     
     def __init__(self, action):
         self.action = action
+        self.dernierdrible = None
                 
     def ComShoot(self, acc = 1, vit = 1, n = 0):
         """
@@ -44,6 +45,18 @@ class Comportement(object):
         if self.action.tools.EstGoalDef():
             return SoccerAction()
         return self.action.RunToDefGoal()
+    
+    def ComDef2(self, acc = 1, vit = 1, n = 0, p = 0.7, frac_p = 0.5):
+        """
+        Comportement de defense.
+        """
+        if self.action.tools.CanShoot():
+            return self.action.ShootAtk()
+        
+        if self.action.tools.EstDef(n, p):
+            return self.action.RunToBall(vit,n)
+
+        return self.action.RunToDefense(p * frac_p)
 
     def ComDrible(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration):
         """
@@ -75,9 +88,9 @@ class Comportement(object):
 
 #######pas prete######
     
-    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40):
+    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
         """
-        Comportement de base d'attaque avec drible.
+        Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi si il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
         """
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAdvPlusProcheDevant()
@@ -100,9 +113,11 @@ class Comportement(object):
                     theta = minPos.angle - posGoal.angle
                     if abs(theta) > maxAngle or minPos.norm > tooFar:
                         return self.action.ShootGoal(accShoot)
-                    elif theta > 0:
+                    elif theta > AngleHyst or (self.dernierdrible == "down" and abs(theta) <= AngleHyst):
+                        self.dernierdrible = "down"
                         return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
                     else:
+                        self.dernierdrible = "up"
                         return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
             else:
                 return self.action.ShootGoal(accShoot)

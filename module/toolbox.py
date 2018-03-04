@@ -129,6 +129,22 @@ class ToolBox(object):
 
         return loc_ball
     
+    def PosDefense(self, pos_x = 0.5):
+        """
+        retourne le vecteur donnant une position defensive pour intercepter la balle si l'ennemi tire droit vers le but.
+        """
+        VecBallGoalDef = self.PosCageDef - self.PosBall()
+        x = pos_x * GAME_WIDTH/2
+        y = x * VecBallGoalDef.y/VecBallGoalDef.x
+        if(self.id_team == 2):
+            x = GAME_WIDTH - x
+        y = abs(y)
+        if self.PosBall().y > GAME_HEIGHT/2:
+            y = y + GAME_HEIGHT/2
+        else:
+            y = GAME_HEIGHT/2 - y
+        return Vector2D(x, y)
+    
     @property
     def PosJoueur(self):
         """
@@ -155,7 +171,7 @@ class ToolBox(object):
             return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
             
         return Vector2D(0, GAME_HEIGHT/2)
-    
+        
     @property
     def GetPosAmis(self):
         """
@@ -261,4 +277,3 @@ class ToolBox(object):
         if not (minPos is None) and not (norm_acc is None):
             minPos.norm = norm_acc
         return minPos
-        

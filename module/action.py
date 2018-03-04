@@ -69,6 +69,12 @@ class Action(object):
         Renvoie une SoocerAction de courir vers la cage de defense.
         """
         return SoccerAction(self.tools.PosCageDef - self.tools.PosJoueur)
+    
+    def RunToDefense(self, pos_x):
+        """
+        Renvoi une SoccerAction de courir vers une position defensive d'interception.
+        """
+        return SoccerAction(self.tools.PosDefense(pos_x) - self.tools.PosJoueur)
 
         
     
