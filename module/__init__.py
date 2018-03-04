@@ -20,7 +20,7 @@ def get_team(nb_players):
     if nb_players == 2:
         #myteam.add("Joueur 1", ShootBallStratOpt(acc = 1))
         myteam.add("RRRRONALDO", DribleStratOpt2(accShoot = 0.25, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
-        myteam.add("Taffarel", DefStratOpt(0.7))
+        myteam.add("Taffarel", DefStratOpt(p = 0.8))
     if nb_players == 4:
         myteam.add("Joueur 1",ShootBallStratOpt(acc = 1))
         myteam.add("Joueur 2",DefStratOpt(0.7))

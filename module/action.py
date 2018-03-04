@@ -27,7 +27,7 @@ class Action(object):
         """
         Renvoie une SoccerAction de tir droit vers le champ adversaire. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
         """
-        return SoccerAction(shoot = self.tools.VecShoot(acc * maxBallAcceleration))
+        return SoccerAction(self.tools.VecPosBall(0, maxPlayerAcceleration), shoot = self.tools.VecShoot(acc * maxBallAcceleration))
 
     def ShootGoal(self, acc = 1):
         """
