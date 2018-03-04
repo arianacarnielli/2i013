@@ -96,6 +96,17 @@ class ToolBox(object):
                 return True
         return False
 
+    def AdvAGardien(self):
+        """
+        determine s'il y a un joueur adversaire a la cage (donc un joueur qui acte comme gardien).
+        """
+        PosGoal = self.PosCageAtk
+        advPos = self.GetPosAdversaires
+        for adv in advPos:
+            if abs(adv.x - PosGoal.x) < 3 and adv.y <= PosGoal.y + GAME_GOAL_HEIGHT/2 and adv.y >= PosGoal.y - GAME_GOAL_HEIGHT/2:
+                return True
+        return False
+    
         
 ###############################################################################        
 ### Getters                                                                 ###
@@ -168,6 +179,21 @@ class ToolBox(object):
         retourne le vecteur du joueur au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
         """
         loc_goal = self.PosCageAtk
+        vec_goal = loc_goal - self.PosJoueur
+        if not (norm_acc is None):
+            vec_goal.norm = norm_acc
+        return vec_goal
+    
+    def VecPosCoinGoal(self, norm_acc = None):
+        """
+        retourne le vecteur du joueur au coin du but le plus proche de lui. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        """
+        loc_goal = self.PosCageAtk
+        if self.PosJoueur.y > GAME_HEIGHT/2:
+            loc_goal.y += GAME_GOAL_HEIGHT/2
+        else:
+            loc_goal.y -= GAME_GOAL_HEIGHT/2
+            
         vec_goal = loc_goal - self.PosJoueur
         if not (norm_acc is None):
             vec_goal.norm = norm_acc

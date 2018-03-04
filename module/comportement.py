@@ -75,7 +75,7 @@ class Comportement(object):
 
 #######pas prete######
     
-    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration):
+    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40):
         """
         Comportement de base d'attaque avec drible.
         """
@@ -84,18 +84,17 @@ class Comportement(object):
             Posgoal = self.action.tools.PosCageAtk
             Posjoueur = self.action.tools.PosJoueur
             
-            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 or Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
+            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 and Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
                 return self.action.ShootGoal(accShoot)
                         
             # S'il y a un joueur entre moi et mon but
             if not (minPos is None):
                 # Si l'autre joueur peut lui aussi tirer, essayer de tirer plus fort
-                #if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
-                #    return self.action.ShootGoal()
-                if abs(minPos.x - Posgoal.x) < 10:
-                    return self.action.ShootGoal(accShoot)
-                else:
-                    
+                if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
+                    return self.action.ShootAtk()
+                if self.action.tools.AdvAGardien() and self.action.tools.VecPosGoal().norm < rSurfBut:
+                    return self.action.ShootCoinGoal()
+                else:                    
                     # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
                     posGoal = self.action.tools.VecPosGoal()
                     theta = minPos.angle - posGoal.angle

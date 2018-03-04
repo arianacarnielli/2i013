@@ -34,7 +34,12 @@ class Action(object):
         Renvoie une SoccerAction de tir au but. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
         """
         return SoccerAction(shoot = self.tools.VecPosGoal(acc * maxBallAcceleration))
-        
+    
+    def ShootCoinGoal(self, acc = 1):
+        """
+         Renvoie une SoccerAction de tir au coin plus proche du but. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
+        """
+        return SoccerAction(shoot = self.tools.VecPosCoinGoal(acc * maxBallAcceleration))
         
     def ShootPasse(self, loc_player2, acc = 1):
         """
