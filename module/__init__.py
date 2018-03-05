@@ -16,11 +16,12 @@ import math
 def get_team(nb_players):
     myteam = SoccerTeam(name="Brasil")
     if nb_players == 1:
-        myteam.add("Joueur ", ShootBallStratOpt(acc = 1, n = 4))
+        myteam.add("RRRRONALDO", DribleStratOpt2(n = 18, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
     if nb_players == 2:
         #myteam.add("Joueur 1", ShootBallStratOpt(acc = 1))
-        myteam.add("RRRRONALDO", DribleStratOpt2(n = 18, accShoot = 0.25, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
         myteam.add("Cafu", Def2StratOpt(p = 0.8))
+        myteam.add("RRRRONALDO", DribleStratOpt2(n = 18, accShoot = 0.25, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
+
     if nb_players == 4:
         myteam.add("Joueur 1",ShootBallStratOpt(acc = 1))
         myteam.add("Joueur 2",DefStratOpt(0.7))

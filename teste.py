@@ -21,11 +21,11 @@ import math
 pyteam = SoccerTeam(name = "GermanyWins")
 thon = SoccerTeam(name = "BRBRBR")
 
-pyteam.add("P1", module.DribleStratOpt())
-pyteam.add("P1b", module.PassStratOpt())
-pyteam.add("P2", module.DefStratOpt())
-thon.add("P3", module.ShootStrat())
-thon.add("P4", module.DefStratOpt())
+#pyteam.add("P1", module.DribleStratOpt())
+pyteam.add("P1b", module.DefStratOpt(p =0.1))
+thon.add("P2", module.Def2StratOpt())
+thon.add("P3", module.DribleStratOpt2())
+
 
 #Creation d'une partie
 simu = Simulation(pyteam, thon)

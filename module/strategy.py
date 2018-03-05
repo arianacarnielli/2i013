@@ -109,7 +109,7 @@ class DefStratOpt(Strategy):
         
 class ShootBallStratOpt(Strategy):
     """
-    Strategie de tir vers le milieu du but que prend en consideration la position attendue de la balle, avec l'acceleration optimale pour 1 x 0.
+    Strategie de tir vers le milieu du but qui prend en consideration la position attendue de la balle, avec l'acceleration optimale pour 1 x 0.
     """
     def __init__(self, acc = 0.64, n = 4):
         Strategy.__init__(self, "ShootBallOptimal")
@@ -143,7 +143,7 @@ class DribleStratOpt2(Strategy):
     """
     Strategie d'attaque avec drible.
     """
-    def __init__(self, accShoot = 0.25, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
         Strategy.__init__(self,"Def")
         self.accShoot = accShoot
         self.accDrible = accDrible
