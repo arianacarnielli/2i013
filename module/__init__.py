@@ -16,7 +16,7 @@ import math
 def get_team(nb_players):
     myteam = SoccerTeam(name="Brasil")
     if nb_players == 1:
-        myteam.add("RRRRONALDO", DribleStratOpt2(n = 18, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
+        myteam.add("RRRRONALDO", Drible1vs1StratOpt2(n = 18, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration))
     if nb_players == 2:
         #myteam.add("Joueur 1", ShootBallStratOpt(acc = 1))
         myteam.add("Cafu", Def2StratOpt(p = 0.8))

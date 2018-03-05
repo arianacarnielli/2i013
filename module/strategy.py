@@ -161,6 +161,29 @@ class DribleStratOpt2(Strategy):
         self.dernierdrible = comp.dernierdrible
         return act
     
+    
+class Drible1vs1StratOpt2(Strategy):
+    """
+    Strategie d'attaque avec drible.
+    """
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
+        Strategy.__init__(self,"Def")
+        self.accShoot = accShoot
+        self.accDrible = accDrible
+        self.vit = vit
+        self.n = n
+        self.maxAngle = maxAngle
+        self.tooFar = tooFar
+        
+        self.dernierdrible = None
+        
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        comp.dernierdrible = self.dernierdrible
+        act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
+        self.dernierdrible = comp.dernierdrible
+        return act
+    
 class Def2StratOpt(Strategy):
     """
     Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de la cage.
@@ -172,7 +195,9 @@ class Def2StratOpt(Strategy):
         self.frac_p = frac_p
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)        
+        return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)       
+    
+
 
                 
 class PassStratOpt(Strategy):
