@@ -91,6 +91,8 @@ class Comportement(object):
         """
         Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi si il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
         """
+        
+        
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAdvPlusProcheDevant()
             Posgoal = self.action.tools.PosCageAtk

@@ -33,8 +33,8 @@ import autres.chefifarouck.FarouckYann as ia
 
 ## Creation d'une equipe
 
-thon = module.get_team(1)
-pyteam = ia.get_team(1)
+thon = module.get_team(2)
+pyteam = ia.get_team(2)
 
 
 #pyteam = SoccerTeam(name = "GermanyWins")

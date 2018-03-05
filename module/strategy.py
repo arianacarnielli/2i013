@@ -124,7 +124,7 @@ class DribleStratOpt(Strategy):
     Strategie d'attaque avec drible.
     """
     def __init__(self, accShoot = 0.25, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
-        Strategy.__init__(self,"Def")
+        Strategy.__init__(self,"Drible")
         self.accShoot = accShoot
         self.accDrible = accDrible
         self.vit = vit
@@ -136,44 +136,48 @@ class DribleStratOpt(Strategy):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDrible(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
     
-    
-########## TESTE ############   
-    
+        
 class DribleStratOpt2(Strategy):
     """
-    Strategie d'attaque avec drible.
-    """
-    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
-        Strategy.__init__(self,"Def")
+    Strategie d'attaque avec drible, plus d'especifications.
+    """    
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
+        Strategy.__init__(self,"Drible2")
         self.accShoot = accShoot
         self.accDrible = accDrible
         self.vit = vit
         self.n = n
         self.maxAngle = maxAngle
         self.tooFar = tooFar
+        self.rSurfBut = rSurfBut
+        self.AngleHyst = AngleHyst
         
         self.dernierdrible = None
         
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         comp.dernierdrible = self.dernierdrible
-        act = comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
+        act = comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst)
         self.dernierdrible = comp.dernierdrible
         return act
     
+########## TESTE ############  
     
 class Drible1vs1StratOpt2(Strategy):
     """
-    Strategie d'attaque avec drible.
+    Strategie d'attaque avec drible pour le 1 vs 1.
     """
-    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration):
-        Strategy.__init__(self,"Def")
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
+        Strategy.__init__(self,"Drible1vs1")
         self.accShoot = accShoot
         self.accDrible = accDrible
         self.vit = vit
         self.n = n
         self.maxAngle = maxAngle
         self.tooFar = tooFar
+        self.rSurfBut = rSurfBut
+        self.AngleHyst = AngleHyst        
+        
         self.cpt = 0
         self.cpt2 = 0        
         self.dernierdrible = None
@@ -186,7 +190,7 @@ class Drible1vs1StratOpt2(Strategy):
         self.cpt += 1
 
         comp.dernierdrible = self.dernierdrible
-        act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, cpt = self.cpt)
+        act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst, cpt = self.cpt)
         self.dernierdrible = comp.dernierdrible
         return act
     
@@ -203,8 +207,6 @@ class Def2StratOpt(Strategy):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)       
     
-
-
                 
 class PassStratOpt(Strategy):
     """
