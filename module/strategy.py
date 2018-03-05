@@ -174,13 +174,19 @@ class Drible1vs1StratOpt2(Strategy):
         self.n = n
         self.maxAngle = maxAngle
         self.tooFar = tooFar
-        
+        self.cpt = 0
+        self.cpt2 = 0        
         self.dernierdrible = None
         
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        if state.get_score_team(1) + state.get_score_team(2) > self.cpt2:
+            self.cpt2 = state.get_score_team(1) + state.get_score_team(2)
+            self.cpt = 0
+        self.cpt += 1
+
         comp.dernierdrible = self.dernierdrible
-        act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar)
+        act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, cpt = self.cpt)
         self.dernierdrible = comp.dernierdrible
         return act
     

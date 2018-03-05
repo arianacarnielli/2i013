@@ -86,7 +86,6 @@ class Comportement(object):
             return self.action.RunToBall(vit, n)   
         
 
-#######pas prete######
     
     def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
         """
@@ -123,8 +122,9 @@ class Comportement(object):
                 return self.action.ShootGoal(accShoot)
         else:
             return self.action.RunToBall(vit, n)
+            
         
-    def ComDrible21vs1(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 50, AngleHyst = math.pi/12):
+    def ComDrible21vs1(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 50, AngleHyst = math.pi/12, cpt = 101):
         """
         Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi si il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
         """
@@ -157,8 +157,8 @@ class Comportement(object):
                         return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
             else:
                 return self.action.ShootGoal(accShoot)
-        elif abs(self.action.tools.PosBall().x - self.action.tools.PosJoueur.x) > 50:
-            return        
+        elif cpt < 100 and abs(self.action.tools.PosBall().x - self.action.tools.PosJoueur.x) > 50:
+            return
         else:    
             return self.action.RunToBall(vit, n)
 

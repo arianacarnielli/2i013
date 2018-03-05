@@ -21,20 +21,21 @@ import math
 
 #import autres.ortiz.ia as ia
 #import autres.sebastien.footIA as ia
-import autres.austenprinciple.Foot as ia
+#import autres.austenprinciple.Foot as ia
 #import autres.ahmedmelliti.module as ia
 #import autres.caieddy.module as ia
 #import autres.iamlisa.module as ia 
 #import autres.baladeur.modulesocc as ia
 #import autres.aatarek.RepoSoccer_master as ia
-#import autres.chefifarouck.FarouckYann as ia
+import autres.chefifarouck.FarouckYann as ia
 
 #teste git#
 
 ## Creation d'une equipe
 
-pyteam = ia.get_team(1)
 thon = module.get_team(1)
+pyteam = ia.get_team(1)
+
 
 #pyteam = SoccerTeam(name = "GermanyWins")
 #thon = SoccerTeam(name = "BRBRBR")
@@ -45,7 +46,7 @@ thon = module.get_team(1)
 #thon.add("P4", module.ShootStrat())
 
 #Creation d'une partie
-simu = Simulation(pyteam, thon)
+simu = Simulation(thon, pyteam)
 
 #Jouer et afficher la partie
 show_simu(simu)
