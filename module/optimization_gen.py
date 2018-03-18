@@ -22,7 +22,8 @@ import math
 import numpy as np
 
 class ParamGenetique(object):
-    def __init__(self, trials = 5, max_steps = 2000, nb_individus = 20, pourcent_meilleurs = 0.25, pourcent_autres = 0.10, proba_mut = 0.05):
+    def __init__(self, nb_players, trials = 5, max_steps = 2000, nb_individus = 20, pourcent_meilleurs = 0.25, pourcent_autres = 0.10, proba_mut = 0.05):
+        self.nb_players = nb_players
         self.trials = trials
         self.max_steps = max_steps
         self.nb_individus = nb_individus
@@ -36,22 +37,22 @@ class ParamGenetique(object):
         
         import autres.ortiz.ia as ia
         self.list_ia = [ia]
-#        import autres.sebastien.footIA as ia
-#        self.list_ia.append(ia)
-#        import autres.austenprinciple.Foot as ia
-#        self.list_ia.append(ia)
-#        import autres.ahmedmelliti.module as ia
-#        self.list_ia.append(ia)
-#        import autres.caieddy.module as ia
-#        self.list_ia.append(ia)
-#        import autres.iamlisa.module as ia 
-#        self.list_ia.append(ia)
-#        import autres.baladeur.modulesocc as ia
-#        self.list_ia.append(ia)
-#        import autres.aatarek.RepoSoccer_master as ia
-#        self.list_ia.append(ia)
-#        import autres.chefifarouck.FarouckYann as ia
-#        self.list_ia.append(ia)
+        import autres.sebastien.footIA as ia
+        self.list_ia.append(ia)
+        import autres.austenprinciple.Foot as ia
+        self.list_ia.append(ia)
+        import autres.ahmedmelliti.module as ia
+        self.list_ia.append(ia)
+        import autres.caieddy.module as ia
+        self.list_ia.append(ia)
+        import autres.iamlisa.module as ia 
+        self.list_ia.append(ia)
+        import autres.baladeur.modulesocc as ia
+        self.list_ia.append(ia)
+        import autres.aatarek.RepoSoccer_master as ia
+        self.list_ia.append(ia)
+        import autres.chefifarouck.FarouckYann as ia
+        self.list_ia.append(ia)
 
     def genVectAlea(self):
         accShoot = rd.randrange(0, 11, 1) / 10.
@@ -67,14 +68,20 @@ class ParamGenetique(object):
         nDef = rd.randrange(0, 21, 1)
         frac_p = rd.randrange(0, 11, 1) / 10.
         
-        return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
+        if self.nb_players==1:
+            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst]
+        elif self.nb_players==2:
+            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
     
     def test_against_all_ias(self, params, verbose = True):
         points = np.empty(len(self.list_ia))
         for i in range(len(self.list_ia)):
             if verbose:
                 print("Test contre l'ia:",i)
-            test = repeatsimu_gen2V2(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
+            if self.nb_players==1:
+                test = repeatsimu_gen1V1(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
+            elif self.nb_players==2:
+                test = repeatsimu_gen2V2(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
             test.start()
             points[i] = test.get_points()
             if verbose:
@@ -136,14 +143,14 @@ class ParamGenetique(object):
         self.init_params_alea()
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}".format(i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_final", self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final".format(self.nb_players), self.tab_params, self.tab_points)
         
     def start_file(self, filename, nb_generations = 10):
         self.init_params_results_from_file(filename)
         for i in range(nb_generations):
             self.next_generation()
             self.eval_params()
-            np.savez("genetique_{}".format(i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}".format(self.nb_players, i), self.tab_params, self.tab_points)

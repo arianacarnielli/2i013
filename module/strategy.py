@@ -174,8 +174,7 @@ class DribleStratOpt2(Strategy):
         act = comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst)
         self.dernierdrible = comp.dernierdrible
         return act
-    
-########## TESTE ############  
+
     
 class Drible1vs1StratOpt2(Strategy):
     """
@@ -208,6 +207,7 @@ class Drible1vs1StratOpt2(Strategy):
         self.dernierdrible = comp.dernierdrible
         return act
     
+########## TESTE ############  
                 
 class PassStratOpt(Strategy):
     """

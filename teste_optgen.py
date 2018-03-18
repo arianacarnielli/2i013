@@ -8,4 +8,4 @@ Created on Mon Feb 26 19:07:16 2018
 import module
 
 expe = module.ParamGenetique()
-expe.start_file("genetique_3.npz")
+expe.start_alea()
