@@ -104,7 +104,21 @@ class DefStratOpt(Strategy):
         self.n = n
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef(p = self.p, n = self.n)        
+        return comp.ComDef(p = self.p, n = self.n)    
+
+  
+class Def2StratOpt(Strategy):
+    """
+    Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de sa position.
+    """
+    def __init__(self, p = 0.7, n = 3, frac_p = 0.5):
+        Strategy.__init__(self,"Def2Opt")
+        self.p = p
+        self.n = n
+        self.frac_p = frac_p
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)          
 
         
 class ShootBallStratOpt(Strategy):
@@ -193,19 +207,6 @@ class Drible1vs1StratOpt2(Strategy):
         act = comp.ComDrible21vs1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst, cpt = self.cpt)
         self.dernierdrible = comp.dernierdrible
         return act
-    
-class Def2StratOpt(Strategy):
-    """
-    Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de sa position.
-    """
-    def __init__(self, p = 0.7, n = 3, frac_p = 0.5):
-        Strategy.__init__(self,"Def2Opt")
-        self.p = p
-        self.n = n
-        self.frac_p = frac_p
-    def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)       
     
                 
 class PassStratOpt(Strategy):
