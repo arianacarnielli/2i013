@@ -5,6 +5,7 @@ from soccersimulator import settings
 from soccersimulator.settings import *
 import math
 
+
 class Etat(object):
 	def __init__(self,state,id_team,id_player):
 		self.state = state
@@ -35,13 +36,6 @@ class Etat(object):
 	def can_shoot(self) : #retourne le booléen indiquant si le joueur peut tirer
 		return (self.distballe() <= PLAYER_RADIUS+BALL_RADIUS)
 
-	def posinter(self) : #retourne la position pour intercepter la balle au début du round
-		posb=self.posballe()
-		if self.id_team==1:
-			posb.x-=2
-		if self.id_team==2:
-			posb.x+=2
-		return posb
 
 	def prox_adv(self): #retourne le numéro du joueur adverse le plus proche de la balle
 		nb_adv=self.state.nb_players(self.id_team%2+1)

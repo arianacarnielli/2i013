@@ -7,6 +7,7 @@ from .actions_simples import *
 from .etat import *
 import math
 
+
 def zigzag(state,id_team,id_player) :
 	e=Etat(state,id_team,id_player)
 	if e.balle_def(0) and e.adv_balle() :

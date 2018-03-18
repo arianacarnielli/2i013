@@ -1,6 +1,7 @@
 from .strategies import *
 from soccersimulator import SoccerTeam
 
+
 def get_team(nb_players):
 	myteam = SoccerTeam(name="1But=1OursPolaireSauvé")
 	if nb_players == 1:

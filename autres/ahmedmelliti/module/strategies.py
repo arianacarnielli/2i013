@@ -147,6 +147,21 @@ class Fonceur_dribbleur(Strategy):
 		else:
 			return SoccerAction(t.goto(t.ball_position+4*t.ball_vitesse))
 
+class Gardien(Strategy):
+        def __init__(self):
+                Strategy.__init__(self,"Gardien")
+        def compute_strategy(self,state, id_team, id_player):
+                t = Tools(state,id_team, id_player);
+                if t.canshoot1():
+                        if t.p_position.distance(t.adv_le_plus_proche()) < t.p_position.distance(t.ami_position):
+                                return t.shoot_cage()
+                        return t.passe()
+                if t.dbp()<30:
+                        return SoccerAction(t.goto(t.ball_position))
+                if (t.p_position.distance(Vector2D(0,GAME_HEIGHT/2))>20):
+                        return SoccerAction(t.goto(Vector2D(GAME_WIDTH/8,GAME_HEIGHT/2)))
+                
+                
 
 class Milieu(Strategy):
 	def __init__(self):

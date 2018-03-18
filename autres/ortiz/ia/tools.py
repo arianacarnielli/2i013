@@ -67,6 +67,20 @@ class StateFoot(Wrapper):
     def center_point(self):
         return Vector2D(self.width/2., self.goal_height)
 
+    def quadrant(self):
+        mp = self.my_pos
+        cp = self.center_point
+        if mp.x < cp.x:
+            if mp.y > cp.y:
+                return "II"
+            else:
+                return "III"
+        else:
+            if mp.y > cp.y:
+                return "I"
+            else:
+                return "IV"
+
     @property
     def nearest_opp(self):
         liste = self.opponents()
@@ -134,3 +148,16 @@ def get_random_strategy():
 
 def get_empty_strategy():
     return SoccerAction()
+
+def free_continue(state, liste, distRef):
+    j = liste[0]
+    dist_min = state.distance_ball(j.position)
+    for i in liste[1::]:
+        dist_i = state.distance_ball(i.position)
+        if dist_i < dist_min:
+            j = i
+            dist_min = dist_i
+    if dist_min <= distRef and state.distance(state.opp_goal) > j.position.distance(state.opp_goal):
+        return j
+    return True
+

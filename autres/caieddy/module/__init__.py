@@ -14,7 +14,7 @@ from .Outil import Outil
 from soccersimulator.settings import *
 
 def get_team(nb_players):
-	myteam = SoccerTeam(name="Vous Êtes Où dans le classement? En dessou de nous ;_;")
+	myteam = SoccerTeam(name="OnVaWin")
 	if nb_players == 1:
 		myteam.add("Le meilleur" ,Bon_joueur_1v1())
 	if nb_players == 2:

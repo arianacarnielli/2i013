@@ -153,7 +153,7 @@ class MetaState(object):
 			vitesse_danulation = 0
 			coefficient_prediction = 10
 			
-			if self.get_distance_to_ball() <= distance_annulation or self.b_speed.norm < vitesse_danulation:
+			if self.get_distance_to_ball() <= distance_annulation or self.b_speed < vitesse_danulation:
 				return self.PB
 			
 			else:

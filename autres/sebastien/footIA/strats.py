@@ -1,8 +1,8 @@
-from .sousStrats import ConditionPoly, ConditionDribleur, ConditionAttaque,ConditionGoal
+from .sousStrats import ConditionPoly, ConditionDribleur, ConditionAttaque,ConditionGoal, ConditionAilier
 from soccersimulator  import Strategy, SoccerAction, Vector2D
 from .tools import ToolBox, Comportement, get_random_SoccerAction
 from .sousStrats import Comportements
-from .sousStrats import fonceur, goal, dribleur, versatile
+from .sousStrats import fonceur, goal, dribleur, versatile, ailier
 
 
 class RandomStrategy(Strategy):
@@ -38,6 +38,13 @@ class MultipurposeStrategy(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         I = ConditionPoly(Comportements(ToolBox(state,id_team,id_player)))
         return versatile(I)
+
+class AilierStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self, "Ailier")
+    def compute_strategy(self,state,id_team,id_player):
+        I = ConditionAilier(Comportements(ToolBox(state,id_team,id_player)))
+        return ailier(I)
 
 class FonceurTestStrategy(Strategy):
     def __init__(self, strength1=None, distancegoal=None):

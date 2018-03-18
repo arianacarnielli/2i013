@@ -26,8 +26,8 @@ def is_in_box(stateFoot, attaque=True):
 def is_close_ball(stateFoot):
     return stateFoot.distance(stateFoot.ball_pos) <= PLAYER_RADIUS + BALL_RADIUS
 
-def is_close_goal(stateFoot):
-    return is_in_radius_action(stateFoot, stateFoot.opp_goal, 27.)
+def is_close_goal(stateFoot, distShoot=27.):
+    return is_in_radius_action(stateFoot, stateFoot.opp_goal, distShoot)
 
 def must_intercept_gk(stateFoot, distance=20.):
     return is_in_radius_action(stateFoot, stateFoot.my_goal, distance) 
@@ -53,3 +53,14 @@ def temps_interception(state):
     if n_inst[idp] == 0:
         n_inst[idp] = interceptionCourte if courte[idp] else interceptionLongue 
     return n_inst[idp]
+
+def empty_goal(state, opp, angle):
+    vGoal = (state.opp_goal - state.ball_pos).normalize()
+    vOpp = (opp.position - state.ball_pos).normalize()
+    if vGoal.dot(vOpp) >= angle:
+        return True
+    try:
+        state.dribbleGardien = not state.dribbleGardien
+    except AttributeError:
+        state.dribbleGardien = True
+    return not state.dribbleGardien

@@ -1,5 +1,5 @@
 from .strategy import Fonceur3Strategy,DefenseurStrategy
-from soccersimulator import *
+from soccersimulator import SoccerTeam
 
 def get_team(nb_players):
 	myteam = SoccerTeam(name="MaTeam")

@@ -48,7 +48,7 @@ def genVectAleaStratDribleur():
     
     
 class ParamSearch_gen(object):
-    def __init__(self, strategy1, strategy2, simu=None, trials=20, max_steps=1000000, max_round_step=40):
+    def __init__(self, strategy1, strategy2, simu=None, trials=20, max_steps=1000000, max_round_step=400):
         self.strategy1 = strategy1
         self.strategy2 = strategy2
         self.simu = simu

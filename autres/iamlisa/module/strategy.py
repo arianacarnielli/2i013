@@ -1,4 +1,4 @@
-from soccersimulator import *
+from soccersimulator import Strategy, SoccerAction, Vector2D, SoccerState
 from .tools import *
 from .comportement import *
 
@@ -55,7 +55,7 @@ class Fonceur3Strategy(Strategy):
 		if state.get_score_team(1)+state.get_score_team(2)>self.cpt2:
 			self.cpt2=state.get_score_team(1)+state.get_score_team(2)
 			self.cpt=0
-		if self.cpt>65:
+		if self.cpt>200:
 			if t.test_shoot():
 				if t.ennemi_in_my_perimeter():
 					return c.dribble()
@@ -66,7 +66,7 @@ class Fonceur3Strategy(Strategy):
 				if t.someone():
 					if t.in_my_fifth():
 						return SoccerAction(Vector2D(0,0),Vector2D(0,0))
-				return c.run_anticipe()
+				return c.run()
 		else:
 			self.cpt+=1
 			if t.in_my_half():
@@ -74,7 +74,7 @@ class Fonceur3Strategy(Strategy):
 					if t.ennemi_in_my_perimeter():
 						return c.dribble()
 					return t.petit_shoot()
-				return c.run_anticipe()
+				return c.run()
 			if t.someone():
 					if t.in_my_fifth():
 						return SoccerAction(Vector2D(0,0),Vector2D(0,0))

@@ -44,6 +44,20 @@ class Comportements(Comportement):
     def returnToGoal(self):
         return SoccerAction(self.vecMyGoal - self.playerPos) 
 
+    def goCorner(self):
+        COEF_CORNERX=0.2
+        COEF_CORNERY=0.2
+        if (self.myTeam==1):
+            if (self.ballPos.y < self.height/2):
+                return SoccerAction(shoot=Vector2D(self.width*(1-COEF_GOCORNERX), self.height*COEF_CORNERY-self.playerPos))
+            else:
+                return SoccerAction(shoot=Vector2D(self.width*(1-COEF_GOCORNERX), self.height*(1-COEF_CORNERY)-self.playerPos))
+        else:
+            if(self.ballPos.y<self.height/2):
+                return SoccerAction(shoot=Vector2D(self.width*(COEF_GOCORNERXERX), self.height*COEF_CORNERY-self.playerPos))
+            else:
+                return SoccerAction(shoot=Vector2D(self.width*(COEF_GOCORNERXERX), self.height*(1-COEF_CORNERY)-self.playerPos))
+
     def returnToCamp(self):
         mates = self.get_mate
         nbup=0
@@ -70,32 +84,25 @@ class Comportements(Comportement):
 
 
     def runBallPredicted(self, n=0):
-        pos_ball = self.ballPos
-        speed_ball = self.ballSpeed
-        ball_predict = Ball(pos_ball, speed_ball)
-        
-        while(n > 0):
-            ball_predict.next(Vector2D(0,0))
-            pos_ball = ball_predict.position
-            n = n - 1
-    
-        vec_ball = pos_ball - self.playerPos
-        
-        return SoccerAction(acceleration=vec_ball*3)
+        pos_ballspeed = self.ballSpeed
+        pos_ballspeed.scale(n)
+        pos_ball= self.ballPos + pos_ballspeed
 
+        return SoccerAction(pos_ball - self.playerPos)
+
+    def playerPosPredicted(self, player, n=0):
+        pos_playerspeed = player.playerSpeed
+        pos_playerspeed.scale(n)
+        pos_player= player.playerPos + pos_playerspeed
+
+        return SoccerAction(shoot=(pos_player - self.playerPos))
 
     def passToMostCloseMate(self, coop):
-        mates=coop
-        numDistMin = GAME_WIDTH
-        i=0
-        for mate in mates:
-            if self.playerPos!=mate:
-                if self.playerPos.distance(mate)<numDistMin:
-                    numDistMin=i
-            i=i+1
-        print('************************PASSSSSS************************')
-        return SoccerAction((mates[numDistMin]-self.playerPos)*7)
-
+ 
+        mate = self.mostCloseMate(coop)
+        #[self.playerPos.distance(m)for m in mates if m!=self.playerPos]
+        print ("....pass....",self.playerPos,mate,(self.playerPos-mate.normalize)()*5)
+        return SoccerAction(shoot=(mate-self.playerPos).normalize()*5)
 
     
 class ConditionGoal(ProxyObj):
@@ -141,7 +148,7 @@ class ConditionAttaque(ProxyObj):
         return self.playerPos.distance(self.vecTheirGoal) < self.COEF_DIST*self.width
 
 class ConditionPoly(ProxyObj):
-    COEF_SHOOT = 0.3
+    COEF_SHOOT = 0.25
 
     def inCamp(self):
         return (((self.myTeam==1) and (self.ballPos.x <= self.width/2))
@@ -153,7 +160,9 @@ class ConditionPoly(ProxyObj):
             if self.ballPos.distance(opp)<5:
                 return True
         return False 
+
     def close_goal(self):
+        print(self.playerPos.distance(self.vecTheirGoal))
         return self.playerPos.distance(self.vecTheirGoal)<self.COEF_SHOOT*self.width
         
     def mateHaveBall(self, coop):
@@ -164,10 +173,34 @@ class ConditionPoly(ProxyObj):
         return False
 
     def canPass(self):
-        if self.mateMostCloseDistance < 50:
+        if self.mateMostCloseDistance < 150:
             return True
         else:
             return False
+
+
+class ConditionAilier(ProxyObj):
+    COEF_CORNER=0.2
+    COEF_ATTAC =0.3
+
+    def inCamp(self):
+        return (((self.myTeam==1) and (self.ballPos.x <= self.width/2))
+            | ((self.myTeam==2) and (self.ballPos.x >= self.width/2)))
+
+    def inCorner(self):
+        return (((self.myTeam==1) and (self.playerPos.x>=self.width*(1-self.COEF_CORNER)))
+            | (self.myTeam==2) and (self.playerPos.x<= self.width*self.COEF_CORNER))
+
+    def mateHaveBall(self, coop):
+        mates=coop
+        for mate in mates:
+            if mate.distance(self.ballPos)< 40:
+                return True
+        return False
+
+    def canPass(self,coop):
+        return (((self.myTeam==1) and (self.mostCloseMate(coop).x>=self.width*(1-self.COEF_ATTAC)))
+            | (self.myTeam==2) and (self.mostCloseMate(coop).x<= self.width*self.COEF_ATTAC))
 
 
 def fonceur(I):
@@ -182,10 +215,10 @@ def fonceur(I):
 def versatile (I):
     mates= I.get_mate
     if I.inCamp():
-            if not I.canShoot:
-                return I.runBallPredicted(14)
-            else:
-                return I.degage()
+        if not I.canShoot:
+            return I.runBallPredicted(2)
+        else:
+            return I.shoot(2)
     else:
         if not I.mateHaveBall(mates):
             if I.oppCloseBall():
@@ -195,13 +228,41 @@ def versatile (I):
                     return I.run(I.ballPos)
                 else:
                     if I.canPass():
+                        print("jes suis ici")
                         return I.passToMostCloseMate(mates)
 
-                    if I.close_goal():
-                        return I.shoot(4)
-                    return I.shoot(0.64)
-        else: 
+                    else:
+                        if I.close_goal():
+                            return I.shoot(4)
+                        else:
+                            print("nope")
+                            return I.shoot(0.64)
+        else:
             return I.returnToCamp()
+
+def ailier(I):
+    mates= I.get_mate
+    if I.inCamp():
+        if I.mateHaveBall(mates):
+            return I.returnToCamp()
+        else:
+            if not I.canShoot:
+                return I.runBallPredicted(2)
+            else:
+                return I.goCorner()
+    else:
+        if not I.inCorner():
+            if I.canShoot:
+                return I.goCorner()
+            else:
+                I.runBallPredicted(2)
+        else:
+            if I.canShoot:
+                if I.canPass(mates):
+                    mate=mostCloseMate()
+                    return I.playerPosPredicted(mate)
+            else:
+                return I.goCorner()
 
 def dribleur(I):
 
@@ -209,7 +270,7 @@ def dribleur(I):
         if I.canShoot:
             return I.shoot(2)
         else: 
-            return I.runBallPredicted(10)
+            return I.runBallPredicted(2)
     else:
         if I.canShoot:
             if I.close_goal():
@@ -218,7 +279,7 @@ def dribleur(I):
                 return I.drible() 
 
         else:
-            return I.runBallPredicted(10)
+            return I.runBallPredicted(2)
 
 
 def goal(I):
@@ -226,7 +287,7 @@ def goal(I):
         if I.canShoot:
             return I.degage()
         else:
-            return I.run(I.ballPos)
+            return I.runBallPredicted(5)
     else:
         if not I.inGoal():
             return I.returnToGoal()

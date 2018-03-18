@@ -23,6 +23,9 @@ class ToolBox(ProxyObj):
     @property        
     def playerPos(self):
         return self.player_state(self.id_team, self.id_player).position
+    @property
+    def playerSpeed(self):
+        return self.player_state(self.id_team, self.id_player).vitesse
     @property     
     def ballPos(self):
         return self.ball.position
@@ -119,6 +122,16 @@ class ToolBox(ProxyObj):
                 return True
         return False
 
+    def mostCloseMate(self, coop):
+        mates=coop
+        numDistMin = GAME_WIDTH
+        i=0
+        for mate in mates:
+            if self.playerPos!=mate:
+                if self.playerPos.distance(mate)<numDistMin:
+                    numDistMin=i
+            i=i+1
+        return mates[numDistMin]
 
 ###################################################################
 #COMPORTEMENTS

@@ -21,13 +21,14 @@ class Fonceur(Strategy):
 	"""
 	Fonceur : Fonce vers la balle le plus vite possible, puis tire le plus fort possible vers les buts adverses.
 	"""
-	def __init__(self):
+	def __init__(self, strength=1):
 		Strategy.__init__(self, "Fonceur")
+		self.strength = strength
 
 	def compute_strategy(self, state, id_team, id_player):
 		etat = Etat(state, id_team, id_player)
 		
-		return SoccerAction(act.fonce(etat), act.tir_but(etat))
+		return SoccerAction(act.fonce(etat), act.tir_but(etat, self.strength))
 	
 
 class Defenseur(Strategy):

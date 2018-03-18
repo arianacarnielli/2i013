@@ -20,7 +20,6 @@ class Conditions(MetaState):
 	def condition_degagement(self):
 		if self.rendre_symetrique(self.PB.x <= 15, self.PB.x >= GW - 15) or \
 		self.proximity_ball_goal_ami() == "proche":
-			print("balle proche mdr")
 			return True
 		else: return False
 	def condition_de_tir(self, seuil=0.5):

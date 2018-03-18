@@ -6,6 +6,7 @@ from soccersimulator.settings import *
 from .etat import *
 import math
 
+
 def dirballe(etat,norme) :
 	vect = etat.posballe()-etat.posjoueur()
 	vect.norm = norme
@@ -36,9 +37,6 @@ def deviation(etat,norme) :
 				direction_goal.angle -= math.radians(25)
 	return direction_goal
 
-def dir_centre(etat) :
-	return dirpos(etat,1,etat.posinter())
-
 def dir_posdef(etat, prop) :
 	return dirpos(etat,1,etat.posdef(prop))
 
@@ -50,3 +48,13 @@ def passe(etat, id_player, norme):
 	vect = Vector2D(etat.poscoequipier(id_player).x - etat.posjoueur().x + 10*vitesse.x,etat.poscoequipier(id_player).y - etat.posjoueur().y +10*vitesse.y)
 	vect.norm=norme
 	return vect
+
+#def inter_goal(etat, norme):
+#	vit=etat.speed()
+#	posb=etat.posballe()
+#	posg=etat.poscage()
+#	kx=(posg.x-posb.x)/vit.x #combien de fois le vecteur vitesse pour aller vers les cages
+#	if k>0: #la balle va vers les cages
+#			
+#	
+#	

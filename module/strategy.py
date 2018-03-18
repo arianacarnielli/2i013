@@ -196,7 +196,7 @@ class Drible1vs1StratOpt2(Strategy):
     
 class Def2StratOpt(Strategy):
     """
-    Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de la cage.
+    Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de sa position.
     """
     def __init__(self, p = 0.7, n = 3, frac_p = 0.5):
         Strategy.__init__(self,"Def2Opt")

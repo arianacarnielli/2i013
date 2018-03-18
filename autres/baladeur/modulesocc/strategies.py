@@ -8,6 +8,7 @@ from .actions_simples import *
 from .etat import Etat
 import math
 
+
 class RandomStrategy(Strategy):
     def __init__(self):
         Strategy.__init__(self,"Random")

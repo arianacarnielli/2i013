@@ -5,12 +5,29 @@ from .Outil import Outil
 from soccersimulator.settings import *
 
 ## Fonceur sur la balle
+class Fonceur_brain_Test(Strategy):
+	def __init__(self, CONSTANTE_A=10, CONSTANTE_B=40):
+		Strategy.__init__(self,"Random")	
+		self.CONSTANTE_A = CONSTANTE_A
+		self.CONSTANTE_B = CONSTANTE_B
+	def compute_strategy(self,state,id_team,id_player):
+		outil = Outil(state, id_team, id_player, CONSTANTE_A=self.CONSTANTE_A, CONSTANTE_B=self.CONSTANTE_B)
+		return outil.fonceur_brain(id_team)
+
+class Fonceur_brain(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Random")	
+	def compute_strategy(self,state,id_team,id_player):
+		outil = Outil(state, id_team, id_player)
+		return outil.fonceur_brain(id_team)
+
 class Fonceur(Strategy):
 	def __init__(self):
 		Strategy.__init__(self,"Random")	
 	def compute_strategy(self,state,id_team,id_player):
 		outil = Outil(state, id_team, id_player)
 		return outil.attaque_fonceur(id_team)
+
 
 class FonceurTest(Strategy):
 	def __init__(self, force=1):
@@ -42,6 +59,16 @@ class Defenseur_2v2(Strategy):
 	def compute_strategy(self,state,id_team,id_player):
 		outil = Outil(state, id_team, id_player)
 		return outil.defense_2v2(id_team)
+
+## Defenseur_2v2_opti
+#class Defenseur_2v2_opti(Strategy):
+	#def __init__(self,CONSTANTE_A=0,CONSTANTE_B=1):
+	#	Strategy.__init__(self,"Random")
+	#	self.CONSTANTE_A = CONSTANTE_A
+	#	self.CONSTANTE_B = CONSTANTE_B	
+	#def compute_strategy(self,state,id_team,id_player):
+	#	outil = Outil(state, id_team, id_player, CONSTANTE_A=self.CONSTANTE_A, CONSTANTE_B=self.CONSTANTE_B)
+	#	return outil.defense_2v2(id_team)
 			
 			
 			
