@@ -16,6 +16,11 @@ from .action import *
 from .comportement import *
 
 import math
+
+
+###############################################################################
+### Strategies simples pour l'aprentissage de l'IA                          ###
+###############################################################################
       
 class ShootStrat(Strategy):
     """

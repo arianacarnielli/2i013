@@ -199,6 +199,16 @@ class ToolBox(object):
         if not (norm_acc is None):
             vec_goal.norm = norm_acc
         return vec_goal
+        
+    def VecPosBallToGoal(self, n = 0, norm_acc = None):
+        """
+        retourne le vecteur du joueur au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        """
+        loc_ball = self.PosBall(n)
+        vec_goal = self.PosCageAtk - loc_ball 
+        if not (norm_acc is None):
+            vec_goal.norm = norm_acc
+        return vec_goal
     
     def VecPosCoinGoal(self, norm_acc = None):
         """
