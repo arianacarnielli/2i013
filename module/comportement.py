@@ -17,11 +17,134 @@ from .action import *
 import math
 
 
+      
 class Comportement(object):
     
     def __init__(self, action):
         self.action = action
         self.dernierdrible = None
+        
+###############################################################################
+### Comportements simples pour l'aprentissage de l'IA                       ###
+###############################################################################
+             
+    def ComShootSimple(self, acc = 1, vit = 1, n = 5):
+        """
+        Comportement de base de attaque.
+        """
+        if self.action.tools.CanShoot(): 
+            return self.action.ShootGoal(acc)
+        else:
+            return self.action.RunToBall(vit, n)
+ 
+    def ComGardienSimple(self, acc = 1, vit = 1, n = 5, p = 0.7):
+        """
+        Comportement de base de gardien.
+        """
+        if self.action.tools.CanShoot():
+            return self.action.ShootAtk()
+        
+        if self.action.tools.EstDef(n, p):
+            return self.action.RunToBall(vit,n)
+        
+        if self.action.tools.EstGoalDef():
+            return SoccerAction()
+        return self.action.RunToDefGoal()
+    
+    
+    def ComDefSimple(self, acc = 1, vit = 1, n = 5, p = 0.7, frac_p = 0.5):
+        """
+        Comportement de base de defense.
+        """
+        if self.action.tools.CanShoot():
+            return self.action.ShootAtk()
+        
+        if self.action.tools.EstDef(n, p):
+            return self.action.RunToBall(vit,n)
+
+        return self.action.RunToDefense(p * frac_p)
+
+    def ComDribleSimple(self, accShoot = 0.64, accDrible = 0.15, vit = 1, n = 4, maxAngle = math.pi/4, tooFar = 8*maxBallAcceleration):
+        """
+        Comportement de base d'attaque avec drible.
+        """
+#        if self.action.tools.CanShoot():
+#            
+#            minPos = self.action.tools.VecPosAdvPlusProche()
+#            posGoal = self.action.tools.VecPosGoal()
+#            
+#            theta = minPos.angle - posGoal.angle
+#            if abs(theta) > maxAngle or minPos.norm > tooFar:
+#                return self.action.ShootGoal(accShoot)
+#            elif theta > 0:
+#                return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
+#            else:
+#                return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
+#        else:
+#            return self.action.RunToBall(vit, n)   
+#        
+        if self.action.tools.CanShoot():
+            minPos = self.action.tools.VecPosAdvPlusProcheDevant()
+         
+            # S'il y a un joueur entre moi et mon but
+            if not (minPos is None):
+                
+                # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
+                posGoal = self.action.tools.VecPosGoal()
+                theta = minPos.angle - posGoal.angle
+                if abs(theta) > maxAngle or minPos.norm > tooFar:
+                    return self.action.ShootGoal(accShoot)
+                elif theta > 0:
+                    return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
+                else:
+                    return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
+            else:
+                return self.action.ShootGoal(accShoot)
+        else:
+            return self.action.RunToBall(vit, n)   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    def ComPassSimple(self, accPasse = 0.25, accShoot = 1, vit = 1, n = 4):        
+        """
+        Comportement de base de passe.
+        """
+        if self.action.tools.CanShoot():
+            minPos = self.action.tools.VecPosAmisPlusProche()
+            if not (minPos is None):
+                Pos_joueur2 = minPos + self.action.tools.PosJoueur
+   
+                return self.action.ShootPasse(Pos_joueur2, accPasse)
+            else:
+                return self.action.ShootGoal(accShoot)
+        else:
+            return self.action.RunToBall(vit, n)  
+
+        
+    def ComAtkSimple(self, acc = 1, pos_x = 0.5, p = 0.5, n = 0, vit = 1):
+        """
+        Comportement de base de Romário.
+        """
+        if self.action.tools.CanShoot():
+            return self.action.ShootGoal(acc)
+        
+        if self.action.tools.EstAtk(n, p):
+            return self.action.RunToBall(vit,n)
+
+        else:     
+            return self.action.RuntoAtaque(pos_x)
+            
+       
+###############################################################################
+### Comportements                                                           ###
+###############################################################################
+             
                 
     def ComShoot(self, acc = 1, vit = 1, n = 0):
         """
@@ -166,9 +289,7 @@ class Comportement(object):
 
 
 
-
-
-    def ComPass(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):        
+    def ComPass(self, accPasse = 0.25, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):        
         
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAmisPlusProcheDevant()
@@ -183,7 +304,5 @@ class Comportement(object):
         else:
             return self.action.RunToBall(vit, n)         
             
-    
-
-
+  
 

@@ -70,11 +70,17 @@ class Action(object):
         """
         return SoccerAction(self.tools.PosCageDef - self.tools.PosJoueur)
     
-    def RunToDefense(self, pos_x):
+    def RunToDefense(self, pos_x = 0.5):
         """
         Renvoi une SoccerAction de courir vers une position defensive d'interception.
         """
-        return SoccerAction(self.tools.PosDefense(pos_x) - self.tools.PosJoueur)
+        return SoccerAction(self.tools.VecDef(pos_x = pos_x, norm_acc = maxPlayerAcceleration))
+    
+    def RuntoAtaque(self, pos_x = 0.5):
+        """
+        Retourne une SoccerAction de courir vers une position de ataque.
+        """
+        return SoccerAction(self.tools.VecAtk(pos_x = pos_x, norm_acc = maxPlayerAcceleration))
 
         
     

@@ -30,9 +30,63 @@ class ShootStrat(Strategy):
         Strategy.__init__(self,"Shoot")
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComShoot()
+        return comp.ComShootSimple()
         
-        
+class GardienStrat(Strategy):
+    """
+    Strategie de defense de la cage.
+    """
+    def __init__(self):
+        Strategy.__init__(self,"Gardien")
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComGardienSimple()
+    
+class DefStrat(Strategy):
+    """
+    Strategie de defense.
+    """
+    def __init__(self):
+        Strategy.__init__(self,"Def")
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDefSimple()    
+
+class DribleStrat(Strategy):
+    """
+    Strategie d'attaque avec drible.
+    """
+    def __init__(self):
+        Strategy.__init__(self,"Drible")
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComDribleSimple()
+
+class PassStrat(Strategy):
+    """
+    Strategie de passe entre deux joueurs.
+    """
+    def __init__(self):
+        Strategy.__init__(self,"Pass")
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComPassSimple()
+
+class AtkStrat(Strategy):
+    """
+    Strategie de passe entre deux joueurs.
+    """
+    def __init__(self):
+        Strategy.__init__(self,"Atacante")
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComAtkSimple()
+
+###############################################################################
+### Strategies                                                              ###
+###############################################################################
+
+    
 class ShootBallPrevStrat(Strategy):
     """
     Strategie de tir vers le milieu du but que prend en consideration la position attendue de la balle.
@@ -57,43 +111,6 @@ class ShootBallOptimalStrat(Strategy):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComShoot(n = self.n, acc = self.acc)
  
-
-class DefStrat(Strategy):
-    """
-    Strategie de defense de la cage.
-    """
-    def __init__(self):
-        Strategy.__init__(self,"Def")
-    def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDef()
-    
-class DribleStrat(Strategy):
-    """
-    Strategie d'attaque avec drible.
-    """
-    def __init__(self):
-        Strategy.__init__(self,"Def")
-    def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDrible(accShoot = 0.25, accDrible = 0.25, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration)
-        
-
-class PassStrat(Strategy):
-    """
-    Strategie de passe entre deux joueurs.
-    """
-    def __init__(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):
-        Strategy.__init__(self,"PassOpt")
-        self.accPasse = accPasse
-        self.accShoot = accShoot
-        self.vit = vit
-        self.n = n
-        self.tooClose = tooClose
-    def compute_strategy(self,state,id_team,id_player):
-        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComPass(accShoot = self.accShoot, vit = self.vit, n = self.n, tooClose = self.tooClose)
-
 
 ###############################################################################
 ### Strategies de teste  pour optimisation                                  ###
