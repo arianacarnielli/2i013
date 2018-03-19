@@ -23,8 +23,8 @@ def get_team(nb_players):
 #        myteam.add("Cafu", Def2StratOpt(p = 0.8))
 #        myteam.add("RRRRONALDO", DribleStratOpt2(n = 18, accShoot = 0.25, maxAngle = math.pi/4, tooFar = 9*maxBallAcceleration))
         
-        myteam.add("Cafu", Def2StratOpt(p = 0.4, n = 0, frac_p = 0.8))
-        myteam.add("RRRRONALDO", DribleStratOpt2(accShoot = 0.7, accDrible = 0.9, vit = 0.8, n = 9, maxAngle = 0.13, tooFar = 24, rSurfBut = 20, AngleHyst = 0.25))
+        myteam.add("Cafu", Def2StratOpt(p = 0.8, n = 10, frac_p = 0.9))
+        myteam.add("RRRRONALDO", DribleStratOpt2(accShoot = 0.4, accDrible = 0.9, vit = 1, n = 7, maxAngle = 0.08, tooFar = 42, rSurfBut = 35, AngleHyst = 0.08))
         #[accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
 
     if nb_players == 4:
