@@ -31,23 +31,26 @@ import autres.chefifarouck.FarouckYann as ia9
 
 #teste git#
 
-## Creation d'une equipe
+### Creation d'une equipe
+#
+#thon = module.get_team(2)
+#pyteam = ia7.get_team(2)
+#
+#
+##pyteam.add("P1", module.DribleStrat())
+##pyteam.add("P2", module.DefStratOpt())
+##thon.add("P3", module.DefStratOpt())
+##thon.add("P4", module.ShootStrat())
+#
+##Creation d'une partie
+#simu = Simulation(pyteam, thon)
+#
+##Jouer et afficher la partie
+#show_simu(simu)
 
-thon = module.get_team(2)
-pyteam = ia8.get_team(2)
-
-
-#pyteam = SoccerTeam(name = "GermanyWins")
-#thon = SoccerTeam(name = "BRBRBR")
-
-#pyteam.add("P1", module.DribleStrat())
-#pyteam.add("P2", module.DefStratOpt())
-#thon.add("P3", module.DefStratOpt())
-#thon.add("P4", module.ShootStrat())
-
-#Creation d'une partie
-simu = Simulation(thon, pyteam)
-
-#Jouer et afficher la partie
-show_simu(simu)
-
+for i in range(30):
+    thon = module.get_team(2)
+    pyteam = ia7.get_team(2)
+    simu = Simulation(pyteam, thon)
+    simu.start()
+    print("{} x {}".format(simu.get_score_team(1), simu.get_score_team(2)))

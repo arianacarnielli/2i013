@@ -75,6 +75,12 @@ class Action(object):
         Renvoi une SoccerAction de courir vers une position defensive d'interception.
         """
         return SoccerAction(self.tools.VecDef(pos_x = pos_x, norm_acc = maxPlayerAcceleration))
+        
+    def RunToDefenseProp(self, alpha = 0.6):
+        """
+        Renvoi une SoccerAction de courir vers une position defensive d'interception.
+        """
+        return SoccerAction(self.tools.VecDefProportionnel(alpha = alpha, norm_acc = maxPlayerAcceleration))
     
     def RuntoAtaque(self, pos_x = 0.5):
         """

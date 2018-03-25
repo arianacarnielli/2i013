@@ -115,6 +115,13 @@ class ToolBox(object):
             if abs(adv.x - PosGoal.x) < 3 and adv.y <= PosGoal.y + GAME_GOAL_HEIGHT/2 and adv.y >= PosGoal.y - GAME_GOAL_HEIGHT/2:
                 return True
         return False
+        
+    def ExistAdvProcheAmi(self, pos_ami, rayon = 15):
+        pos_advs = self.GetPosAdversaires
+        for pos_adv in pos_advs:
+            if (pos_ami - pos_adv).norm <= rayon:
+                return True
+        return False
     
         
 ###############################################################################        
@@ -153,6 +160,14 @@ class ToolBox(object):
         else:
             y = GAME_HEIGHT/2 - y
         return Vector2D(x, y)
+        
+    def PosDefenseProportionnelle(self, alpha = 0.6):
+        """
+        retourne le vecteur donnant une position defensive pour intercepter la balle si l'ennemi tire droit vers le but.
+        """
+        pos_cage = self.PosCageDef
+        pos_ball = self.PosBall()
+        return pos_ball*alpha + pos_cage*(1 - alpha)
     
     def PosAtk(self, pos_x = 0.5):
         """
@@ -205,6 +220,17 @@ class ToolBox(object):
         """
         return [self.state.player_state(idteam, idplayer).position for idteam, idplayer in self.state.players if idteam != self.id_team]
 
+    @property
+    def PosAdvPlusProcheDeLaBalle(self):
+        """
+        retourne la position de l'adversaire plus proche de la balle.
+        """
+        pos_advs = self.GetPosAdversaires
+        min_pos = pos_advs[0]
+        for pos_adv in pos_advs:
+            if (pos_adv - self.PosBall()).norm < (min_pos - self.PosBall()).norm:
+                min_pos = pos_adv
+        return min_pos
 
 ###############################################################################
 ### Vecteurs                                                                ###
@@ -297,6 +323,15 @@ class ToolBox(object):
             vec_def.norm = norm_acc
         return vec_def
         
+    def VecDefProportionnel(self, alpha = 0.6, norm_acc = None):
+        """
+        retourne un vecteur de la position du joueur vers la position de defense default.
+        """
+        vec_def = self.PosDefenseProportionnelle(alpha) - self.PosJoueur
+        if not (norm_acc is None):
+            vec_def.norm = norm_acc
+        return vec_def
+        
     def VecPosAdvPlusProcheDevant(self, norm_acc = None):
         """
         retourne le vecteur du joueur actuel au joueur adversaire le plus proche devant lui. Retourne None s'il n'y a pas d'adversaire devant.
@@ -354,3 +389,10 @@ class ToolBox(object):
         if not (minPos is None) and not (norm_acc is None):
             minPos.norm = norm_acc
         return minPos
+
+    def VecPosAdvPlusProcheDeLaBalle(self):
+        """
+        retourne le vecteur de l'adversaire plus proche de la balle à la balle.
+        """
+        return self.PosBall() - self.PosAdvPlusProcheDeLaBalle
+        

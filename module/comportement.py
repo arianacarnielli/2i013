@@ -198,14 +198,50 @@ class Comportement(object):
             if abs(theta) > maxAngle:
                 return self.action.ShootGoal()
             if (theta > 0 and self.action.tools.id_team == 1) or (theta <= 0 and self.action.tools.id_team ==2):
-                return self.action.ShootAngle(vec_adv - maxAngle)
-            return self.action.ShootAngle(vec_adv + maxAngle)
+                return self.action.ShootAngle(vec_adv.angle - maxAngle)
+            return self.action.ShootAngle(vec_adv.angle + maxAngle)
         
         if self.action.tools.EstDef(n, p):
             return self.action.RunToBall(vit,n)
 
         return self.action.RunToDefense(p * frac_p)
 
+    def ComDefIntelligent2(self, acc = 1, vit = 1, n = 0, p = 0.7, alpha = 0.6, distMin = 10, distMax = 60, maxAngle = math.pi/6, rayon = 15):
+        """
+        Comportement de defense.
+        """
+        my_pos = self.action.tools.PosJoueur
+        if self.action.tools.CanShoot():
+            vec_ami = self.action.tools.VecPosAmisPlusProcheDevant()
+            if vec_ami is not None:
+                if vec_ami.norm >= distMin and vec_ami.norm <= distMax and not self.action.tools.ExistAdvProcheAmi(vec_ami + my_pos, rayon):
+                    return self.action.ShootPasse(vec_ami + my_pos, acc = vec_ami.norm/maxBallAcceleration)
+            
+            vec_adv = self.action.tools.VecPosAdvPlusProcheDevant()
+            if vec_adv is not None:
+                vec_goal = self.action.tools.VecPosGoal()
+                if self.action.tools.id_team == 1:
+                    theta = vec_adv.angle - vec_goal.angle
+                else:
+                    vec_adv.x = -vec_adv.x
+                    vec_goal.x = -vec_goal.x
+                    theta = vec_adv.angle - vec_goal.angle
+                    vec_adv.x = -vec_adv.x
+                    vec_goal.x = -vec_goal.x
+                if abs(theta) > maxAngle:
+                    return self.action.ShootGoal()
+                if (theta > 0 and self.action.tools.id_team == 1) or (theta <= 0 and self.action.tools.id_team ==2):
+                    return self.action.ShootAngle(vec_adv.angle - maxAngle)
+                return self.action.ShootAngle(vec_adv.angle + maxAngle)
+            return self.action.ShootGoal()
+        
+        if self.action.tools.EstDef(n, p):
+#            if self.action.tools.VecPosAdvPlusProcheDeLaBalle().norm + 5 < self.action.tools.VecPosBall().norm:
+#                return self.action.RunToDefenseProp(alpha)
+            return self.action.RunToBall(vit,n)
+
+        return self.action.RunToDefenseProp(alpha)
+        
     def ComDrible(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration):
         """
         Comportement de base d'attaque avec drible.
@@ -235,7 +271,7 @@ class Comportement(object):
         
 
     
-    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
+    def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12, distShoot = 50):
         """
         Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi si il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
         """
@@ -246,8 +282,11 @@ class Comportement(object):
             Posgoal = self.action.tools.PosCageAtk
             Posjoueur = self.action.tools.PosJoueur
             
-            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 and Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
+            if abs(Posjoueur.x - Posgoal.x) < distShoot:
                 return self.action.ShootGoal(accShoot)
+                
+#            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 and Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
+#                return self.action.ShootGoal(accShoot)
                         
             # S'il y a un joueur entre moi et mon but
             if not (minPos is None):

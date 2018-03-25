@@ -146,17 +146,17 @@ class DefIntelligentStratOpt(Strategy):
     """
     Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de sa position.
     """
-    def __init__(self, p = 0.7, n = 3, frac_p = 0.5, distMin = 10, distMax = 60, maxAngle = math.pi/6:
+    def __init__(self, p = 0.7, n = 3, alpha = 0.6, distMin = 10, distMax = 60, maxAngle = math.pi/6):
         Strategy.__init__(self,"DefIntelligent")
         self.p = p
         self.n = n
-        self.frac_p = frac_p
+        self.alpha = alpha
         self.distMin = distMin
         self.distMax = distMax
         self.maxAngle = maxAngle
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDefIntelligent(p = self.p, n = self.n, frac_p = self.frac_p, distMin = self.distMin, distMax = self.distMax, maxAngle = self.maxAngle)
+        return comp.ComDefIntelligent2(p = self.p, n = self.n, alpha = self.alpha, distMin = self.distMin, distMax = self.distMax, maxAngle = self.maxAngle)
 
         
 
