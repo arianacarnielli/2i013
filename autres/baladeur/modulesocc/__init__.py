@@ -1,11 +1,10 @@
 from .strategies import *
 from soccersimulator import SoccerTeam
 
-
 def get_team(nb_players):
-	myteam = SoccerTeam(name="1But=1OursPolaireSauvé")
+	myteam = SoccerTeam(name="Started from the bottom")
 	if nb_players == 1:
-		myteam.add("Joueur" ,ZigzagStrategy())
+		myteam.add("Joueur" ,AttaqueStrategy())
 	if nb_players == 2:
 		myteam.add("Defenseur", DefenseStrategy())
 		myteam.add("Attaquant", AttaqueStrategy())

@@ -65,7 +65,7 @@ class ToolBox(object):
         """
         determine si le joueur courant est plus proche du ballon que tous les joueurs adversaires.
         """
-        posAdversaires = self.GetPosAdversaires()
+        posAdversaires = self.GetPosAdversaires
         posBall = self.PosBall(n)
         return self.PosJoueur.distance(posBall) < min([posAdv.distance(posBall) for posAdv in posAdversaires])
 
@@ -314,7 +314,7 @@ class ToolBox(object):
         
     def VecPosAmisPlusProcheDevant(self, norm_acc = None):
         """
-        retourne le vecteur du joueur actuel au joueur ami le plus proche devant lui. Retourne None s'il n'y a pas d'adversaire devant.
+        retourne le vecteur du joueur actuel au joueur ami le plus proche devant lui. Retourne None s'il n'y a pas d'ami devant.
         """
         amisPos = self.GetPosAmis
         minPos = None

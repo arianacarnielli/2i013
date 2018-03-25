@@ -66,13 +66,13 @@ class UnVUn(Strategy):
 		def compteur(self, id_tim):
 			if id_tim == 1: return 0
 			self.debug += 1
-			print("tag", self.debug)
+			#print("tag", self.debug)
 			
 		def debug_init(self, id_tim):
 			self.debug = 0
-			print("tag 0")
+			#print("tag 0")
 		
-		print("debug")
+		#print("debug")
 		##Parameters
 		rayon_zone_de_confiance = 4.3
 		##End parameters

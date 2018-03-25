@@ -20,13 +20,13 @@ import module
 import math
 
 import autres.ortiz.ia as ia1
-import autres.sebastien.footIA as ia2
+import autres.sebastien.footIAT2 as ia2
 import autres.austenprinciple.Foot as ia3
 import autres.ahmedmelliti.module as ia4
 import autres.caieddy.module as ia5
 import autres.iamlisa.module as ia6
 import autres.baladeur.modulesocc as ia7
-import autres.aatarek.RepoSoccer_master as ia8
+import autres.aatarek.RepoSoccer_master.prog as ia8
 import autres.chefifarouck.FarouckYann as ia9
 
 #teste git#
@@ -34,7 +34,7 @@ import autres.chefifarouck.FarouckYann as ia9
 ## Creation d'une equipe
 
 thon = module.get_team(2)
-pyteam = ia7.get_team(2)
+pyteam = ia8.get_team(2)
 
 
 #pyteam = SoccerTeam(name = "GermanyWins")

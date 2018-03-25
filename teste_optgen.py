@@ -7,5 +7,5 @@ Created on Mon Feb 26 19:07:16 2018
 
 import module
 
-expe = module.ParamGenetique()
+expe = module.ParamGenetique(2)
 expe.start_alea()

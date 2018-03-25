@@ -104,13 +104,6 @@ class Comportement(object):
             return self.action.RunToBall(vit, n)   
         
         
-        
-        
-        
-        
-        
-        
-        
     def ComPassSimple(self, accPasse = 0.25, accShoot = 1, vit = 1, n = 4):        
         """
         Comportement de base de passe.

@@ -37,7 +37,7 @@ class ParamGenetique(object):
         
         import autres.ortiz.ia as ia
         self.list_ia = [ia]
-        import autres.sebastien.footIA as ia
+        import autres.sebastien.footIAT2 as ia
         self.list_ia.append(ia)
         import autres.austenprinciple.Foot as ia
         self.list_ia.append(ia)
@@ -49,7 +49,7 @@ class ParamGenetique(object):
         self.list_ia.append(ia)
         import autres.baladeur.modulesocc as ia
         self.list_ia.append(ia)
-        import autres.aatarek.RepoSoccer_master as ia
+        import autres.aatarek.RepoSoccer_master.prog as ia
         self.list_ia.append(ia)
         import autres.chefifarouck.FarouckYann as ia
         self.list_ia.append(ia)
@@ -64,7 +64,7 @@ class ParamGenetique(object):
         rSurfBut = rd.randrange(0, 51, 5)
         AngleHyst = round(rd.uniform(0, math.pi/10), 2)
         
-        p = rd.randrange(0, 11, 1) / 10.
+        p = rd.randrange(0, 16, 1) / 10.
         nDef = rd.randrange(0, 21, 1)
         frac_p = rd.randrange(0, 11, 1) / 10.
         
@@ -143,14 +143,15 @@ class ParamGenetique(object):
         self.init_params_alea()
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}_{}".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_{}_final".format(self.nb_players), self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final_20180325".format(self.nb_players), self.tab_params, self.tab_points)
         
     def start_file(self, filename, nb_generations = 10):
         self.init_params_results_from_file(filename)
+        
         for i in range(nb_generations):
             self.next_generation()
             self.eval_params()
-            np.savez("genetique_{}_{}".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)

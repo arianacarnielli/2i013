@@ -1,3 +1,7 @@
 *.pyc
 __pycache__/
-
+test_arbre.pdf/
+test_kb_strat.jz/
+tree_test.pkl/
+teste_aprentissage1v1.py/
+test_arbre.dot

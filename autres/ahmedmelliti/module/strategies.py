@@ -192,4 +192,6 @@ class Defenseur(Strategy):
 			return SoccerAction(t.goto(t.ball_position + t.ball_vitesse))
 		else:
 			return SoccerAction(t.goto(t.cage_adv))
+		
 
+		

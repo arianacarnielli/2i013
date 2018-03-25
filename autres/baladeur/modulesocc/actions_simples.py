@@ -6,55 +6,47 @@ from soccersimulator.settings import *
 from .etat import *
 import math
 
-
-def dirballe(etat,norme) :
-	vect = etat.posballe()-etat.posjoueur()
+#Vecteur direction vers la balle avec k tours d'anticipation
+def dirballe(etat, id_t, id_p, norme, k) :
+	vect= etat.posballe()+k*etat.spballe() - etat.posjoueur(id_t,id_p)
 	vect.norm = norme
 	return vect
 
-def dirpos(etat,norme,pos):
-	vect = pos-etat.posjoueur()
+#Vecteur direction vers la position indiquée
+def dirpos(etat, id_t, id_p, norme, pos) :
+	vect= pos-etat.posjoueur(id_t,id_p)
 	vect.norm = norme
 	return vect
 
-def dirgoal(etat,norme) :
-	vect=Vector2D(0,0)
-	posg=etat.posgoal()
-	vect=posg-etat.posballe()
+#Vecteur tir de la balle vers les cages de la team indiquée, avec h correpondant au y visé
+#h=0 	:	Tir vers le point le plus bas des cages
+#h=0.5	:	Tir vers le centre
+#h=1 	:	Tir vers le point le plus haut des cages
+def dirgoal(etat, id_t, norme, h) : 
+	posg=etat.poscage(id_t)
+	hg=(GAME_HEIGHT-GAME_GOAL_HEIGHT)/2
+	posb=etat.posballe()
+	vect=Vector2D(posg.x-posb.x,(hg+h*GAME_GOAL_HEIGHT)-posb.y)
+	vect.norm=norme
+	return vect
+	
+
+#Vecteur tir de la balle vers un joueur allié de l'équipe avec k tours d'anticipation
+def passe(etat, id_t, id_p, norme, k) :
+	posb=etat.posballe()
+	posp=etat.posjoueur(id_t,id_p)
+	vitp=etat.spjoueur(id_t,id_p)
+	vect=Vector2D(posp.x-posb.x+k*vitp.x,posp.y-posb.y+k*vitp.y)
 	vect.norm=norme
 	return vect
 
-def deviation(etat,norme) :
-	direction_goal=dirgoal(etat,norme)
-	sp=etat.speed()
-	balle=etat.posballe()
-	if sp.x>0:
-		anticipe=balle.y+(direction_goal.x/sp.x)*sp.y
-		if anticipe>=GAME_HEIGHT/2-GAME_GOAL_HEIGHT and anticipe<=GAME_HEIGHT/2+GAME_GOAL_HEIGHT:
-			if balle.y >=GAME_HEIGHT/2:
-				direction_goal.angle += math.radians(25)
-			if balle.y <GAME_HEIGHT/2:
-				direction_goal.angle -= math.radians(25)
-	return direction_goal
-
-def dir_posdef(etat, prop) :
-	return dirpos(etat,1,etat.posdef(prop))
-
-def dir_pospasse(etat, id_player):
-	return dirpos(etat,1,etat.pos_passe(id_player))
-
-def passe(etat, id_player, norme):
-	vitesse = etat.state.player_state(etat.id_team,id_player).vitesse
-	vect = Vector2D(etat.poscoequipier(id_player).x - etat.posjoueur().x + 10*vitesse.x,etat.poscoequipier(id_player).y - etat.posjoueur().y +10*vitesse.y)
-	vect.norm=norme
+#Vecteur tir de la balle vers un joueur allié décalé par rapport à la position défensive
+#k est le facteur du vecteur qui sépare le joueur allié du joueur adverse
+def passedef(etat, id_t, id_p, norme, k) :
+	t_adv = id_t%2+1
+	posjadv=etat.state.player_state(t_adv, etat.proche_balle(t_adv)).position
+	posj=etat.state.player_state(id_t,id_p).position
+	pos=Vector2D(posj.x + k*(posj.x-posjadv.x), posj.y + k*(posj.y-posjadv.y))
+	vect= pos-etat.posballe()
+	vect.norm = norme
 	return vect
-
-#def inter_goal(etat, norme):
-#	vit=etat.speed()
-#	posb=etat.posballe()
-#	posg=etat.poscage()
-#	kx=(posg.x-posb.x)/vit.x #combien de fois le vecteur vitesse pour aller vers les cages
-#	if k>0: #la balle va vers les cages
-#			
-#	
-#	
