@@ -146,7 +146,7 @@ class DefIntelligentStratOpt(Strategy):
     """
     Strategie de defense de la cage, on peut tester combien de pas on essaie de predir la position de la balle et a partir de quand le defenseur doit sortir de sa position.
     """
-    def __init__(self, p = 0.7, n = 3, alpha = 0.6, distMin = 10, distMax = 60, maxAngle = math.pi/6):
+    def __init__(self, p = 0.7, n = 0, alpha = 0.6, distMin = 10, distMax = 60, maxAngle = math.pi/6, rayon = 15):
         Strategy.__init__(self,"DefIntelligent")
         self.p = p
         self.n = n
@@ -154,13 +154,12 @@ class DefIntelligentStratOpt(Strategy):
         self.distMin = distMin
         self.distMax = distMax
         self.maxAngle = maxAngle
+        self.rayon = rayon
+        
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
-        return comp.ComDefIntelligent2(p = self.p, n = self.n, alpha = self.alpha, distMin = self.distMin, distMax = self.distMax, maxAngle = self.maxAngle)
+        return comp.ComDefIntelligent(p = self.p, n = self.n, alpha = self.alpha, distMin = self.distMin, distMax = self.distMax, maxAngle = self.maxAngle, rayon = self.rayon)
 
-        
-
-        
 class ShootBallStratOpt(Strategy):
     """
     Strategie de tir vers le milieu du but qui prend en consideration la position attendue de la balle, avec l'acceleration optimale pour 1 x 0.
@@ -195,7 +194,7 @@ class DribleStratOpt2(Strategy):
     """
     Strategie d'attaque avec drible, plus d'especifications.
     """    
-    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12):
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12, distShoot = 50):
         Strategy.__init__(self,"Drible2")
         self.accShoot = accShoot
         self.accDrible = accDrible
@@ -205,13 +204,14 @@ class DribleStratOpt2(Strategy):
         self.tooFar = tooFar
         self.rSurfBut = rSurfBut
         self.AngleHyst = AngleHyst
+        self.distShoot = distShoot
         
         self.dernierdrible = None
         
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         comp.dernierdrible = self.dernierdrible
-        act = comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst)
+        act = comp.ComDrible2(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst, distShoot = self.distShoot)
         self.dernierdrible = comp.dernierdrible
         return act
 

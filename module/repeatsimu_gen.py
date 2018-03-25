@@ -23,7 +23,7 @@ import numpy as np
     
 class repeatsimu_gen2V2(object):
     def __init__(self, list_param, ia, trials=20, max_steps=2000):
-        self.strategy1 = Def2StratOpt
+        self.strategy1 = DefIntelligentStratOpt
         self.strategy2 = DribleStratOpt2
         self.trials = trials
         self.max_steps = max_steps
@@ -40,8 +40,8 @@ class repeatsimu_gen2V2(object):
             if verbose:
                 print(" Match",i)
             brasil = SoccerTeam("Brasil")
-            brasil.add("self.strategy1", self.strategy1(p = self.list_param[8], n = self.list_param[9], frac_p = self.list_param[10]))
-            brasil.add("self.strategy2", self.strategy2(accShoot = self.list_param[0], accDrible = self.list_param[1], vit = self.list_param[2], n = self.list_param[3], maxAngle = self.list_param[4], tooFar = self.list_param[5], rSurfBut = self.list_param[6], AngleHyst = self.list_param[7]))
+            brasil.add("self.strategy1", self.strategy1(p = self.list_param[9], n = self.list_param[10], alpha = self.list_param[11], distMin = self.list_param[12], distMax = self.list_param[13], maxAngle = self.list_param[14], rayon = self.list_param[15]))
+            brasil.add("self.strategy2", self.strategy2(accShoot = self.list_param[0], accDrible = self.list_param[1], vit = self.list_param[2], n = self.list_param[3], maxAngle = self.list_param[4], tooFar = self.list_param[5], rSurfBut = self.list_param[6], AngleHyst = self.list_param[7], distShoot = self.list_param[8]))
                
             desafiante = self.ia.get_team(2)
         

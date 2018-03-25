@@ -55,6 +55,7 @@ class ParamGenetique(object):
         self.list_ia.append(ia)
 
     def genVectAlea(self):
+        #distShoot = 50)
         accShoot = rd.randrange(0, 11, 1) / 10.
         accDrible = rd.randrange(0, 11, 1) / 10.
         vit = rd.randrange(0, 11, 1) / 10.
@@ -63,15 +64,24 @@ class ParamGenetique(object):
         tooFar = rd.randrange(0, 61, 1)
         rSurfBut = rd.randrange(0, 51, 5)
         AngleHyst = round(rd.uniform(0, math.pi/10), 2)
+        distShoot = rd.randrange(0, 76, 1)
         
         p = rd.randrange(0, 16, 1) / 10.
         nDef = rd.randrange(0, 21, 1)
-        frac_p = rd.randrange(0, 11, 1) / 10.
+        alpha = rd.randrange(0, 11, 1) / 10.
+        distMin = rd.randrange(0, 26, 1)
+        distMax = rd.randrange(distMin, 176, 1)
+        maxAngleDef = round(rd.uniform(0, math.pi/2), 2)
+        rayon = rd.randrange(1, 26, 1)
         
+        #distMin = 10, distMax = 60, maxAngle = math.pi/6, rayon = 15)
+
         if self.nb_players==1:
             return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst]
         elif self.nb_players==2:
-            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
+            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, \
+                    rSurfBut, AngleHyst, distShoot, p, nDef, alpha, distMin, \
+                    distMax, maxAngleDef, rayon]
     
     def test_against_all_ias(self, params, verbose = True):
         points = np.empty(len(self.list_ia))
@@ -96,6 +106,14 @@ class ParamGenetique(object):
         data = np.load(filename)
         self.tab_params = data["arr_0"]
         self.tab_points = data["arr_1"]
+
+    def init_params_from_list(self, list_list_params):
+        if len(list_list_params) > self.nb_meilleurs:
+            raise Exception("Trop de joueurs dans la liste en argument!")
+        for i in range(len(list_list_params)):
+            self.tab_params[i] = list_list_params[i].copy()
+        for i in range(len(list_list_params), self.nb_individus):
+            self.tab_params[i] = self.genVectAlea()
             
     def eval_params(self):
         for i in range(self.nb_individus):
@@ -155,3 +173,12 @@ class ParamGenetique(object):
             self.next_generation()
             self.eval_params()
             np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
+            
+    def start_list(self, list_list_params, nb_generations = 10):
+        self.init_params_from_list(list_list_params)
+        for i in range(nb_generations):
+            self.eval_params()
+            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
+            self.next_generation()
+        self.eval_params()
+        np.savez("genetique_{}_final_20180325".format(self.nb_players), self.tab_params, self.tab_points)
