@@ -364,7 +364,7 @@ class ToolBox(object):
     
     def VecPosAmisPlusProche(self, norm_acc = None):
         """
-        retourne le vecteur du joueur actuel au joueur ami le plus. Retourne None s'il n'y a pas d'adversaire devant.
+        retourne le vecteur du joueur actuel au joueur ami le plus proche. Retourne None s'il n'y a pas d'adversaire devant.
         """
         amisPos = self.GetPosAmis
         minPos = None

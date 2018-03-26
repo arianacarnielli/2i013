@@ -22,7 +22,7 @@ import pickle
      
 import autres.ortiz.ia as ia
 list_ia = [ia]
-import autres.sebastien.footIA as ia
+import autres.sebastien.footIAT2 as ia
 list_ia.append(ia)
 import autres.austenprinciple.Foot as ia
 list_ia.append(ia)
@@ -34,7 +34,7 @@ import autres.iamlisa.module as ia
 list_ia.append(ia)
 import autres.baladeur.modulesocc as ia
 list_ia.append(ia)
-import autres.aatarek.RepoSoccer_master as ia
+import autres.aatarek.RepoSoccer_master.prog as ia
 list_ia.append(ia)
 import autres.chefifarouck.FarouckYann as ia
 list_ia.append(ia)
@@ -51,8 +51,8 @@ nb_players = int(nb_players)
 
 ent = entrainer(nb_players)
 
-fname0 = "entrainer1v1_snap_teste_0"
-fname1 = "entrainer2v2_snap_teste_1"
+fname0 = "entrainer1v1"
+#fname1 = "entrainer2v2_snap_teste_1e"
 
 ent.entrainer_contre_tous(fname0 + ".jz")
 # ent.entrainer2v2_snap(fname0 + ".jz", fname1 + ".jz", 5)
@@ -60,20 +60,21 @@ ent.entrainer_contre_tous(fname0 + ".jz")
 states_tuple0 = load_jsonz(fname0 + ".jz")
 #states_tuple1 = load_jsonz(fname1 + ".jz")
 
-ent.apprendre(states_tuple0,ent.my_get_features, fname0 + ".pkl")
+ent.apprendre_1v1(states_tuple0,ent.my_get_features_1v1, fname0 + ".pkl")
 #ent.apprendre(states_tuple1,ent.my_get_features, fname1 + ".pkl")
+
 
 with open(fname0 + ".pkl","rb") as f:
     dt0 = pickle.load(f)
 # Visualisation de l'arbre
-genere_dot(dt0,fname0 + "arbre_entrainer2v2_snap_teste_0.dot")
+genere_dot(dt0,fname0 + "testeee.dot")
 
 #with open(fname1 + ".pkl","rb") as f:
 #    dt1 = pickle.load(f)
-# Visualisation de l'arbre
-#genere_dot(dt1,fname1 + "arbre_entrainer2v2_snap_teste_1.dot")
+##Visualisation de l'arbre
+#genere_dot(dt1,fname1 + "rtestee1.dot")
 
-treeStrat0 = DTreeStrategy(dt0, dic_strategy, ent.my_get_features)
+treeStrat0 = DTreeStrategy(dt0, dic_strategy, ent.my_get_features_1v1)
 #treeStrat1 = DTreeStrategy(dt1, dic_strategy, ent.my_get_features)
 
 treeteam = SoccerTeam("Arbre Team")

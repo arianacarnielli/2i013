@@ -250,7 +250,7 @@ class Drible1vs1StratOpt2(Strategy):
 ########## TESTE ############  
                 
 class PassStratOpt(Strategy):
-    """
+    """    
     Strategie de passe entre deux joueurs.
     """
     def __init__(self, accPasse = 0.1, accShoot = 1, vit = 1, n = 4, tooClose = 100 * PLAYER_RADIUS):
@@ -258,8 +258,42 @@ class PassStratOpt(Strategy):
         self.accPasse = accPasse
         self.accShoot = accShoot
         self.vit = vit
+
         self.n = n
         self.tooClose = tooClose
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComPass(accShoot = self.accShoot, vit = self.vit, n = self.n, tooClose = self.tooClose)
+        
+        
+class DribleIntelligent1v1Strat(Strategy):
+    """
+    Strategie d'attaque avec drible pour le 1 vs 1.
+    """
+    def __init__(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/3, tooFar = 10*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12, alpha = 0.4):
+        Strategy.__init__(self,"Drible_1v1_intelligent")
+        self.accShoot = accShoot
+        self.accDrible = accDrible
+        self.vit = vit
+        self.n = n
+        self.maxAngle = maxAngle
+        self.tooFar = tooFar
+        self.rSurfBut = rSurfBut
+        self.AngleHyst = AngleHyst
+        self.alpha = alpha        
+             
+        self.dernierdrible = None
+        self.position_ennemi_x = 0
+        self.position_ennemi_y = 0
+        
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+
+        comp.dernierdrible = self.dernierdrible
+        comp.position_ennemi_x = self.position_ennemi_x
+        comp.position_ennemi_y = self.position_ennemi_y
+        act = comp.ComDribleIntelligent1v1(accShoot = self.accShoot, accDrible = self.accDrible, vit = self.vit, n = self.n, maxAngle = self.maxAngle, tooFar = self.tooFar, rSurfBut = self.rSurfBut, AngleHyst = self.AngleHyst, alpha = self.alpha)
+        self.dernierdrible = comp.dernierdrible
+        self.position_ennemi_x = comp.position_ennemi_x
+        self.position_ennemi_y = comp.position_ennemi_y
+        return act

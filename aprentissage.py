@@ -29,7 +29,7 @@ class entrainer(object):
         self.nb_players = nb_players     
         import autres.ortiz.ia as ia
         self.list_ia = [ia]
-        import autres.sebastien.footIA as ia
+        import autres.sebastien.footIAT2 as ia
         self.list_ia.append(ia)
         import autres.austenprinciple.Foot as ia
         self.list_ia.append(ia)
@@ -41,22 +41,22 @@ class entrainer(object):
         self.list_ia.append(ia)
         import autres.baladeur.modulesocc as ia
         self.list_ia.append(ia)
-        import autres.aatarek.RepoSoccer_master as ia
+        import autres.aatarek.RepoSoccer_master.prog as ia
         self.list_ia.append(ia)
         import autres.chefifarouck.FarouckYann as ia
         self.list_ia.append(ia)
         self.list_ia.append(m)
         
-        if self.nb_players == 1:
-            self.my_get_features.__dict__["names"]= ["dist_ball","dist_but_ennemi","dist_ball_but_ennemi",
+
+        self.my_get_features_1v1.__dict__["names"]= ["dist_ball","dist_but_ennemi","dist_ball_but_ennemi",
                                       "can_shoot", "ball_champs_def", "is_closer_ball","existe_adv_devant",
-                                      "existe_ami_devant", "existe_gardien", "dist_ennemi"]        
+                                      "existe_gardien", "dist_ennemi"]        
     
-        else:
-             self.my_get_features.__dict__["names"]= ["dist_ball","dist_but_ennemi","dist_ball_but_ennemi",
+        self.my_get_features_2v2.__dict__["names"]= ["dist_ball","dist_but_ennemi","dist_ball_but_ennemi",
                                       "can_shoot", "ball_champs_def", "is_closer_ball","existe_adv_devant",
                                       "existe_ami_devant", "existe_gardien", "dist_ami_devant",
                                           "dist_ennemi_devant", "dist_ami", "dist_ennemi"]    
+    
     
     
     def entrainer_contre_tous(self, fname1, fname2 = None):
@@ -85,7 +85,7 @@ class entrainer(object):
             
 ### Transformation d'un etat en features : state,idt,idp -> R^d
 
-    def my_get_features(self, state, id_team, id_player):
+    def my_get_features_1v1(self, state, id_team, id_player):
         """ extraction du vecteur de features d'un etat, ici distance a la balle, distance au but, distance balle but... """
         tools = m.ToolBox(state,id_team,id_player)
         
@@ -93,38 +93,52 @@ class entrainer(object):
         f2 = tools.VecPosGoal().norm
         f3 = tools.VecPosBallToGoal().norm 
     
-        #f4 = int(tools.CanShoot())
-        #f5 = int(tools.EstDef())
-        #f6 = int(tools.IsCloserToBall())
-        #f7 = int(tools.ExisteAdversaireDevant())        
+        f4 = int(tools.CanShoot())
+        f5 = int(tools.EstDef())
+        f6 = int(tools.IsCloserToBall())
+        f7 = int(tools.ExisteAdversaireDevant())        
 
-        #f9 = int(tools.AdvAGardien())
+        f8 = int(tools.AdvAGardien())
         
-        #f13 = tools.VecPosAdvPlusProche().norm
+        f9 = tools.VecPosAdvPlusProche().norm
+#        
+#       
+        return [f1, f2, f3, f4, f5, f6, f7, f8, f9]
         
-        if self.nb_players == 2:
-            f8 = int(tools.ExisteAmiDevant())
-            
-            if tools.VecPosAmisPlusProcheDevant() is None :
-                f10 = -1
-            else: 
-                f10 = tools.VecPosAmisPlusProcheDevant().norm
-            
-            if tools.VecPosAdvPlusProcheDevant() is None :
-                f11 = -1
-            else:
-                f11 = tools.VecPosAdvPlusProcheDevant().norm
         
-            if tools.VecPosAmisPlusProche() is None :
-                f12 = -1
-            else: 
-                f12 = tools.VecPosAmisPlusProche().norm
-                
-            return [f1, f2, f3, f4, f5, f6, f8, f10, f11, f12, f13]
+    def my_get_features_2v2(self, state, id_team, id_player):
+        """ extraction du vecteur de features d'un etat, ici distance a la balle, distance au but, distance balle but... """
+        tools = m.ToolBox(state,id_team,id_player)
         
+        f1 = tools.VecPosBall().norm
+        f2 = tools.VecPosGoal().norm
+        f3 = tools.VecPosBallToGoal().norm 
+    
+        f4 = int(tools.CanShoot())
+        f5 = int(tools.EstDef())
+        f6 = int(tools.IsCloserToBall())
+        f8 = int(tools.ExisteAmiDevant())
+        f7 = int(tools.ExisteAdversaireDevant())        
+        f9 = int(tools.AdvAGardien())
+        f10 = tools.VecPosAdvPlusProche().norm
+        
+                   
+        if tools.VecPosAmisPlusProcheDevant() is None :
+            f11 = -1
+        else: 
+            f11 = tools.VecPosAmisPlusProcheDevant().norm
+        
+        if tools.VecPosAdvPlusProcheDevant() is None :
+            f12 = -1
         else:
+            f12 = tools.VecPosAdvPlusProcheDevant().norm
+    
+
+        f13 = tools.VecPosAmisPlusProche().norm
             
-            return [f1, f2, f3]
+        return [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13]
+                
+
     
     def entrainer1v1_main(self, fname, ia):
         
@@ -194,7 +208,7 @@ class entrainer(object):
         print("Nombre d'exemples : "+str(len(kb_strat1.states) + len(kb_strat2.states)))
         
         # Sauvegarde des etats dans un fichier
-        if simu.get_score_team(1) > simu.get_score_team(2):
+        if simu.get_score_team(1) >= simu.get_score_team(2):
             try: 
                 temp_joueur_1 = load_jsonz(fname1)
                 temp_joueur_1+= kb_strat1.states
@@ -209,11 +223,22 @@ class entrainer(object):
             except FileNotFoundError:
                 dump_jsonz( kb_strat2.states,fname2)
     
-    def apprendre(self, exemples, get_features,fname=None):
+    def apprendre_1v1(self, exemples, get_features_1v1,fname=None):
         #genere l'ensemble d'apprentissage
-        data_train, data_labels = build_apprentissage(exemples,get_features)
+        data_train, data_labels = build_apprentissage(exemples,get_features_1v1)
         #Apprentissage de l'arbre
-        dt = apprend_arbre(data_train,data_labels,depth=5, feature_names=get_features.names)
+        dt = apprend_arbre(data_train,data_labels,depth=10, feature_names=get_features_1v1.names)
+        ##Sauvegarde de l'arbre
+        if fname is not None:
+            with open(fname,"wb") as f:
+                pickle.dump(dt,f)
+        return dt
+        
+    def apprendre_2v2(self, exemples, get_features_2v2,fname=None):
+        #genere l'ensemble d'apprentissage
+        data_train, data_labels = build_apprentissage(exemples,get_features_2v2)
+        #Apprentissage de l'arbre
+        dt = apprend_arbre(data_train,data_labels,depth=10, feature_names=get_features2v2.names)
         ##Sauvegarde de l'arbre
         if fname is not None:
             with open(fname,"wb") as f:
