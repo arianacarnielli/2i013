@@ -379,7 +379,7 @@ class Comportement(object):
             self.position_ennemi_y = self.action.tools.PosAdvPlusProcheDeLaBalle.y
             return self.action.RunToDefenseProp(alpha)
         else:    
-            return self.action.RunToBall(vit, n)
+            return self.action.RunToBall(vit, n)  
 
 
 

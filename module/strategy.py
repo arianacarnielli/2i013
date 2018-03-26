@@ -297,3 +297,4 @@ class DribleIntelligent1v1Strat(Strategy):
         self.position_ennemi_x = comp.position_ennemi_x
         self.position_ennemi_y = comp.position_ennemi_y
         return act
+        
