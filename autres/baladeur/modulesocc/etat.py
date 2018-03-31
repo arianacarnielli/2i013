@@ -79,21 +79,13 @@ class Etat(object):
 		return num_j
 
 	#Position pour la reception de la passe
-	"""def pospasse(self, id_t, id_jd,angle) :
-		t_adv=id_t%2+1 
-		posjd=self.state.player_state(id_t, id_jd).position
-		posjadv=self.state.player_state(t_adv, self.proche_balle(t_adv)).position
-		if (posjadv.y>=posjd.x):
-			angle=-1*angle
-		vect=Vector2D(posjadv.x-posjd.x,posjadv.y-posjd.y)
-		vect.angle += math.radians(angle)
-		return Vector2D(posjd.x+vect.x,posjd.y+vect.y)"""
-
 	def pospasse(self, id_t, id_jd, h) :
 		t_adv=id_t%2+1
 		posb=self.posballe()
 		posjd=self.state.player_state(id_t, id_jd).position
 		posjadv=self.state.player_state(t_adv, self.proche_balle(t_adv)).position
+		spejadv=self.spjoueur(t_adv,self.proche_balle(t_adv))
+		posjadv=posjadv+10*spejadv
 		if posjadv.y>posjd.y:
 			k=-1
 		else:

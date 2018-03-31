@@ -32,3 +32,32 @@ class AttaqueStrategy(Strategy):
 	def compute_strategy(self,state,id_team,id_player):
 		return attaque(state,id_team,id_player, 4)
 
+class posdefStrategy(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Defenseur")
+	def compute_strategy(self,state,id_team,id_player):
+		return arriere(state,id_team,id_player)
+
+class passeStrategy(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Defenseur")
+	def compute_strategy(self,state,id_team,id_player):
+		return fairepasse(state,id_team,id_player,3.5)
+
+class pospasseStrategy(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Attaquant")
+	def compute_strategy(self,state,id_team,id_player):
+		return recpasse(state,id_team,id_player)
+
+class dribbleStrategy(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Attaquant")
+	def compute_strategy(self,state,id_team,id_player):
+		return dribble(state,id_team,id_player)
+
+class tirStrategy(Strategy):
+	def __init__(self):
+		Strategy.__init__(self,"Attaquant")
+	def compute_strategy(self,state,id_team,id_player):
+		return fonceur_defaut(state,id_team,id_player, 4)

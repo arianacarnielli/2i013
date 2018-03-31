@@ -1,6 +1,7 @@
 import sys
 
 from soccersimulator import SoccerTeam
+from .strategie import *
 from .strategie import Fonceur
 from .strategie import Defenseur
 from .strategie import Defenseur_2v2
@@ -14,7 +15,7 @@ from .Outil import Outil
 from soccersimulator.settings import *
 
 def get_team(nb_players):
-	myteam = SoccerTeam(name="OnVaWin")
+	myteam = SoccerTeam(name="Je suis nul et je suis devant vous -_- ???? ?PROBLEM?")
 	if nb_players == 1:
 		myteam.add("Le meilleur" ,Bon_joueur_1v1())
 	if nb_players == 2:
@@ -22,7 +23,7 @@ def get_team(nb_players):
 		myteam.add("The Wall",Defenseur_2v2())
 	if nb_players == 4:
 		myteam.add("Joueur 1",Defenseur_2v2())
-		myteam.add("Joueur 2",Fonceur())
+		myteam.add("Joueur 2",Fonceur_brain())
 		myteam.add("Joueur 3",Bon_joueur_2v2())
 		myteam.add("Joueur 4",Defenseur_2v2())
 	return myteam	

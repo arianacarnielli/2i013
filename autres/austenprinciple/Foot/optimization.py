@@ -5,28 +5,27 @@ from soccersimulator.settings import GAME_WIDTH, GAME_HEIGHT
 
 
 class ParamSearch(object):
-    def __init__(self, strategy, params, simu=None, trials=20, max_steps=1000000,
-                 max_round_step=40):
-        self.strategy = strategy
-        self.params = params.copy()
-        self.simu = simu
-        self.trials = trials
-        self.max_steps = max_steps
-        self.max_round_step = max_round_step
+	def __init__(self, strategy, params, simu=None, trials=20, max_steps=1000000, max_round_step=40):
+		self.strategy = strategy
+		self.params = params.copy()
+		self.simu = simu
+		self.trials = trials
+		self.max_steps = max_steps
+		self.max_round_step = max_round_step
 
-    def start(self, show=True):
-        if not self.simu:
-            team1 = SoccerTeam("Team 1")
-            team2 = SoccerTeam("Team 2")
-            team1.add(self.strategy.name, self.strategy)
-            team2.add(Strategy().name, Strategy())
-            self.simu = Simulation(team1, team2, max_steps=self.max_steps)
-        self.simu.listeners += self
+	def start(self, show=True):
+		if not self.simu:
+			team1 = SoccerTeam("Team 1")
+			team2 = SoccerTeam("Team 2")
+			team1.add(self.strategy.name, self.strategy)
+			team2.add(Strategy().name, Strategy())
+			self.simu = Simulation(team1, team2, max_steps=self.max_steps)
+		self.simu.listeners += self
 
-        if show:
-            show_simu(self.simu)
-        else:
-            self.simu.start()
+		if show:
+			show_simu(self.simu)
+		else:
+			self.simu.start()
 
     def begin_match(self, team1, team2, state):
         self.last = 0  # Step of the last round

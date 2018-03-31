@@ -29,7 +29,7 @@ def degagement1v1(tools):
 		ennemi = tools.get_position_adversaire1v1()
 		
 		if con.etre_colle_au_mur_lateral(ennemi):
-				#print("jetais colled")
+				print("jetais colled")
 				if tools.closest_mur_lateral(ennemi) == "haut":
 					endroit = Vector2D(
 					ennemi.x, 
@@ -41,7 +41,7 @@ def degagement1v1(tools):
 					(GH - ennemi.y) / 2)
 		
 		else:
-				#print("jetais pas colled cest pire")
+				print("jetais pas colled cest pire")
 				if tools.closest_mur_lateral(ennemi) == "haut":
 					endroit = Vector2D(
 					ennemi.x, 

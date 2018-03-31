@@ -4,8 +4,10 @@ from soccersimulator.settings import GAME_WIDTH, GAME_HEIGHT
 
 
 class ParamSearch(object):
-    def __init__(self, strategy1, strategy2, params, simu=None, trials=1, max_steps=1000000,
-                 max_round_step=70):
+
+    def __init__(self, strategy1, strategy2, params, simu=None, trials=10, max_steps=1000000,
+                 max_round_step=180):
+
         self.strategy1 = strategy1
         self.strategy2 = strategy2
         self.params = params.copy()
@@ -41,11 +43,13 @@ class ParamSearch(object):
 
     def begin_round(self, team1, team2, state):
     
-        ball = Vector2D(GAME_WIDTH*0.55,GAME_HEIGHT/2)
+        ball = Vector2D(GAME_WIDTH/2,GAME_HEIGHT/2)
 
         # Player and ball postion (random)
-        self.simu.state.states[(1, 0)].position = ball.copy()  # Player position
-        self.simu.state.states[(1, 0)].vitesse = Vector2D()  # Player acceleration
+        self.simu.state.states[(1, 0)].position = Vector2D(15,45) # Player position
+	self.simu.state.states[(2, 0)].position = Vector2D(135,45) # Player position
+        
+
         self.simu.state.ball.position = ball.copy()  # Ball position
 
         # Last step of the game
@@ -99,3 +103,4 @@ class ParamSearch(object):
 
     def get_res(self):
         return self.res
+

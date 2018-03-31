@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+module*/
+jouer.py
+confronterBest.py
+match2equipes.py
+testPoints.py

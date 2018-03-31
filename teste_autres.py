@@ -33,8 +33,8 @@ import autres.chefifarouck.FarouckYann as ia9
 
 ### Creation d'une equipe
 #
-thon = module.get_team(1)
-pyteam = ia9.get_team(1)
+thon = module.get_team(4)
+pyteam = ia1.get_team(4)
 #
 #
 ##pyteam.add("P1", module.DribleStrat())

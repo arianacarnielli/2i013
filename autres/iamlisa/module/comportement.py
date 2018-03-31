@@ -16,9 +16,9 @@ class Comportement(object):
 		t=Tools(self.state,self.id_team,self.id_player)
 		return SoccerAction(t.player_ball().normalize()*0.2, Vector2D(0,0))
 
-	def passe(self):
+	def passe(self, strength):
 		t=Tools(self.state,self.id_team,self.id_player)
-		return SoccerAction((t.closest_friend()-t.player()).normalize()*0.2, (t.closest_friend()-t.player()).normalize()*2.)
+		return SoccerAction((t.closest_friend()-t.player()).normalize()*0.2, (t.closest_friend()-t.player()).normalize()*strength)
 
 	def se_demarquer(self):
 		t=Tools(self.state,self.id_team,self.id_player)
@@ -36,9 +36,29 @@ class Comportement(object):
 		t=Tools(self.state,self.id_team,self.id_player)
 		return SoccerAction(t.player_my_defense(), Vector2D(0,0))
 
+	def return_defense_top(self):
+		t=Tools(self.state,self.id_team,self.id_player)
+		return SoccerAction(t.player_my_defense_top(), Vector2D(0,0))
+
+	def return_defense_down(self):
+		t=Tools(self.state,self.id_team,self.id_player)
+		return SoccerAction(t.player_my_defense_down(), Vector2D(0,0))
+
+	def return_defense_milieu(self):
+		t=Tools(self.state,self.id_team,self.id_player)
+		return SoccerAction(t.player_my_defense_milieu(), Vector2D(0,0))
+
 	def return_attaquant_defense(self):
 		t=Tools(self.state,self.id_team,self.id_player)
 		return SoccerAction(t.attaquant_my_defense(), Vector2D(0,0))
+
+	def follow_ball_top(self):
+		t=Tools(self.state,self.id_team,self.id_player)
+		return SoccerAction(t.top_ball_x(), Vector2D(0,0))
+
+	def follow_ball_down(self):
+		t=Tools(self.state,self.id_team,self.id_player)
+		return SoccerAction(t.down_ball_x(), Vector2D(0,0))
 
 	def degage(self):
 		t=Tools(self.state,self.id_team,self.id_player)
@@ -68,11 +88,12 @@ class Comportement(object):
 
 	def shoot2(self,strength):
 		t=Tools(self.state,self.id_team,self.id_player)
-		return SoccerAction(t.player_his_goal().normalize()*0.2, t.g(strength,t.d_goal_player())*(t.player_his_goal().normalize()))
+		return SoccerAction(t.player_his_goal().normalize()*0.2, t.g(strength,t.d_his_goal_player())*(t.player_his_goal().normalize()))
 
 	def shoot3(self,strength):
 		t=Tools(self.state,self.id_team,self.id_player)
 		return SoccerAction(t.player_his_goal().normalize()*0.2, t.player_his_goal().normalize()*strength)
+
 	def dribble2(self, strength, decal):
 		t=Tools(self.state,self.id_team,self.id_player)
 		if t.closest_ennemi().y > t.player().y:

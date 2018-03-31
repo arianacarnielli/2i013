@@ -1,7 +1,7 @@
 # coding: utf-8
 from __future__ import print_function, division
 from soccersimulator import SoccerTeam
-from ia.strategies import FonceurStrategy, GardienStrategy, AttaquantStrategy
+from ia.strategies import FonceurStrategy, GardienStrategy, AttaquantStrategy, GardienModifStrategy, AttaquantModifStrategy
 from functools import total_ordering
 from math import pi as PI, sqrt
 import random
@@ -83,7 +83,11 @@ class dictParams(object):
                 'distSortie': 0., 'raySortie': 0., 'controleMT': 0., \
                 'profDeg': 0., 'amplDeg': 0., 'decalX': 0., 'decalY': 0., \
                 'distAttaque': 0., 'controleAttaque': 0., 'distMontee': 0., \
-                'distDefZone': 0., 'powerDeg': 0.}
+                'distDefZone': 0., 'powerDeg': 0., 'tempsContr': 0., \
+                'powerPasse': 0., 'thetaPasse': 0., 'distDemar': 0., \
+                'rayPressing': 0., 'rayRecept': 0., 'angleRecept': 0., \
+                'rayReprise': 0., 'angleReprise': 0., 'coeffPushUp': 0., \
+                'distPasse': 0., 'angleInter': 0.}
         self.res = [0,0,0] # le compteur de resultats (V,N,D)
         self.pts = 0 # le nombre de points obtenus (V,N,D) = (3,1,0)
         self.fg = 0     # le nombre de buts marques
@@ -103,14 +107,18 @@ class dictParams(object):
         Renvoie un dictionnaire avec les bornes de chaque
         parametre
         """
-        return {'alphaShoot': (0.,0.6), 'betaShoot': (0.5,1.2), 'powerDribble': (1.,4.), \
-                'tempsI': (2,13), 'angleDribble': (0.,PI/2.), 'rayInter': (5.,20.), \
-                'distShoot': (10.,40.), 'rayDribble': (10.,25.), \
+        return {'alphaShoot': (0.,0.6), 'betaShoot': (0.7,1.2), 'powerDribble': (1.,4.), \
+                'tempsI': (2,15), 'angleDribble': (0.,PI/2.), 'rayInter': (10.,20.), \
+                'distShoot': (35.,45.), 'rayDribble': (10.,25.), \
                 'angleGardien':  (0.5,1.), 'coeffAD': (0.7,1.5), \
-                'distSortie': (40.,70.), 'raySortie': (10.,30.), 'controleMT': (1.04,1.1), \
+                'distSortie': (40.,70.), 'raySortie': (5.,25.), 'controleMT': (1.04,1.1), \
                 'profDeg': (10.,50.), 'amplDeg': (20.,45.), 'decalX': (10.,50.), \
-                'decalY': (20.,45.), 'distAttaque': (40.,70.), 'controleAttaque': (0.7, 1.2), \
-                'distMontee': (40.,80.), 'distDefZone': (10.,40.), 'powerDeg': (2.,5.)}
+                'decalY': (20.,45.), 'distAttaque': (40.,70.), 'controleAttaque': (1.04, 1.1), \
+                'distMontee': (40.,70.), 'distDefZone': (10.,40.), 'powerDeg': (2.,5.), \
+                'tempsContr': (8,15), 'powerPasse': (1.5,4.), 'thetaPasse': (0.,0.6), \
+                'distDemar': (15.,60.), 'rayPressing': (5.,30.), 'rayRecept': (5., 35.), \
+                'angleRecept': (0.7,1.), 'rayReprise': (8., 15.), 'angleReprise': (-1, -0.5), \
+                'coeffPushUp': (6., 12.), 'distPasse': (45., 60.), 'angleInter': (0.,PI/3.)}
 
     def random(self, parameters):
         """
@@ -277,7 +285,7 @@ class GeneTeam(object):
         self.sortVectors()
         size = len(self.vectors)
         nKeep = int(size * self.keep)
-        for k in range(nKeep, size):
+        for k in range(nKeep, size-2):
             while True:
                 i, j = getDistinctTuple(high=nKeep)
                 r = random.random()
@@ -287,6 +295,12 @@ class GeneTeam(object):
                 elif r < self.coProb:
                     self.crossover(i, j, k)
                     break
+        pList = self.paramsList()
+        for k in range(size-2, size):
+            self.vectors[k] = dictParams()
+        for k in range(size-2, size):
+            self.vectors[k].random(pList)
+
 
     def printVectors(self, nVect):
         """
@@ -337,21 +351,24 @@ class GeneTeam(object):
 class GKStrikerTeam(GeneTeam):
     def __init__(self, size=20, keep=0.5, coProb=0.7, mProb=0.01):
         super(GKStrikerTeam, self).__init__(name="GKStrikerTeam", \
-            playerStrats=[GardienStrategy(), AttaquantStrategy(), None, None], \
+            playerStrats=[GardienModifStrategy(), AttaquantModifStrategy(), None, None], \
             playerParams=[GKStrikerTeam.gk_params(), GKStrikerTeam.st_params(), [], []], \
             size=size, keep=keep, coProb=coProb, mProb=mProb)
 
     @classmethod
     def gk_params(cls):
         return ['tempsI', 'rayInter', 'distSortie', 'raySortie', \
-                'profDeg', 'amplDeg', 'distMontee', 'powerDeg']
+                'profDeg', 'amplDeg', 'powerDeg', 'tempsContr']
 
     @classmethod
     def st_params(cls):
         return ['alphaShoot', 'betaShoot', 'angleDribble', 'powerDribble', \
                 'distShoot', 'rayDribble', 'angleGardien', 'coeffAD', \
                 'controleMT', 'decalX', 'decalY', 'distAttaque', \
-                'controleAttaque', 'distDefZone']
+                'controleAttaque', 'distDefZone', 'powerPasse', 'thetaPasse',\
+                'distDemar', 'rayPressing', 'rayRecept', 'angleRecept', \
+                'rayReprise', 'angleReprise', 'coeffPushUp', 'distPasse', \
+                'distMontee', 'angleInter']
 
     def gkDict(self):
         """
@@ -375,7 +392,29 @@ class GKStrikerTeam(GeneTeam):
 
     def save(self, fn_gk="gk_dico.pkl", fn_st="st_dico.pkl"):
         """
-        Sauvegarde le dictionnaire de parametres du gardien et de
-        l'attaquant dans des fichiers le repertoire 'parameters'
+        Sauvegarde le dictionnaire de parametres du gardien
+        et de l'attaquant dans des fichiers dans le repertoire
+        'parameters'
         """
         return super(GKStrikerTeam, self).save([fn_gk, fn_st, None, None])
+
+
+
+class GKStrikerModifTeam(GKStrikerTeam):
+    def __init__(self, size=20, keep=0.5, coProb=0.7, mProb=0.01):
+        super(GKStrikerModifTeam, self).__init__(size=size, keep=keep, \
+            coProb=coProb, mProb=mProb)
+
+    def getTeam(self, i):
+        """
+        Doc a modifier
+        """
+        self.team = SoccerTeam(self.name)
+        params = self.vectors[i].params
+        for i in range(2):
+            for p in self.playerParams[i]:
+                self.playerStrats[0].dico[p] = params[p] # params du gk
+                self.playerStrats[1].dico[p] = params[p] # params du st
+        self.team.add(self.playerStrats[0].name, self.playerStrats[0])
+        self.team.add(self.playerStrats[1].name, self.playerStrats[1])
+        return self.team

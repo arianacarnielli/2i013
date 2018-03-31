@@ -51,10 +51,31 @@ def attaque(state, id_t,id_p, shoot) :
 	id_jd=e.proche_joueur(id_t,id_p)
 	id_jb=e.proche_balle(id_t)
 	if id_jd != id_p and id_jb != id_p:
-		vect = 	dirpos(e,id_t,id_p,1,e.pospasse(id_t, id_jd, 10))
+		vect = 	dirpos(e,id_t,id_p,1,e.pospasse(id_t, id_jd, 25))
 		return SoccerAction(vect)
 	else :
 		if e.dist(e.posballe(),e.poscage(id_t%2+1))>=50 :
 			return dribble(state,id_t,id_p)
 		else :
 			return fonceur_defaut(state, id_t, id_p, shoot)
+
+#mini-strategie position de reception de passe
+def recpasse(state, id_t, id_p):
+	e=Etat(state)
+	id_jd=e.proche_joueur(id_t,id_p)
+	vect = 	dirpos(e,id_t,id_p,1,e.pospasse(id_t, id_jd, 25))
+	return SoccerAction(vect)
+
+#mini-strategie passe la balle
+def fairepasse(state, id_t, id_p,shoot):
+	e=Etat(state)
+	nb_j=e.proche_joueur(id_t,id_p)
+	if e.can_shoot(id_t,id_p):
+		return SoccerAction(dirballe(e,id_t,id_p, 1, 0), passedef(e,id_t,nb_j, shoot, 1))
+	else :
+		return SoccerAction(dirballe(e,id_t,id_p, 1, 2))
+
+#mini-strategie va en position defensive
+def arriere(state, id_t, id_p):
+	e=Etat(state)
+	return SoccerAction(dirpos(e,id_t, id_p, 1, e.posdef(id_t,0.4)))

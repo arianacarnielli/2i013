@@ -57,6 +57,27 @@ class Tools(object):
 			return Vector2D(GAME_WIDTH/3., self.ball().y)-self.player()
 		return Vector2D(GAME_WIDTH*(2/3.), self.ball().y)-self.player()
 
+	def top_ball_x(self):
+		return Vector2D(self.ball().x, GAME_HEIGHT*(2/3.))-self.player()
+
+	def down_ball_x(self):
+		return Vector2D(self.ball().x, GAME_HEIGHT/3.)-self.player()
+
+	def player_my_defense_top(self):
+		if self.id_team==1:
+			return Vector2D(GAME_WIDTH*0.15, GAME_HEIGHT*(2/3.))-self.player()
+		return Vector2D(GAME_WIDTH*0.85, GAME_HEIGHT*(2/3.))-self.player()
+
+	def player_my_defense_down(self):
+		if self.id_team==1:
+			return Vector2D(GAME_WIDTH*0.15, GAME_HEIGHT/3.)-self.player()
+		return Vector2D(GAME_WIDTH*0.85, GAME_HEIGHT/3.)-self.player()
+
+	def player_my_defense_milieu(self):
+		if self.id_team==1:
+			return Vector2D(GAME_WIDTH*0.15, GAME_HEIGHT/2.)-self.player()
+		return Vector2D(GAME_WIDTH*0.85, GAME_HEIGHT/2.)-self.player()
+
 
 	#Distance
 	def d_his_goal_player(self):
@@ -132,6 +153,34 @@ class Tools(object):
 					u = True
 			else:
 				if self.player2(L[i][0],L[i][1]).x > self.player().x-p and self.player2(L[i][0],L[i][1]).x < self.player().x and self.player2(L[i][0],L[i][1]).y > self.player().y-p and self.player2(L[i][0],L[i][1]).y < self.player().y+p:
+					u = True
+		return u
+
+	def ennemi_in_my_friend_small_perimeter(self):
+		f = self.closest_friend()
+		L=[(it, ip) for (it, ip) in self.state.players if it != self.id_team]
+		u = False
+		p = 10.
+		for i in range(len(L)):
+			if self.id_team==1:
+				if self.player2(L[i][0],L[i][1]).x > f.x and self.player2(L[i][0],L[i][1]).x < f.x+p and self.player2(L[i][0],L[i][1]).y > f.y-p and self.player2(L[i][0],L[i][1]).y < f.y+p:
+					u = True
+			else:
+				if self.player2(L[i][0],L[i][1]).x > f.x-p and self.player2(L[i][0],L[i][1]).x < f.x and self.player2(L[i][0],L[i][1]).y > f.y-p and self.player2(L[i][0],L[i][1]).y < f.y+p:
+					u = True
+		return u
+
+	def ennemi_in_my_friend_perimeter(self):
+		f = self.closest_friend()
+		L=[(it, ip) for (it, ip) in self.state.players if it != self.id_team]
+		u = False
+		p = 25.
+		for i in range(len(L)):
+			if self.id_team==1:
+				if self.player2(L[i][0],L[i][1]).x > f.x and self.player2(L[i][0],L[i][1]).x < f.x+p and self.player2(L[i][0],L[i][1]).y > f.y-p and self.player2(L[i][0],L[i][1]).y < f.y+p:
+					u = True
+			else:
+				if self.player2(L[i][0],L[i][1]).x > f.x-p and self.player2(L[i][0],L[i][1]).x < f.x and self.player2(L[i][0],L[i][1]).y > f.y-p and self.player2(L[i][0],L[i][1]).y < f.y+p:
 					u = True
 		return u
 
@@ -214,6 +263,14 @@ class Tools(object):
 			if self.player().x < ennemi.x:
 				return True
 			return False
+
+	def ball_in_top(self):
+		return self.ball().y > GAME_HEIGHT/2.
+
+	def friend_in_front(self):
+		if self.id_team==1:
+			return self.closest_friend().x > self.player().x
+		return self.closest_friend().x < self.player().x
 
 
 	#Joueur

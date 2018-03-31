@@ -55,7 +55,6 @@ class ParamGenetique(object):
         self.list_ia.append(ia)
 
     def genVectAlea(self):
-        #distShoot = 50)
         accShoot = rd.randrange(0, 11, 1) / 10.
         accDrible = rd.randrange(0, 11, 1) / 10.
         vit = rd.randrange(0, 11, 1) / 10.
@@ -65,6 +64,16 @@ class ParamGenetique(object):
         rSurfBut = rd.randrange(0, 51, 5)
         AngleHyst = round(rd.uniform(0, math.pi/10), 2)
         distShoot = rd.randrange(0, 76, 1)
+
+        accShoot2 = rd.randrange(0, 11, 1) / 10.
+        accDrible2 = rd.randrange(0, 11, 1) / 10.
+        vit2 = rd.randrange(0, 11, 1) / 10.
+        nDrible2 = rd.randrange(0, 21, 1)
+        maxAngle2 = round(rd.uniform(0, math.pi/2), 2)
+        tooFar2 = rd.randrange(0, 61, 1)
+        rSurfBut2 = rd.randrange(0, 51, 5)
+        AngleHyst2 = round(rd.uniform(0, math.pi/10), 2)
+        distShoot2 = rd.randrange(0, 76, 1)
         
         p = rd.randrange(0, 16, 1) / 10.
         nDef = rd.randrange(0, 21, 1)
@@ -74,14 +83,28 @@ class ParamGenetique(object):
         maxAngleDef = round(rd.uniform(0, math.pi/2), 2)
         rayon = rd.randrange(1, 26, 1)
         
-        #distMin = 10, distMax = 60, maxAngle = math.pi/6, rayon = 15)
-
+        p2 = rd.randrange(0, 16, 1) / 10.
+        nDef2 = rd.randrange(0, 21, 1)
+        alpha2 = rd.randrange(0, 11, 1) / 10.
+        distMin2 = rd.randrange(0, 26, 1)
+        distMax2 = rd.randrange(distMin, 176, 1)
+        maxAngleDef2 = round(rd.uniform(0, math.pi/2), 2)
+        rayon2 = rd.randrange(1, 26, 1)
+        
         if self.nb_players==1:
-            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst]
+            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, \
+                    rSurfBut, AngleHyst, alpha]
         elif self.nb_players==2:
             return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, \
                     rSurfBut, AngleHyst, distShoot, p, nDef, alpha, distMin, \
                     distMax, maxAngleDef, rayon]
+        elif self.nb_players==4:
+            return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, \
+                    rSurfBut, AngleHyst, distShoot, p, nDef, alpha, distMin, \
+                    distMax, maxAngleDef, rayon, \
+                    accShoot2, accDrible2, vit2, nDrible2, maxAngle2, tooFar2, \
+                    rSurfBut2, AngleHyst2, distShoot2, p2, nDef2, alpha2, distMin2, \
+                    distMax2, maxAngleDef2, rayon2]
     
     def test_against_all_ias(self, params, verbose = True):
         points = np.empty(len(self.list_ia))

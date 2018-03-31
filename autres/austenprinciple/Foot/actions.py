@@ -7,13 +7,13 @@ from .utilitaires import estDansTerrain, estSortant
 #TIRS : Vector2D
 #####################################################
 
-def tir_but(etat, strength):
+def tir_but(etat):
 	"""
 	Tire vers le milieu des buts adverses.
 	Plus fort si on est plus loin des cages.
 	"""
 	if etat.distance() <= etat.rayon_shoot:
-		return (etat.but_adv - etat.p_joueur).scale(strength)
+		return etat.but_adv - etat.p_joueur
 	else:
 		return Vector2D()
 
