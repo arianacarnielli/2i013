@@ -26,8 +26,8 @@ def get_team(nb_players):
         #myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.9, n = 0, frac_p = 0.4))
         #myteam.add("Ronaldo", DribleStratOpt2(accShoot = 0.64, accDrible = 0.25, vit = 1, n = 0, maxAngle = 0.08, tooFar = 42, rSurfBut = 35, AngleHyst = 0.08))
         
-        myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.9, n = 2, alpha = 0.6, distMin = 0, distMax = 250))
-        myteam.add("Ronaldo", DribleStratOpt2(accShoot = 0.8, accDrible = 0.25, vit = 1.0, n = 10, maxAngle = 0.5, tooFar = 34, rSurfBut = 35, AngleHyst = 0.1))
+        myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.9, n = 2, alpha = 0.6, distMin = 0, distMax = 250, maxAngle = math.pi/6, rayon = 15))
+        myteam.add("Ronaldo", DribleStratOpt2(accShoot = 0.8, accDrible = 0.25, vit = 1.0, n = 10, maxAngle = 0.5, tooFar = 34, rSurfBut = 35, AngleHyst = 0.1, distShoot = 50))
         #[accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
 
     if nb_players == 4:

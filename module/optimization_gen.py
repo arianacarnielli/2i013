@@ -115,6 +115,8 @@ class ParamGenetique(object):
                 test = repeatsimu_gen1V1(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
             elif self.nb_players==2:
                 test = repeatsimu_gen2V2(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
+            elif self.nb_players==4:
+                test = repeatsimu_gen4V4(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
             test.start()
             points[i] = test.get_points()
             if verbose:
@@ -184,10 +186,10 @@ class ParamGenetique(object):
         self.init_params_alea()
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_{}_final_20180325".format(self.nb_players), self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final_20180331".format(self.nb_players), self.tab_params, self.tab_points)
         
     def start_file(self, filename, nb_generations = 10):
         self.init_params_results_from_file(filename)
@@ -195,13 +197,13 @@ class ParamGenetique(object):
         for i in range(nb_generations):
             self.next_generation()
             self.eval_params()
-            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
             
     def start_list(self, list_list_params, nb_generations = 10):
         self.init_params_from_list(list_list_params)
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}_{}_20180325".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_{}_final_20180325".format(self.nb_players), self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final_20180331".format(self.nb_players), self.tab_params, self.tab_points)
