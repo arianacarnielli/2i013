@@ -116,6 +116,7 @@ class ParamGenetique(object):
             elif self.nb_players==2:
                 test = repeatsimu_gen2V2(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
             elif self.nb_players==4:
+                
                 test = repeatsimu_gen4V4(params, self.list_ia[i], trials = self.trials, max_steps = self.max_steps)
             test.start()
             points[i] = test.get_points()

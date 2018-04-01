@@ -33,8 +33,8 @@ import autres.chefifarouck.FarouckYann as ia9
 
 ### Creation d'une equipe
 #
-thon = module.get_team(4)
-pyteam = ia1.get_team(4)
+#thon = module.get_team(4)
+#pyteam = ia1.get_team(4)
 #
 #
 ##pyteam.add("P1", module.DribleStrat())
@@ -43,14 +43,14 @@ pyteam = ia1.get_team(4)
 ##thon.add("P4", module.ShootStrat())
 #
 ##Creation d'une partie
-simu = Simulation(pyteam, thon)
+#simu = Simulation(pyteam, thon)
 #
 ##Jouer et afficher la partie
-show_simu(simu)
+#show_simu(simu)
 
-#for i in range(30):
-#    thon = module.get_team(4)
-#    pyteam = ia.get_team(4)
-#    simu = Simulation(pyteam, thon)
-#    simu.start()
-#    print("{} x {}".format(simu.get_score_team(1), simu.get_score_team(2)))
+for i in range(30):
+    thon = module.get_team(1)
+    pyteam = ia1.get_team(1)
+    simu = Simulation(pyteam, thon)
+    simu.start()
+    print("{} x {}".format(simu.get_score_team(1), simu.get_score_team(2)))
