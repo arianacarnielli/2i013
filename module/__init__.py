@@ -31,10 +31,10 @@ def get_team(nb_players):
         #[accShoot, accDrible, vit, nDrible, maxAngle, tooFar, rSurfBut, AngleHyst, p, nDef, frac_p]
 
     if nb_players == 4:
-        myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.9, n = 2, alpha = 0.6, distMin = 0, distMax = 250))
-        myteam.add("Ronaldo", DribleStratOpt2(accShoot = 0.8, accDrible = 0.25, vit = 1.0, n = 10, maxAngle = 0.5, tooFar = 34, rSurfBut = 35, AngleHyst = 0.1))        
-        myteam.add("Messi", DribleStratOpt2(accShoot = 0.8, accDrible = 0.25, vit = 1.0, n = 10, maxAngle = 0.5, tooFar = 34, rSurfBut = 35, AngleHyst = 0.1))        
-        myteam.add("Neymar", DefIntelligentStratOpt(p = 0.9, n = 2, alpha = 0.6, distMin = 0, distMax = 250))
+        myteam.add("Ronaldo", DribleStratOpt2(accShoot = 0.5, accDrible = 0.2, vit = 0.7, n = 5, maxAngle = 0.7, tooFar = 37, rSurfBut = 0, AngleHyst = 0.11, distShoot = 20))        
+        myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.4, n = 10, alpha = 0.2, distMin = 14, distMax = 122, maxAngle = 0.32, rayon = 15))
+        myteam.add("Messi", DribleStratOpt2(accShoot = 0.4, accDrible = 0.3, vit = 1.0, n = 10, maxAngle = 0.84, tooFar = 44, rSurfBut = 5, AngleHyst = 0.18, distShoot = 19))        
+        myteam.add("Neymar", DefIntelligentStratOpt(p = 0.9, n = 17, alpha = 0.7, distMin = 18, distMax = 67, maxAngle = 0.81, rayon = 6))
     return myteam	
 
 def get_team_challenge(num):
