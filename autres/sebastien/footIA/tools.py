@@ -33,10 +33,6 @@ class ToolBox(ProxyObj):
     def ballSpeed(self):
         return self.ball.vitesse
     @property
-    def pos_mil(self):
-        return Vector2D(GAME_WIDTH/2,GAME_HEIGHT/2)
-    @property
-
     def mySpeed(self):
         return self.player_state(self.id_team, self.id_player).vitesse
     def playerSpeed(self, player):
@@ -58,20 +54,6 @@ class ToolBox(ProxyObj):
         target = 0 if self.id_team == 1 else 1
         return Vector2D((target)*GAME_WIDTH, GAME_HEIGHT/2)
     @property
-
-    def pos_def(self):
-        if self.id_team == 1:
-           return Vector2D(GAME_WIDTH/4,GAME_HEIGHT/2)
-        else:
-           return Vector2D(GAME_WIDTH*3/4,GAME_HEIGHT/2)
-    @property
-    def pos_att(self):
-        if self.id_team == 1:
-           return Vector2D(GAME_WIDTH/2+15,GAME_HEIGHT/2)
-        else:
-           return Vector2D(GAME_WIDTH/2-15,GAME_HEIGHT/2)
-    @property
-
     def vecOppGoal(self):
         target = 0 if self.id_team == 2 else 1
         return Vector2D((target)*GAME_WIDTH, GAME_HEIGHT/2)
@@ -79,8 +61,32 @@ class ToolBox(ProxyObj):
     def vecTheirGoal(self):
         target = 0 if self.id_team == 2 else 1
         return Vector2D((target)*GAME_WIDTH, GAME_HEIGHT/2)
+    
 
 #DONNEES DU TERRAIN
+
+    @property
+
+    def pos_def(self):
+        if self.id_team == 1:
+           return Vector2D(GAME_WIDTH/4,GAME_HEIGHT/2)
+        else:
+           return Vector2D(GAME_WIDTH*3/4,GAME_HEIGHT/2)
+
+    @property
+    def posDef(self):
+        
+        if self.id_team ==1:
+            return Vector2D(GAME_WIDTH/4-10,GAME_HEIGHT/2)
+        else:
+            return Vector2D(GAME_WIDTH*3/4+10,GAME_HEIGHT/2)
+                            
+    @property
+    def pos_att(self):
+        if self.id_team == 1:
+           return Vector2D(GAME_WIDTH/2+15,GAME_HEIGHT/2)
+        else:
+           return Vector2D(GAME_WIDTH/2-15,GAME_HEIGHT/2)
 
     @property
     def width(self):
@@ -92,7 +98,7 @@ class ToolBox(ProxyObj):
     def middleSpot(self):
         return Vector2D(self.width/2, self.height/2)
 
-
+#Position des Joeurs alliés et adverses
 
     @property
     def get_opponent(self):
@@ -176,14 +182,20 @@ class ToolBox(ProxyObj):
             return None
         return opps[numDistMin]
 
+    def distanceOppBallClose(self,opponents):
+        opp=self.mostCloseOppToball(opponents)
+        return self.ballPos.distance(opp)
+        
     def mostCloseMateToball(self, coop):
         return self.mostCloseOppToball(coop)
 
     def defenderbehindopp(self, opponents, coop):
-
+        """
+        True si l'allié le plus proche de l'adversaire le plus proche de la balle 
+        est devant ou derriere celui ci par rapport aux cages allié
+        """
         opp=self.mostCloseOppToball(opponents)
         mate=self.mostCloseMateToball(coop)
-        print(not(self.specificForward(mate,opp)))
         return not(self.specificForward(mate,opp))
 
 #Some players and ball currents distances
@@ -203,6 +215,9 @@ class ToolBox(ProxyObj):
     @property
     def playerBall_distance(self):
         return self.ballPos.distance(self.playerPos)
+    @property
+    def playerGoal_distance(self):
+        return self.vecMyGoal.distance(self.playerPos)
 
     @property    
     def mateMostCloseDistance(self):
@@ -221,7 +236,6 @@ class ToolBox(ProxyObj):
                 if self.distPlayers(opp)<DistMin:
                     DistMin=self.distPlayers(opp)
         return DistMin
-        
 
 ########################################################################################################
 # Boolean Condition
@@ -247,6 +261,15 @@ class ToolBox(ProxyObj):
         else:
             return False   
 
+    def ballCenter(self):
+        ball=self.ballPos
+        vit= self.ballSpeed.norm
+        if (ball.x==self.width/2 and ball.y==self.height/2 and vit==0):
+            return True
+        else:
+            return False
+
+
     @property       
     def inCamp(self):
         """
@@ -257,7 +280,9 @@ class ToolBox(ProxyObj):
 
     @property
     def mateHaveBall(self):
-
+        """
+        si un allié est assez proche de la balle ->true
+        """
         mate= self.get_mate
         for players in mate :
             if (players.distance(self.ballPos)<=10):
@@ -265,13 +290,17 @@ class ToolBox(ProxyObj):
         return False
     @property
     def iHaveBall(self):
-
+        """
+        Si je suis assez proche de ma balle et qu'un allié ne l'a pas je l'ai
+        """
         if (self.playerPos.distance(self.ballPos)<=10) and self.mateHaveBall:
             return True
         return False
     @property
     def inCorner(self):
-
+        """
+        retourne suivant l'équipe dans laquelle ou je me trouve si je suis dans le corner
+        """
         if (self.myTeam == 0):
             if ((self.playerPos.distance(Vector2D(GAME_WIDHT,0))<=10) | (self.playerPos().distance(Vector2D(GAME_WIDTH,GAME_HEIGHT))<=10)):
                 return True
@@ -284,7 +313,9 @@ class ToolBox(ProxyObj):
                 return False
     @property
     def isInAera(self):
-
+        """
+        Si un adversaire est dans ma zone (dans un perimetre) proche de moi
+        """
         opp = self.get_opponent
         for players in opp:
             if (players.distance(self.playerPos)<10):
@@ -292,23 +323,30 @@ class ToolBox(ProxyObj):
         return False
 
     def specificForward(self, mate, opp):
-
+        """
+        Si mon équipe est la premiere alors celle de mon allié aussi
+        resp si je suis dans la deuxieme equipe
+        """
         if(self.myTeam==1):
             return opp.x > mate.x
         else:
             return opp.x < mate.x
 
+    @property
     def forwardOpp(self):
-
+        """
+        Le moindre attaquant en face de moi à une distance inferieure a 40 -> true resp false
+        """
         opp = self.get_opponent
         for player in opp:
-            if (player.distance(self.playerPos)<20)and(self.forward(player)):
+            if (player.distance(self.playerPos)<40)and(self.forward(player)):
                 return True
         return False
 
     def forward(self, player):
-
-
+        """
+        Meme fonction que les autres mais pour un quelconque joueur, que ce soit allié ou adverse
+        """
         if(self.myTeam==1):
             return player.x > self.playerPos.x
         else:
@@ -346,6 +384,4 @@ def get_random_vec():
     return Vector2D.create_random(-1,1)
 
 def get_random_SoccerAction():
-
     return SoccerAction(get_random_vec(),get_random_vec())
-

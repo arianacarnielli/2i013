@@ -37,7 +37,7 @@ class ParamGenetique(object):
         
         import autres.ortiz.ia as ia
         self.list_ia = [ia]
-        import autres.sebastien.footIAT2 as ia
+        import autres.sebastien.footIA as ia
         self.list_ia.append(ia)
         import autres.austenprinciple.Foot as ia
         self.list_ia.append(ia)
@@ -47,7 +47,7 @@ class ParamGenetique(object):
         self.list_ia.append(ia)
         import autres.iamlisa.module as ia 
         self.list_ia.append(ia)
-        import autres.baladeur.modulesocc as ia
+        import autres.baladeur as ia
         self.list_ia.append(ia)
         import autres.aatarek.RepoSoccer_master.prog as ia
         self.list_ia.append(ia)

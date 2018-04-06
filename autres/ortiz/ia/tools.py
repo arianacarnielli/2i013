@@ -17,9 +17,10 @@ class Wrapper(object):
 #### de la configuration courante du terrain
 #### depuis la perspective d'un joueur
 class StateFoot(Wrapper):
-    def __init__(self,state,id_team,id_player):
+    def __init__(self,state,id_team,id_player, numPlayers):
         super(StateFoot,self).__init__(state)
         self.key = (id_team,id_player)
+        self.numPlayers = numPlayers
 
     @property
     def my_team(self):
@@ -139,6 +140,12 @@ class StateFoot(Wrapper):
                 return "IV"
 
     @property
+    def attacking_vector(self):
+        """
+        """
+        return (self.opp_goal - self.my_goal).normalize()
+
+    @property
     def teammates(self):
         """
         Ses coequipiers
@@ -147,6 +154,17 @@ class StateFoot(Wrapper):
         liste = [self.player_state(team,i) for i in range(self.nb_players(team))]
         liste.remove(self.player_state(*self.key))
         return liste
+
+    @property
+    def offensive_teammates(self):
+        """
+        """
+        team = self.teammates
+        try:
+            delete_teammate(self.player_state(state.my_team, 0), team)
+        except:
+            pass
+        return team
 
     @property
     def opponents(self):
@@ -256,11 +274,10 @@ class StateFoot(Wrapper):
             return not p in self.opponents
         return None
 
-    def free_pass_trajectory(self, angleInter):
+    def free_trajectory(self, dest, angleInter):
         """
         """
-        tm = self.teammates[0]
-        vect = (tm.position - self.my_pos).normalize()
+        vect = (dest - self.my_pos).normalize()
         for opp in self.opponents:
             diff = opp.position-self.my_pos
             angle = get_oriented_angle(vect, diff.normalize())
@@ -268,6 +285,11 @@ class StateFoot(Wrapper):
             if angle >= 0. and angle < angleInter:
                 return False
         return True
+
+    def free_pass_trajectory(self, tm, angleInter):
+        """
+        """
+        return self.free_trajectory(tm.position, angleInter)
 
 
 def get_random_vector():
@@ -328,6 +350,13 @@ def distance_horizontale(v1, v2):
     """
     return abs(v1.x-v2.x)
 
+def distance_verticale(v1, v2):
+    """
+    Renvoie la distance entre les abscisses de deux
+    points
+    """
+    return abs(v1.y-v2.y)
+
 def is_upside(ref,other):
     """
     Renvoie vrai ssi la reference est au-dessus de
@@ -346,10 +375,10 @@ def shootPower(stateFoot, alphaShoot, betaShoot):
     u = stateFoot.opp_goal - stateFoot.my_pos
     dist = u.norm
     theta = acos(abs(vect.dot(u))/u.norm)/acos(0.)
-    return maxPlayerShoot*(1.-exp(-(alphaShoot*dist)))*exp(-betaShoot*theta)
+    return max(1.,maxPlayerShoot*(1.-exp(-(alphaShoot*dist)))*exp(-betaShoot*theta))
 
 def passPower(stateFoot, dest, maxPower, thetaPass):
-    """
+    """.
     Renvoie la force avec laquelle on
     va faire une passer selon la distance
     de entre la balle et le recepteur
@@ -370,6 +399,20 @@ def nearest(ref, liste):
             p = o
             distMin = dist
     return p.position
+
+def nearest_state(ref, liste):
+    """
+    Renvoie la position du joueur le plus proche de la
+    reference parmi une liste passee en parametre
+    """
+    p = None
+    distMin = 1024.
+    for o in liste:
+        dist = ref.distance(o.position)
+        if dist < distMin:
+            p = o
+            distMin = dist
+    return p
 
 def nearest_ball(stateFoot, liste):
     """
@@ -393,3 +436,13 @@ def nearest_defender(stateFoot, liste, distRef):
             oppDef = j
             dist_dmin = dist_j
     return oppDef
+
+def delete_teammate(tm, liste):
+    """
+    """
+    index = -1
+    for i in range(len(liste)):
+        if liste[i].position == tm.position:
+            index = i
+            break
+    liste.pop(index)

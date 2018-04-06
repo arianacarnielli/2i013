@@ -12,7 +12,7 @@ class Comportements(Comportement):
     BIG_SHOOT_COEF = 2
     SHOOT_COEF = maxPlayerShoot/3.
     THROW_COEF = maxPlayerShoot
-    COEF_ANGLE = math.pi/3.5
+    COEF_ANGLE = math.pi/5
 
     def __init__(self,state):
         super(Comportements,self).__init__(state)
@@ -47,7 +47,11 @@ class Comportements(Comportement):
         return SoccerAction(self.vecMyGoal - self.playerPos) 
 
     def goCorner(self):
-        
+        """
+        Retourne le vecteur shoot vers les corners adverse suivant
+        la position du joueur. s'il est en bas il ira dans le corner 
+        adverse du bas et inversement 
+        """
         COEF_CORNERX=0.2
         COEF_CORNERY=0.2
         if (self.myTeam==1):
@@ -65,7 +69,11 @@ class Comportements(Comportement):
         mates = self.get_mate
         nbup=0
         nbdown=0
-   
+        """
+        fait retourner le joueur dans son camp et une zone specifique
+        suivant la postion des autres joueurs alliés.
+        s'il y en a plus en bas il ira en haut et inversement.
+        """
         for mate in mates:
             if mate!=self.playerPos:
 
@@ -109,19 +117,23 @@ class Comportements(Comportement):
 
     def dribble_bypassed (self, opponent):
 
-        VecOpp=self.mostCloseOppforward(opponent)
-        vecMe_opp=VecOpp - self.playerPos
-        currentAngle= vecMe_opp.angle - (self.vecTheirGoal-self.playerPos).angle 
-        
-
-        if vecMe_opp.norm>30 or (currentAngle)>self.COEF_ANGLE:
-            return self.shoot(1)
-        
-        if currentAngle > 0:
-            return SoccerAction(shoot = Vector2D(angle =vecMe_opp.angle- self.COEF_ANGLE, norm = 0.80))
+        if not self.forwardOpp:
+            return self.shoot(3)
 
         else:
-            return SoccerAction(shoot = Vector2D(angle =vecMe_opp.angle+ self.COEF_ANGLE, norm = 0.80))
+            VecOpp=self.mostCloseOppforward(opponent)
+            vecMe_opp=VecOpp - self.playerPos
+            currentAngle= vecMe_opp.angle - (self.vecTheirGoal-self.playerPos).angle 
+            
+
+            if vecMe_opp.norm>40 or (currentAngle)>self.COEF_ANGLE or not self.forward(VecOpp):
+                return self.shoot(3)
+            
+            elif currentAngle > 0:
+                return SoccerAction(shoot = Vector2D(angle =vecMe_opp.angle- self.COEF_ANGLE, norm = 0.8))
+
+            else:
+                return SoccerAction(shoot = Vector2D(angle =vecMe_opp.angle+ self.COEF_ANGLE, norm = 0.8))
 
 """
 
@@ -150,15 +162,22 @@ class ConditionGoal(ProxyObj):
 #############################################################
 
 class ConditionDribleur(ProxyObj):
-    COEF_DISTMIN=45
+    COEF_DISTMIN=60
     COEF_BALL = 0.1
     def __init__(self,state):
         super(ConditionDribleur,self).__init__(state)
 
-    def close_opp(self):
+    def attclose_opp(self):
         opp = self.get_opponent
         for players in opp:
-            if (self.playerPos.distance(players)<8):
+            if (self.playerPos.distance(players)<40):
+                return True
+        return False
+
+    def defclose_opp(self):
+        opp = self.get_opponent
+        for players in opp:
+            if (self.playerPos.distance(players)<10):
                 return True
         return False
 
@@ -167,6 +186,17 @@ class ConditionDribleur(ProxyObj):
 
     def close_goal(self):
         return self.playerPos.distance(self.vecTheirGoal)<self.COEF_DISTMIN
+
+    def close_Mygoal(self):
+        return self.playerPos.distance(self.vecMyGoal)<self.COEF_DISTMIN
+
+    def oppCloseBall(self):
+        opps= self.get_opponent
+        for opp in opps:
+            if (self.ballPos.distance(opp)<5 
+            and opp.x > self.playerPos.x):
+                return True
+        return False 
 
 #############################################################
 
@@ -196,6 +226,9 @@ class ConditionPoly(ProxyObj):
 
     def close_goal(self):
         return self.playerPos.distance(self.vecTheirGoal)<self.COEF_SHOOT*self.width
+
+    def close_Mygoal(self):
+        return self.playerPos.distance(self.vecMyGoal)<self.COEF_SHOOT*self.width
         
     def mateHaveBall(self, coop):
         mates=coop
@@ -239,12 +272,14 @@ STRATEGIES : CONDITIONS AND COMPORTMENTS
 """
 
 def fonceur(I):
-    
-        if I.canShoot:
-            return I.shoot(6)
+    opps=I.get_opponent
+    if not I.canShoot:
+        return I.run(I.ballPos)
+    else:
+        if I.close_goal():
+            return I.bigshoot()
         else:
-            return I.runBallPredicted(5)
-
+        	return I.dribble_bypassed(opps)
 
 
 def versatile (I):
@@ -255,12 +290,17 @@ def versatile (I):
         
 
         #if not I.canShoot and (not I.mateHaveBall(mates) or I.defenderbehindopp(mates, opps)):
-        if not I.canShoot and not I.mateHaveBall(mates):
+        if not I.canShoot:
         #if not I.canShoot or not I.mateHaveBall(mates) or (I.mateHaveBall(mates) and I.defenderbehindopp(mates, opps)):
         #if not I.canShoot and (I.defenderbehindopp(mates, opps)):
-        
+            if not I.mateHaveBall(mates):
+                return I.runBallPredicted(5)
 
-            return I.runBallPredicted(5)
+            elif I.defenderbehindopp(mates, opps):
+                return I.runBallPredicted(5)
+            else:
+                return I.returnToCamp()
+        
         else:
             if I.forwardOpp() and I.nb_mateplayer>1:
                 return I.passToMostCloseMate(mates)
@@ -310,27 +350,21 @@ def ailier(I):
 
 def dribleur(I):
     opps=I.get_opponent
-    if  I.close_opp():
-        if I.canShoot:
-            if I.close_goal():
-                if I.forwardOpp():
-                    return I.shoot(5)
-                else:
-                    return I.shoot(1)
-        else: 
-            return I.runBallPredicted(3)
+
+    if I.canShoot:
+        if not I.close_goal():
+            return I.dribble_bypassed(opps)
+        else:
+            return I.shoot(4.5)
     else:
-        if I.canShoot:
-            if I.close_goal():
-                return I.shoot(5)
-            else:
-                return I.dribble_bypassed(opps) 
+        if I.ballCenter():
+            return I.returnToGoal()
 
         else:
-            if  I.close_opp():
-                return I.returnToCamp()
-            else:    
-                return I.runBallPredicted(5)
+            if I.inCamp:
+                return I.runBallPredicted(2)
+            else:
+                return I.runBallPredicted(7)
 
 
 def goal(I):
@@ -345,20 +379,24 @@ def goal(I):
         else:
             return None
 
+
+
 def defenseur(I):
-    if I.ballPos.distance(I.vecMyGoal)<=(I.width/2):
+    if I.ballPos.distance(I.vecMyGoal)>(I.width/2+10) :
+        return I.go(I.pos_def)
+    
+    else:
         if I.canShoot:
             return I.shoot(6)
         else:
-            return I.runBallPredicted(5)     
-    else :
-        return I.go(I.pos_def)
-
+            return I.runBallPredicted(5) 
 
 def attaquant(I):
     if I.ballPos.distance(I.vecTheirGoal) <= I.width/2:
         if I.canShoot:
-            if I.ballPos.distance(I.vecTheirGoal) <= I.width/2.91 :
+            if I.ballPos.distance(I.vecTheirGoal) <= I.width/3:
+                return I.shoot(3.5)
+            elif I.ballPos.distance(I.vecTheirGoal) <= I.width/2.91:
                 return I.shoot(5)
             else:
                 return I.shoot(6)
@@ -366,8 +404,3 @@ def attaquant(I):
             return I.runBallPredicted(5)
     else:
         return I.go(I.pos_att)
-    
-    
-                    
-def drible(I):
-                    

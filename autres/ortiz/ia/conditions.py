@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from .tools import Wrapper, StateFoot, is_in_radius_action, distance_horizontale, nearest, nearest_ball
+from .tools import Wrapper, StateFoot, is_in_radius_action, distance_horizontale, \
+    nearest, nearest_state, nearest_ball
 from soccersimulator.settings import GAME_WIDTH, GAME_GOAL_HEIGHT, GAME_HEIGHT, BALL_RADIUS, \
         PLAYER_RADIUS
 import random
@@ -28,7 +29,7 @@ def is_close_goal(stateFoot, distGoal=27.):
     cage adverse
     """
     return is_in_radius_action(stateFoot, stateFoot.opp_goal, distGoal) or \
-        distance_horizontale(stateFoot.opp_goal, stateFoot.my_pos) < distGoal
+        distance_horizontale(stateFoot.opp_goal, stateFoot.my_pos) < (distGoal-5.)
 
 def is_kick_off(stateFoot):
     """
@@ -63,6 +64,11 @@ def must_intercept(stateFoot, rayInter=distMaxInterception):
         return False
     return stateFoot.is_nearest_ball()
 
+def ball_advances(stateFoot):
+    """
+    """
+    return stateFoot.ball_speed.dot(stateFoot.attacking_vector) > 0.
+
 def must_advance(stateFoot, distMontee):
     """
     Renvoie vrai ssi le balle est loin de la
@@ -71,19 +77,15 @@ def must_advance(stateFoot, distMontee):
     control = stateFoot.team_controls_ball()
     if control is not None:
         return control
-    vect = (stateFoot.my_goal - stateFoot.opp_goal)
-    if stateFoot.ball_speed.dot(vect) > 0.:
+    if not ball_advances(stateFoot):
         return False
-    tm = stateFoot.teammates[0]
-    tmBall = (stateFoot.ball_pos - tm.position).normalize()
+    ball_speed = stateFoot.ball_speed.copy().normalize()
     meBall = (stateFoot.ball_pos - stateFoot.my_pos).normalize()
-    return tmBall.dot(stateFoot.ball_speed.copy().normalize()) >= 0.995 or \
-        meBall.dot(stateFoot.ball_speed.copy().normalize()) >= 0.995
-    if not tm.is_nearest_ball():
-        return False
-    return True
-    return stateFoot.distance_ball(stateFoot.my_goal) >= distMontee and \
-            stateFoot.ball_speed.dot(stateFoot.ball_pos-stateFoot.my_goal) > 0
+    if meBall.dot(ball_speed) >= 0.995: return True
+    for tm in stateFoot.teammates:
+        tmBall = (stateFoot.ball_pos - tm.position).normalize()
+        if tmBall.dot(ball_speed) >= 0.8: return True
+    return False
 
 def opponent_approaches_my_goal(stateFoot, distSortie):
     """
@@ -127,15 +129,47 @@ def empty_goal(strat, stateFoot, opp, angle):
         strat.dribbleGardien = True
     return not strat.dribbleGardien
 
-def free_teammate(stateFoot, rayPressing):
+def free_teammate(stateFoot, angleInter):
     """
     Renvoie le premier coequipier libre de
     marquage
+    """
     """
     for tm in stateFoot.teammates:
         if not is_under_pressure(stateFoot, tm, rayPressing):
             return tm
     return None
+    """
+    tm_best = None
+    dist_best = 0.
+    for tm in stateFoot.offensive_teammates:
+        if tm.position.distance(stateFoot.my_goal) < 35. or \
+           distance_horizontale(tm.position, stateFoot.my_goal) < 25.:
+            continue
+        if stateFoot.free_pass_trajectory(tm, angleInter):
+            opp = nearest(tm.position, stateFoot.opponents)
+            dist = tm.position.distance(opp)
+            # dist = stateFoot.distance(tm.position)
+            if dist > dist_best:
+                tm_best = tm
+                dist_best = dist
+    return tm_best
+
+
+def free_opponent(stateFoot, distDefZone, rayPressing):
+    """
+    """
+    oppAtt = None
+    my_team = stateFoot.teammates + [stateFoot.my_state]
+    my_team = my_team[2::]
+    for opp in stateFoot.opponents:
+        if distance_horizontale(stateFoot.my_goal, opp.position) > distDefZone:
+            continue
+        tm = nearest_state(opp.position, my_team)
+        if stateFoot.distance_ball(opp.position) > rayPressing and tm.position == stateFoot.my_pos:
+            oppAtt = opp
+            break;
+    return oppAtt
 
 def must_defend(stateFoot):
     """
@@ -154,10 +188,10 @@ def must_pass_ball(stateFoot, tm, distPasse, angleInter):
     avec une probabilite de probPasse
     """
     #modif 20.
-    if distance_horizontale(stateFoot.my_pos, stateFoot.opp_goal) +20.< \
+    if distance_horizontale(stateFoot.my_pos, stateFoot.opp_goal)+20.< \
        distance_horizontale(tm.position, stateFoot.opp_goal):
         return False
-    return stateFoot.free_pass_trajectory(angleInter)
+    return stateFoot.free_pass_trajectory(tm, angleInter)
 
 def must_assist(stateFoot, tm, distPasse, angleInter, coeffPushUp):
     """

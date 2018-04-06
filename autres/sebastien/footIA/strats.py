@@ -2,7 +2,7 @@ from .sousStrats import ConditionPoly, ConditionDribleur, ConditionAttaque,Condi
 from soccersimulator  import Strategy, SoccerAction, Vector2D
 from .tools import ToolBox, Comportement, get_random_SoccerAction
 from .sousStrats import Comportements
-from .sousStrats import fonceur, goal, dribleur, versatile, ailier
+from .sousStrats import fonceur, goal, dribleur, versatile, ailier , defenseur, attaquant
 
 
 class RandomStrategy(Strategy):
@@ -56,3 +56,18 @@ class FonceurTestStrategy(Strategy):
         C.BIG_SHOOT_COEF = self.strength1
         I = ConditionAttaque(C, COEF_DIST=self.distancegoal)
         return fonceur(I)
+
+    
+class DefStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self,"defenceur")
+    def compute_strategy(self,state,id_team,id_player):
+        I = ConditionAttaque(Comportements(ToolBox(state,id_team,id_player)))
+        return defenseur(I)
+
+class AttStrategy(Strategy):
+    def __init__(self):
+        Strategy.__init__(self,"defenceur")
+    def compute_strategy(self,state,id_team,id_player):
+        I = ConditionAttaque(Comportements(ToolBox(state,id_team,id_player)))
+        return attaquant(I)
