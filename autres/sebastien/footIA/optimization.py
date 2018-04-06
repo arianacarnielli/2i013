@@ -72,8 +72,8 @@ class ParamSearch(object):
         self.cpt += 1  # Increment number of trials
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
         if self.cpt >= self.trials:
             # Save the result

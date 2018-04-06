@@ -156,12 +156,12 @@ class dictParams(object):
         les resultats de l'experience
         """
         for p in parameters:
-            print(p, ":", self.params[p])
-        print("------------------------")
-        print("bilan :", self.res)
-        print("points : ", self.pts)
-        print("fg : ", self.fg)
-        print("ag : ", self.ag)
+            #print(p, ":", self.params[p])
+        #print("------------------------")
+        #print("bilan :", self.res)
+        #print("points : ", self.pts)
+        #print("fg : ", self.fg)
+        #print("ag : ", self.ag)
 
 
 
@@ -306,19 +306,19 @@ class GeneTeam(object):
         """
         Affiche les nVect premiers vecteurs de parametres
         """
-        print(self.name)
+        #print(self.name)
         pList = self.paramsList()
         for i in range(nVect):
-            print(i+1, "/ ", end='')
+            #print(i+1, "/ ", end='')
             self.vectors[i].printParams(pList)
-            print()
+            #print()
 
     def printAllVectors(self):
         """
         Affiche tous les vecteurs de parametres
         """
         self.printVectors(len(self.vectors))
-        print("==================================================")
+        #print("==================================================")
 
     def playerDict(self, i):
         """

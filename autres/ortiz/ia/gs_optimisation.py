@@ -79,7 +79,7 @@ class ParamSearchShoot(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -103,8 +103,8 @@ class ParamSearchShoot(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res
@@ -190,7 +190,7 @@ class ParamSearchGoal(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -208,8 +208,8 @@ class ParamSearchGoal(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res
@@ -276,7 +276,7 @@ class ParamSearchControle(object):
     def end_round(self, team1, team2, state):
         # A round ends when there is a goal
         me = StateFoot(state, 1, 0)
-        print(me.my_pos.x - GAME_WIDTH/2.)
+        #print(me.my_pos.x - GAME_WIDTH/2.)
         if me.my_pos.x >= GAME_WIDTH/2. + 7. and has_ball_control(me):#15.
             self.crit += 1  # Increment criterion
 
@@ -287,7 +287,7 @@ class ParamSearchControle(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -301,8 +301,8 @@ class ParamSearchControle(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res
@@ -382,7 +382,7 @@ class ParamSearchDribble(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -400,8 +400,8 @@ class ParamSearchDribble(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res
@@ -467,7 +467,7 @@ class ParamSearchPasse(object):
     def end_round(self, team1, team2, state):
         # A round ends when there is a goal
         me = StateFoot(state, 1, 1)
-        print(me.my_pos - me.ball_pos)
+        #print(me.my_pos - me.ball_pos)
         self.cpt += 1  # Increment number of trials
         if self.cpt >= self.trials:
             # Save the result
@@ -475,7 +475,7 @@ class ParamSearchPasse(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -489,8 +489,8 @@ class ParamSearchPasse(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res
@@ -561,7 +561,7 @@ class ParamSearchReception(object):
             for i, values in zip(self.param_id, self.params.values()):
                 res_key += values[i],
             self.res[res_key] = self.crit * 1. / self.trials
-            print(res_key, self.crit)
+            #print(res_key, self.crit)
 
             # Reset parameters
             self.crit = 0
@@ -575,8 +575,8 @@ class ParamSearchReception(object):
                 self.simu.end_match()
 
         for i, (key, values) in zip(self.param_id, self.params.items()):
-            print("{}: {}".format(key, values[i]), end="   ")
-        print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
+            #print("{}: {}".format(key, values[i]), end="   ")
+        #print("Crit: {}   Cpt: {}".format(self.crit, self.cpt))
 
     def get_res(self):
         return self.res

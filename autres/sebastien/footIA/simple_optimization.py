@@ -64,7 +64,7 @@ class SimpleParamSearch(object):
             if key not in self.res:
                 self.res[key]=[]
             self.res[key].append((self.list_forces[self.idx_force],self.crit*1./self.trials))
-            print("Res pour  position %s force %f : %f" % (str(key),self.res[key][-1][0],self.res[key][-1][1]))
+            #print("Res pour  position %s force %f : %f" % (str(key),self.res[key][-1][0],self.res[key][-1][1]))
             # Reset parameters
             self.crit = 0
             self.cpt = 0

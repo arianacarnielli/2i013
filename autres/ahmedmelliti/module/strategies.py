@@ -33,7 +33,7 @@ class DZStrategy(Strategy):
 		#if t.dbp()<1.65:
 		a=Vector2D(GAME_WIDTH*3/4.,GAME_HEIGHT*3/4.)
 		b=Vector2D(GAME_WIDTH*1/4.,GAME_HEIGHT*3/4.)
-		print(t.p_position)
+		#print(t.p_position)
 		#if not t.canshoot() and i==0:
 			#0.8
 		#    if (t.p_position.x-t.adv_le_plus_proche().x<150):
@@ -105,13 +105,13 @@ class NewStrategy(Strategy):
 		t = Tools(state,id_team,id_player)
 		a=Vector2D(GAME_WIDTH*3/4.,GAME_HEIGHT*3/4.)
 		b=Vector2D(GAME_WIDTH*1/4.,GAME_HEIGHT*3/4.)
-		print(t.ball_vitesse)
+		#print(t.ball_vitesse)
 		if t.canshoot():
 			if t.adv_le_plus_proche().distance(t.ball_position)>t.p_position.distance(t.ball_position) :
 				if t.p_position.distance(t.cage_adv - t.p_position)<10:
 					return SoccerAction(0, 0.1*(b - t.p_position))  
 				else :
-					print(t.adv_le_plus_proche())
+					#print(t.adv_le_plus_proche())
 					return SoccerAction(t.goto(t.ball_position)*1,0.1*(b - t.p_position))
 			#if t.dbp()== 0 :
 			#    return SoccerAction(t.goto(a), 0.1*(b - t.p_position))
@@ -138,7 +138,7 @@ class Fonceur_dribbleur(Strategy):
 		Strategy.__init__(self,"Fonceur_dribbleur")
 	def compute_strategy(self,state,id_team,id_player):
 		t = Tools(state,id_team,id_player)
-		print(t.canshoot1())
+		#print(t.canshoot1())
 		if t.canshoot1():
 				if t.joueur_position_shoot():
 					return t.shoot_cage()
@@ -168,7 +168,7 @@ class Milieu(Strategy):
 		Strategy.__init__(self,"Milieu")
 	def compute_strategy(self,state,id_team,id_player):
 		t = Tools(state,id_team,id_player)
-		print(t.ami_position)	
+		#print(t.ami_position)	
 		if t.canshoot1():
 			if t.joueur_position_shoot():
 				return t.shoot_cage()

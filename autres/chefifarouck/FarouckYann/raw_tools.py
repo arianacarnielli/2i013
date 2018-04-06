@@ -16,7 +16,7 @@ def resolution_equation_second_degre(A, B, C):
 	delta = B*B - 4 * A * C
 	
 	if delta < 0:
-		print("delta negatif")
+		#print("delta negatif")
 		return -1000000
 	
 	x1 = (-B - delta.sqrt()) / 2 /A

@@ -99,9 +99,9 @@ class TestAccStrategy(Strategy):
         me = StateFoot(state,id_team,id_player)
         vect = Vector2D(me.width*0.1+self.dist,me.goal_height)
         if me.my_pos.x >= vect.x:
-            print("0")
+            #print("0")
             return get_empty_strategy()
-        print("1")
+        #print("1")
         return goTo(me, vect)
 
 
