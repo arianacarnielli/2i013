@@ -68,6 +68,14 @@ class ToolBox(object):
         posAdversaires = self.GetPosAdversaires
         posBall = self.PosBall(n)
         return self.PosJoueur.distance(posBall) < min([posAdv.distance(posBall) for posAdv in posAdversaires])
+    
+    def IsCloserToBallThanAll(self, n = 0):
+        """
+        determine si le joueur courant est plus proche du ballon que tous les autres joueurs, adversaires ou pas.
+        """
+        posAutres = self.GetPosAdversaires + self.GetPosAmis
+        posBall = self.PosBall(n)
+        return self.PosJoueur.distance(posBall) < min([posAutre.distance(posBall) for posAutre in posAutres])
 
     def EstGoalDef(self):
         """
@@ -166,6 +174,14 @@ class ToolBox(object):
         retourne le vecteur donnant une position defensive pour intercepter la balle si l'ennemi tire droit vers le but.
         """
         pos_cage = self.PosCageDef
+        pos_ball = self.PosBall()
+        return pos_ball*alpha + pos_cage*(1 - alpha)
+    
+    def PosAtkProportionnelle(self, alpha = 0.6):
+        """
+        retourne le vecteur donnant une position d'attaque pour intercepter la balle plus facilement.
+        """
+        pos_cage = self.PosCageAtk
         pos_ball = self.PosBall()
         return pos_ball*alpha + pos_cage*(1 - alpha)
     
@@ -331,6 +347,15 @@ class ToolBox(object):
         if not (norm_acc is None):
             vec_def.norm = norm_acc
         return vec_def
+
+    def VecAtkProportionnel(self, alpha = 0.6, norm_acc = None):
+        """
+        retourne un vecteur de la position du joueur vers la position d'attaque default.
+        """
+        vec_atk = self.PosAtkProportionnelle(alpha) - self.PosJoueur
+        if not (norm_acc is None):
+            vec_atk.norm = norm_acc
+        return vec_atk
         
     def VecPosAdvPlusProcheDevant(self, norm_acc = None):
         """

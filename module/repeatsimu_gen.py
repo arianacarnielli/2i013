@@ -25,7 +25,7 @@ class repeatsimu_gen4V4(object):
         self.strategy1 = DefIntelligentStratOpt
         self.strategy2 = DribleStratOpt2
         self.strategy3 = DefIntelligentStratOpt
-        self.strategy4 = DribleStratOpt2
+        self.strategy4 = AtkIntelligentStratOpt
         self.trials = trials
         self.max_steps = max_steps
         
@@ -43,12 +43,11 @@ class repeatsimu_gen4V4(object):
             brasil = SoccerTeam("Brasil")
             brasil.add("self.strategy1", self.strategy1(p = self.list_param[9], n = self.list_param[10], alpha = self.list_param[11], distMin = self.list_param[12], distMax = self.list_param[13], maxAngle = self.list_param[14], rayon = self.list_param[15]))            
             brasil.add("self.strategy2", self.strategy2(accShoot = self.list_param[0], accDrible = self.list_param[1], vit = self.list_param[2], n = self.list_param[3], maxAngle = self.list_param[4], tooFar = self.list_param[5], rSurfBut = self.list_param[6], AngleHyst = self.list_param[7], distShoot = self.list_param[8]))            
-            brasil.add("self.strategy1", self.strategy1(p = self.list_param[25], n = self.list_param[26], alpha = self.list_param[27], distMin = self.list_param[28], distMax = self.list_param[29], maxAngle = self.list_param[30], rayon = self.list_param[31]))
-            brasil.add("self.strategy2", self.strategy2(accShoot = self.list_param[16], accDrible = self.list_param[17], vit = self.list_param[18], n = self.list_param[19], maxAngle = self.list_param[20], tooFar = self.list_param[21], rSurfBut = self.list_param[22], AngleHyst = self.list_param[23], distShoot = self.list_param[24]))
-            
-               
+            brasil.add("self.strategy3", self.strategy3(p = self.list_param[22], n = self.list_param[23], alpha = self.list_param[24], distMin = self.list_param[25], distMax = self.list_param[26], maxAngle = self.list_param[27], rayon = self.list_param[28]))
+            brasil.add("self.strategy4", self.strategy4(distShoot = self.list_param[16], accShoot = self.list_param[17], distMin = self.list_param[18], distMax = self.list_param[19], rayon = self.list_param[20], alpha = self.list_param[21]))
+
             desafiante = self.ia.get_team(4)
-        
+
             simu = Simulation(brasil, desafiante, max_steps=self.max_steps)
 
             if show:

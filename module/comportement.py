@@ -175,6 +175,23 @@ class Comportement(object):
             return self.action.RunToBall(vit,n)
 
         return self.action.RunToDefense(p * frac_p)
+    
+    def ComAtkIntelligent(self, distShoot = 50, accShoot = 0.64, distMin = 10, distMax = 60, rayon = 15, alpha = 0.6):
+        """
+        Comportement d'ataque.
+        """
+        my_pos = self.action.tools.PosJoueur
+        if self.action.tools.CanShoot():
+            if abs(self.action.tools.VecPosGoal().x) < distShoot:
+                return self.action.ShootGoal(acc = accShoot)
+            vec_ami = self.action.tools.VecPosAmisPlusProcheDevant()
+            if vec_ami is not None:
+                if vec_ami.norm >= distMin and vec_ami.norm <= distMax and not self.action.tools.ExistAdvProcheAmi(vec_ami + my_pos, rayon):
+                    return self.action.ShootPasse(vec_ami + my_pos, acc = vec_ami.norm/maxBallAcceleration)
+            return self.action.ShootGoal(acc = accShoot)
+        if self.action.tools.IsCloserToBallThanAll():
+            return self.action.RunToBall()
+        return self.action.RunToAtkProp(alpha)
 
     def ComDefIntelligent(self, acc = 1, vit = 1, n = 0, p = 0.7, alpha = 0.6, distMin = 10, distMax = 60, maxAngle = math.pi/6, rayon = 15):
         """

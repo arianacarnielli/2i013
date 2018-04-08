@@ -8,8 +8,11 @@ Created on Mon Feb 26 19:07:16 2018
 import module
 import math
 
-expe = module.ParamGenetique(2)
+expe = module.ParamGenetique(4)
 
-lista = [0.8, 0.25, 1, 10, 0.5, 34, 35, 0.1, 50, 0.9, 2, 0.6, 0, 175, math.pi/6, 15] 
+lista = [0.4, 0.3, 1.0, 10, 0.84, 44, 5, 0.18, 19, \
+         0.4, 10, 0.2, 14, 122, 0.32, 15, \
+         50, 0.64, 10, 60, 15, 0.6, \
+         0.9, 17, 0.7, 18, 67, 0.81, 6]
 
 expe.start_list([lista])

@@ -82,6 +82,12 @@ class Action(object):
         """
         return SoccerAction(self.tools.VecDefProportionnel(alpha = alpha, norm_acc = maxPlayerAcceleration))
     
+    def RunToAtkProp(self, alpha = 0.6):
+        """
+        Renvoi une SoccerAction de courir vers une position d'attaque d'interception.
+        """
+        return SoccerAction(self.tools.VecAtkProportionnel(alpha = alpha, norm_acc = maxPlayerAcceleration))
+    
     def RuntoAtaque(self, pos_x = 0.5):
         """
         Retourne une SoccerAction de courir vers une position de ataque.

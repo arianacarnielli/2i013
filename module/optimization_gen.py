@@ -65,15 +65,19 @@ class ParamGenetique(object):
         AngleHyst = round(rd.uniform(0, math.pi/10), 2)
         distShoot = rd.randrange(0, 76, 1)
 
-        accShoot2 = rd.randrange(0, 11, 1) / 10.
-        accDrible2 = rd.randrange(0, 11, 1) / 10.
-        vit2 = rd.randrange(0, 11, 1) / 10.
-        nDrible2 = rd.randrange(0, 21, 1)
-        maxAngle2 = round(rd.uniform(0, math.pi/2), 2)
-        tooFar2 = rd.randrange(0, 61, 1)
-        rSurfBut2 = rd.randrange(0, 51, 5)
-        AngleHyst2 = round(rd.uniform(0, math.pi/10), 2)
-        distShoot2 = rd.randrange(0, 76, 1)
+        accShoot3 = rd.randrange(0, 11, 1) / 10.
+#        accDrible2 = rd.randrange(0, 11, 1) / 10.
+#        vit2 = rd.randrange(0, 11, 1) / 10.
+#        nDrible2 = rd.randrange(0, 21, 1)
+#        maxAngle2 = round(rd.uniform(0, math.pi/2), 2)
+#        tooFar2 = rd.randrange(0, 61, 1)
+#        rSurfBut2 = rd.randrange(0, 51, 5)
+#        AngleHyst2 = round(rd.uniform(0, math.pi/10), 2)
+        distShoot3 = rd.randrange(0, 76, 1)
+        distMin3 = rd.randrange(0, 26, 1)
+        distMax3 = rd.randrange(distMin3, 176, 1)
+        rayon3 = rd.randrange(1, 26, 1)
+        alpha3 = rd.randrange(0, 11, 1) / 10.
         
         p = rd.randrange(0, 16, 1) / 10.
         nDef = rd.randrange(0, 21, 1)
@@ -87,7 +91,7 @@ class ParamGenetique(object):
         nDef2 = rd.randrange(0, 21, 1)
         alpha2 = rd.randrange(0, 11, 1) / 10.
         distMin2 = rd.randrange(0, 26, 1)
-        distMax2 = rd.randrange(distMin, 176, 1)
+        distMax2 = rd.randrange(distMin2, 176, 1)
         maxAngleDef2 = round(rd.uniform(0, math.pi/2), 2)
         rayon2 = rd.randrange(1, 26, 1)
         
@@ -102,9 +106,8 @@ class ParamGenetique(object):
             return [accShoot, accDrible, vit, nDrible, maxAngle, tooFar, \
                     rSurfBut, AngleHyst, distShoot, p, nDef, alpha, distMin, \
                     distMax, maxAngleDef, rayon, \
-                    accShoot2, accDrible2, vit2, nDrible2, maxAngle2, tooFar2, \
-                    rSurfBut2, AngleHyst2, distShoot2, p2, nDef2, alpha2, distMin2, \
-                    distMax2, maxAngleDef2, rayon2]
+                    distShoot3, accShoot3, distMin3, distMax3, rayon3, alpha3, \
+                    p2, nDef2, alpha2, distMin2, distMax2, maxAngleDef2, rayon2]
     
     def test_against_all_ias(self, params, verbose = True):
         points = np.empty(len(self.list_ia))
@@ -186,10 +189,10 @@ class ParamGenetique(object):
         self.init_params_alea()
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180407".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_{}_final_20180331".format(self.nb_players), self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final_20180407".format(self.nb_players), self.tab_params, self.tab_points)
         
     def start_file(self, filename, nb_generations = 10):
         self.init_params_results_from_file(filename)
@@ -197,13 +200,13 @@ class ParamGenetique(object):
         for i in range(nb_generations):
             self.next_generation()
             self.eval_params()
-            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180407".format(self.nb_players, i), self.tab_params, self.tab_points)
             
     def start_list(self, list_list_params, nb_generations = 10):
         self.init_params_from_list(list_list_params)
         for i in range(nb_generations):
             self.eval_params()
-            np.savez("genetique_{}_{}_20180331".format(self.nb_players, i), self.tab_params, self.tab_points)
+            np.savez("genetique_{}_{}_20180407".format(self.nb_players, i), self.tab_params, self.tab_points)
             self.next_generation()
         self.eval_params()
-        np.savez("genetique_{}_final_20180331".format(self.nb_players), self.tab_params, self.tab_points)
+        np.savez("genetique_{}_final_20180407".format(self.nb_players), self.tab_params, self.tab_points)

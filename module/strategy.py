@@ -141,6 +141,23 @@ class Def2StratOpt(Strategy):
     def compute_strategy(self,state,id_team,id_player):
         comp = Comportement(Action(ToolBox(state,id_team,id_player)))
         return comp.ComDef2(p = self.p, n = self.n, frac_p = self.frac_p)  
+    
+class AtkIntelligentStratOpt(Strategy):
+    """
+    Strategie d'attaque, position par défault entre la balle et le but adversaire.
+    """
+    def __init__(self, distShoot = 50, accShoot = 0.64, distMin = 10, distMax = 60, rayon = 15, alpha = 0.6):
+        Strategy.__init__(self,"AtkIntelligent")
+        self.distShoot = distShoot
+        self.accShoot = accShoot
+        self.distMin = distMin
+        self.distMax = distMax
+        self.rayon = rayon
+        self.alpha = alpha
+        
+    def compute_strategy(self,state,id_team,id_player):
+        comp = Comportement(Action(ToolBox(state,id_team,id_player)))
+        return comp.ComAtkIntelligent(distShoot = self.distShoot, accShoot = self.accShoot, distMin = self.distMin, distMax = self.distMax, rayon = self.rayon, alpha = self.alpha)
 
 class DefIntelligentStratOpt(Strategy):
     """
