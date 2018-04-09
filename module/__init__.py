@@ -35,7 +35,7 @@ def get_team(nb_players):
     if nb_players == 4:
         myteam.add("Messi", DribleStratOpt2(accShoot = 1.0, accDrible = 0.9, vit = 1.0, n = 5, maxAngle = 0.72, tooFar = 33, rSurfBut = 30, AngleHyst = 0.18, distShoot = 2))
         myteam.add("Matuidi", DefIntelligentStratOpt(p = 0.3, n = 1, alpha = 0.4, distMin = 14, distMax = 122, maxAngle = 1.43, rayon = 15))
-        myteam.add("Romario", AtkIntelligentStratOpt(distShoot = 75, accShoot = 0.8, distMin = 2, distMax = 104, rayon = 13, alpha = 0.5))
+        myteam.add("Ibrahimović", AtkIntelligentStratOpt(distShoot = 75, accShoot = 0.8, distMin = 2, distMax = 104, rayon = 13, alpha = 0.5))
         myteam.add("Neymar", DefIntelligentStratOpt(p = 1.3, n = 17, alpha = 0.7, distMin = 18, distMax = 67, maxAngle = 0.84, rayon = 25))
     return myteam	
 
