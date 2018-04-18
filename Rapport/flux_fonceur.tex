@@ -1,0 +1,12 @@
+\tikzstyle{block} = [rectangle, rounded corners=3mm, very thick, font=\small, draw=blue!50!white, fill=blue!10!white]
+\tikzstyle{decision} = [diamond, rounded corners=3mm, shape aspect=2.5, very thick, font=\small, draw=red!50!white, fill=red!10!white, inner sep=0mm]
+
+\begin{tikzpicture}
+
+\node[decision] (test1) at (0, 0) {\parbox[c][\height][c]{4cm}{\centering Peut tirer? }};
+\node[block, anchor = north] (oui) at (-3, -2) {\parbox[c][\height][c]{4cm}{\centering Tirer vers le centre du but}};
+\node[block, anchor = north] (non) at (3, -2) {\parbox[c][\height][c]{4cm}{\centering Courir vers le ballon}};
+\draw[thick, -Stealth] (test1) -- node[midway, above left]{\small Oui} (oui);
+\draw[thick, -Stealth] (test1) -- node[midway, above right]{\small Non} (non);
+
+\end{tikzpicture}
