@@ -22,7 +22,7 @@
 % imported in the same page. Mostly harmless, can be almost always supressed.
 %\usepackage[pstarrows]{pict2e} % Amplia as funcionalidades do ambiente picture
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows, arrows.meta}
+\usetikzlibrary{shapes, arrows, arrows.meta, angles, quotes}
 
 %-----------------------------------------------------------------------------------%
 % PACOTES DE TABELAS                                                                %
@@ -223,6 +223,10 @@
 %\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % Arredondar para baixo
 %\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil} % Arredondar para cima
 
+\renewcommand{\floatpagefraction}{0.99}
+\renewcommand{\topfraction}{0.99}
+\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\textfraction}{0.01}
 
 %-----------------------------------------------------------------------------------%
 % NUMERAÇÃO DE ELEMENTOS                                                            %
@@ -282,7 +286,7 @@ Cette section présente les principales \og familles \fg{} de stratégies que no
 
 \subsection{Fonceur}
 
-Comme nous avons dit précédemment, la première stratégie codée a été le Fonceur qui peut être représenté par l'arbre de décision de la Figure \ref{Figure1}.
+Comme nous avons dit précédemment, la première famille de stratégies codée a été le Fonceur qui peut être représenté par l'arbre de décision de la Figure \ref{Figure1}.
 
 \begin{figure}[ht]
 \centering
@@ -297,26 +301,90 @@ Lorsque ce fonceur joue contre d'autres stratégies de fonceur identiques ou tr�
 
 \subsection{Dribbleur}
 
+La famille de stratégies qui forme la pièce maitresse de notre jeu est le Dribbleur dont l'arbre de décision représentatif est donné sur la Figure \ref{Figure3}. 
+
+\begin{figure}[ht]
+\centering
+\input{flux_dribbleur}
+\caption{Arbre de décision du Dribbleur}
+\label{Figure3}
+\end{figure}
+
+En comparant les Figures \ref{Figure1} et \ref{Figure3} on remarque que le Dribbleur a le même comportement que le Fonceur s'il n'a pas le ballon, s'il est très proche de la cage adverse ou s'il n'existe pas d'adversaire devant lui. Cependant il a un comportement plus élaboré dans d'autres situations. Lorsqu'il arrive au ballon au même temps qu'un adversaire, il essaie de contrer le tir adverse en faisant un tir d'accélération maximale vers le champ adverse, sans viser la cage. Dans le cas où l’équipe adverse a un gardien, c'est-à-dire un joueur au voisinage immédiat de la cage, le Dribbleur frappe en visant le coin de la cage le plus proche de lui. Enfin, s'il n'est pas proche de la cage et il existe un joueur adverse devant lui qui n'est pas trop loin, il dribble selon le schéma de la Figure \ref{Figure4}.
+
+\begin{figure}[ht]
+\centering
+\input{schema_dribble}
+\caption{Schéma d'un dribble : Dribbleur en rouge, adversaire en bleu, cage en gris}
+\label{Figure4}
+\end{figure}
+
+Pour le dribble, le joueur détermine les vecteurs entre lui-même et le centre du but adverse et entre lui-même et le joueur adverse le plus proche devant lui, calculant ensuite l'angle $\theta$ entre ces vecteurs. Si $\theta$ est trop grand, il considère que l'autre joueur ne bloque pas son chemin au but et ne fait pas de dribble. Sinon, il fait un dribble : si l’adversaire est situé en bas par rapport au joueur, il dribble vers le haut, et au contraire si l’adversaire est situé en haut par rapport au joueur, il dribble vers le bas.
+ 
+Un souci observé avec cette implémentation de dribble est que, dans certaines \mbox{situations} où le joueur, son adversaire et le centre du but sont presque alignés, le joueur peut, dans un premier moment, trouver que l'adversaire est en bas et dribbler vers le haut, pour tout de suite après trouver que l'adversaire est en haut et dribbler vers le bas. Cette hésitation lui fait souvent perdre le contrôle du ballon. Pour éviter ce problème, nous avons implémenté une mémoire du dernier dribble : si l'angle $\theta$ est trop petit, il dribble dans la même direction que son dernier dribble, en changeant de direction uniquement si $\theta$ est plus grande qu'une valeur fixée. Pour créer cette mémoire, nous avons utilisé le fait que \texttt{Comportement} et \texttt{Strategy} sont deux classes séparées : la mémoire est implémentée par une variable dans la \texttt{Strategy} du Dribbleur qui est mise à jour à chaque pas de temps dans l'appel de la fonction \texttt{compute\_strategy} (un nouveau \texttt{Comportement} est crée à chaque appel à \texttt{compute\_strategy}, ce pourquoi la mémoire doit forcément être dans \texttt{Strategy}).
+
+Pour être capable de faire une optimisation de ce Dribbleur, nous avons introduit une dizaine de paramètres, entre eux l’accélération pour faire un tir au but mais aussi une autre pour dribbler, ainsi que les angles définissant le comportement de dribble. Il est nécessaire que le joueur dribble avec une accélération optimale pour qu’il soit assez rapide afin de se déplacer sur l’ensemble du terrain tout en contournant ses adversaires et en gardant le contrôle du ballon. Le Dribbleur est utile car il favorise la liaison entre défense et attaque et il est autonome c’est-à-dire qu’il ne dépend pas de ses co-équipiers mais uniquement de ses adversaires, c’est pourquoi nous pouvons l’utiliser dans tous les types de matchs : en 1 contre 1, en 2 contre 2 voire en 4 contre 4. Pour les matchs en 1 contre 1, nous avons légèrement modifié le Dribbleur pour enrichir son arbre de décision afin d'être plus performant.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width = 0.24\textwidth]{dribble1_coupe}
+\includegraphics[width = 0.24\textwidth]{dribble2_coupe}
+\includegraphics[width = 0.24\textwidth]{dribble3_coupe}
+\includegraphics[width = 0.24\textwidth]{dribble4_coupe}
+\caption{Example de dribble dans un match, Dribbleur en rouge}
+\label{Figure5}
+\end{figure}
+
+\subsection{Défenseur}
+
+La famille de stratégies de Défenseur a été fondamentale dans les matchs à plusieurs joueurs. Son arbre de décision représentatif est donné sur la Figure \ref{Figure6}. 
+
+\begin{figure}[ht]
+\centering
+\input{flux_defenseur}
+\caption{Arbre de décision du Défenseur}
+\label{Figure6}
+\end{figure}
+
+Notre but était de nous assurer que lorsqu’un attaquant de l’équipe adverse s’attaque à notre Défenseur, ce dernier puisse le confronter et adopter un certain comportement défensif empêchant ainsi aux ennemis de marquer un but. Pour ce faire, nous avons implémenté quelques versions de Défenseur, qui diffèrent essentiellement par leur position de défense et par des simplifications de la branche \og Oui \fg{} du test \og Peut tirer? \fg. Dans un premier moment, nous avons codé une version simplifiée de Défenseur que nous avons appelé Gardien puisque sa position de défense par défaut était le centre de notre but. Dans cette version, lorsqu'il pouvait tirer, il faisait un tir aveugle vers l'avant.
+
+Cette stratégie a bien marché pendant les premières semaines après son implémentation, mais les autres binômes ont réussi à trouver des stratégies d'attaque exploitant des failles de notre gardien, notamment le fait qu'il ne pouvait pas attraper le ballon si sa vitesse était trop élevée. Pour améliorer notre Gardien, nous avons codé une nouvelle version de Défenseur dont la position de défense par défaut n'était pas la cage mais avait un degré de liberté supplémentaire : nous avons choisi une position horizontale \texttt{frac\_p}, représentée comme une fraction de la longueur du champ défensif et passé en argument au Défenseur, de telle sorte que la position de défense avait la position horizontale voulue et était toujours entre le ballon et le centre du but, comme sur la Figure \ref{Figure8}. Notre intention avec cette modification était de faciliter l'interception du ballon. Son but consistait principalement à empêcher le jeu d'attaque de l'équipe adverse.
+
+\begin{figure}[ht]
+\centering
+\input{schema_defenseur}
+\caption{Position de défense par défaut: position du Dribbleur en rouge, ballon en noir, cage en gris}
+\label{Figure8}
+\end{figure}
+
+Cette modification de la position de défense a amélioré notre Défenseur mais n'était cependant pas satisfaisante, et nous l'avons modifiée dans la version finale, en augmentant encore un degré de liberté. Pour cela, nous avons choisi un paramètre $\alpha \in [0, 1]$ et défini la position défensive par défaut comme la position sur le segment reliant le ballon au centre de la cage, à une proportion $\alpha$ du centre de la cage et $1 - \alpha$ du ballon. Ainsi, il n'est pas à une position horizontale fixée, mais peut avancer --- même sur le champ d'attaque si le ballon est proche de la cage adverse --- ce qui peut être utile pour récupérer le ballon plus tôt. Remarquons que, si le ballon est trop proche de la cage de défense, il court vers le ballon comme indique sur la Figure \ref{Figure6}.
+
+C'est également à ce moment que nous avons codé le mécanisme de passe indiqué sur la Figure \ref{Figure6}. Nous avions auparavant codé une stratégie de passe entre les joueurs, qui prenait en paramètre deux accélérations différentes : une pour tirer et une autre pour faire la passe. L'accélération de passe différente était importante pour que la passe ne soit ni trop longue ni trop courte pour favoriser l’avancement progressif de la balle entre les joueurs jusqu’aux attaquants. 
+
+Pour notre stratégie de passe, lorsque le joueur peut tirer, il calcule la position du joueur qui est le plus proche de lui --- car il est inutile de faire une passe à un joueur qui est loin --- et détermine si ce joueur n'est pas trop proche ni trop loin et si un joueur adversaire n'est pas proche de lui. Une fois la position calculée et les conditions de passe remplies, il fait la passe à ce joueur. Comme nous n'avions pas utilisé cette stratégie de passe de façon isolée, nous l'avons incorporée à notre Défenseur.
+
+Enfin, lorsque le Défenseur a le ballon et ne peut pas faire une passe, plutôt que de tirer aveuglement vers l'avant, il cherche à déterminer si un joueur adverse pourrait intercepter le ballon. Pour ce faire, il détermine les vecteurs entre lui-même et le centre du but adverse et entre lui-même et le joueur adverse le plus proche devant lui, calculant ensuite l'angle entre ces vecteurs. Comme dans le cas du dribble, il choisira, en fonction de la taille de cet angle et de la position de l'adversaire s'il tirera vers le centre du but ou s'il déviera ce tir vers le haut ou le bas.
+
+\subsection{Attaquant}
+
+\begin{figure}[ht]
+\centering
+\input{flux_attaquant}
+\caption{Arbre de décision de l'Attaquant}
+\label{Figure7}
+\end{figure}
+
+
+
+
+
+
+
 \noindent \textcolor{red}{\rule{\textwidth}{0.5cm}}
 
-Finalement, la stratégie qui forme la pièce maitresse de notre jeu est le dribbleur. La dernière prend en paramètre la vitesse v, le nombre d’étapes n, l’accélération pour faire un tir mais aussi pour dribbler. Il est nécessaire que le joueur dribble à une vitesse optimale pour qu’il soit assez rapide afin de se déplacer sur l’ensemble du terrain tout en contournant ses adversaires. Il prend également un angle qui va nous servir à déterminer la direction du tir en fonction de l’adversaire. Ce dribbleur est utile pour favoriser la liaison entre la défense et l’attaque et contrairement aux stratégies précédentes, il est autonome c’est-à-dire qu’il ne dépend pas de ses co-équipiers mais uniquement de ses adversaires, c’est pourquoi nous pouvons l’utiliser dans tous les types de matchs : en 1 contre 1, en 2 contre 2 voire en 4 contre 4…
-	
-Ainsi, le programme détermine d’emblée s’il le joueur est à proximité de la balle puis calcule la position cette fois de l’adversaire le plus proche de lui, pour remonter progressivement vers les cages de l’équipe adverse. Il calcule ensuite l’angle entre lui et l’adversaire : si l’adversaire est situé en bas par rapport au joueur, il dribble vers le haut, et au contraire si l’adversaire est situé en haut par rapport au joueur, il dribble vers le bas. Lorsqu’il n’y a plus aucun adversaire en face de lui, il finit par marquer un but. En revanche, s’il n’est pas en mesure de dribbler, il court vers la balle pour exécuter les dernières instructions.
 
-\noindent \textcolor{red}{\rule{\textwidth}{0.5cm}}
 
-Parmi les stratégies que nous avons codées, il y a celle du gardien appelée GardienStrat. Celle-ci prend en paramètre l’accélération a, la vitesse v, le nombre d’étapes n et enfin la variable p qui désigne la position pour la coordonnée x de la cage de défense. Notre but était de nous s’assurer que lorsqu’un attaquant de l’équipe adverse s’attaque à notre gardien, ce dernier puisse le confronter et adopte un certain comportement, empêchant ainsi aux ennemis de marquer un but. 
 
-Pour ce faire, nous avons mis en place un programme qui vérifie d’abord si le gardien est à proximité du ballon. Si tel est le cas, le gardien va dégager la balle pour permettre aux autres joueurs de l’intercepter. Puis il calcule si le ballon se trouvera dans la cage de défense dans n étapes pour ensuite courir vers la position attendue si besoin, afin de s’emparer de la balle. Enfin, on vérifie si le gardien est bien positionné dans le champ défensif et si ce n’est pas le cas, il court vers sa cage pour éviter qu’un ennemi profite de l’occasion pour marquer un but.
-
-Par ailleurs, nous avons également codé un défenseur, nommé DefStrat qui possède certains comportements similaires à notre gardien, leurs objectifs communs étant le même : celui de défendre. En plus des paramètres du gardien, il prend une variable frac\_p qui est une position défensive d’interception. Son but consistait principalement à empêcher le jeu d'attaque de l'équipe adverse.
-
-Ainsi, le programme créé vérifie d’abord si le défenseur est à proximité du ballon. Si cette condition est remplie, le défenseur va dégager la balle pour continuer le jeu. Ensuite il détermine si le ballon se trouvera dans la cage de défense dans n étapes dans le but de courir vers la position attendue. Si ces conditions ne sont pas respectées, le défenseur court vers une position pour intercepter la balle pour ensuite la passer aux attaquants.
-
-D’autre part, nous avons codé une stratégie de passe entre les joueurs appelée PassStrat.
-Cette stratégie prend en paramètre deux accélérations différentes : une pour tirer et une autre pour faire la passe. Nous avons créé la dernière pour que la passe ne soit ni trop longue ni trop courte pour favoriser l’avancement progressif de la balle entre les joueurs jusqu’aux attaquants. En plus de l’accélération, elle prend en paramètre la vitesse et le nombre d’étapes.
-
-Le programme se charge de d’abord déterminer si le joueur est à proximité du ballon, puis calcule la position du joueur qui est le plus proche de lui car il est inutile de faire une passe à un joueur qui est loin, les adversaires pouvant intercepter la balle et prendre le jeu à leur avantage. Une fois la position calculée, il fait la passe à ce joueur, sinon il fait une passe au gardien. Enfin, s’il n’est pas proche de ballon, il court vers celui-ci pour ensuite faire les instructions ci-dessus.
 
 
 

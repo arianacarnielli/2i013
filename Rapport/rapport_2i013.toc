@@ -4,8 +4,10 @@
 \contentsline {section}{\numberline {3}Pr\IeC {\'e}sentation des strat\IeC {\'e}gies}{4}{section.3}
 \contentsline {subsection}{\numberline {3.1}Fonceur}{4}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Dribbleur}{5}{subsection.3.2}
-\contentsline {section}{\numberline {4}Optimisation des strat\IeC {\'e}gies}{7}{section.4}
-\contentsline {subsection}{\numberline {4.1}Recherche exhaustive}{7}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Algorithme g\IeC {\'e}n\IeC {\'e}tique}{8}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Arbres de d\IeC {\'e}cision}{8}{subsection.4.3}
-\contentsline {section}{\numberline {5}Conclusion}{8}{section.5}
+\contentsline {subsection}{\numberline {3.3}D\IeC {\'e}fenseur}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Attaquant}{9}{subsection.3.4}
+\contentsline {section}{\numberline {4}Optimisation des strat\IeC {\'e}gies}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Recherche exhaustive}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Algorithme g\IeC {\'e}n\IeC {\'e}tique}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Arbres de d\IeC {\'e}cision}{11}{subsection.4.3}
+\contentsline {section}{\numberline {5}Conclusion}{11}{section.5}

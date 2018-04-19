@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+\node[rectangle, thick, draw=red!80!white, fill=red!30!white, minimum size=0.5cm] (me) at (0, 0) {};
+\node[rectangle, thick, draw=blue!80!white, fill=blue!30!white, minimum size=0.5cm] (other) at (2, 1) {};
+
+\node[rectangle, thick, draw=black!50!white, fill=black!30!white, minimum width=0.2cm, minimum height=2cm, anchor = east] (goal) at (5, -1) {};
+
+\draw[thick, -Stealth] (me.center) -- (other.center);
+\draw[thick, -Stealth] (me.center) -- (goal.center);
+\draw (5, -2.5) -- (5, 1.5);
+\coordinate (A) at (goal.center);
+\coordinate (B) at (me.center);
+\coordinate (C) at (other.center);
+\draw pic[draw=black, thick, angle radius=0.75cm, "$\theta$", angle eccentricity = 1.5] {angle = A--B--C};
+\end{tikzpicture}

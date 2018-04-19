@@ -113,7 +113,7 @@ class ShootBallOptimalStrat(Strategy):
  
 
 ###############################################################################
-### Strategies de teste  pour optimisation                                  ###
+### Strategies de teste pour optimisation                                  ###
 ###############################################################################
 
 class DefStratOpt(Strategy):

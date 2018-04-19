@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.8)  19 APR 2018 00:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.8)  20 APR 2018 01:08
 entering extended mode
 **./rapport_2i013.tex
 (rapport_2i013.tex
@@ -400,6 +400,12 @@ File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
 \pgfarrowlength=\dimen161
 \pgfarrowwidth=\dimen162
 \pgfarrowlinewidth=\dimen163
+)
+(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibraryangles.code.tex
+File: tikzlibraryangles.code.tex 2013/08/28 v3.0.1a (rcs-revision 1.1)
+)
+(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibraryquotes.code.tex
+File: tikzlibraryquotes.code.tex 2014/03/21 v3.0.1a (rcs-revision 1.4)
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
 Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
@@ -1445,48 +1451,48 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 ) (rapport_2i013.aux)
 \openout1 = `rapport_2i013.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 242.
-LaTeX Font Info:    Try loading font information for OML+jkp on input line 242.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 246.
+LaTeX Font Info:    Try loading font information for OML+jkp on input line 246.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 242.
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 242.
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 242.
-LaTeX Font Info:    Try loading font information for OMS+jkp on input line 242.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 246.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 246.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 246.
+LaTeX Font Info:    Try loading font information for OMS+jkp on input line 246.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 242.
-LaTeX Font Info:    Try loading font information for OMX+jkp on input line 242.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 246.
+LaTeX Font Info:    Try loading font information for OMX+jkp on input line 246.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 242.
-LaTeX Font Info:    Try loading font information for U+jkpexa on input line 242.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 246.
+LaTeX Font Info:    Try loading font information for U+jkpexa on input line 246.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 242.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 242.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 246.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 246.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 242.
-LaTeX Font Info:    ... okay on input line 242.
-LaTeX Font Info:    Try loading font information for T1+jkp on input line 242.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 246.
+LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Try loading font information for T1+jkp on input line 246.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\t1jkp.fd
 File: t1jkp.fd 2007/01/24 Fontinst v1.928 font definitions for T1/jkp.
@@ -1549,17 +1555,17 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 ) ABD: EveryShipout initializing macros
-LaTeX Info: Redefining \degres on input line 242.
-LaTeX Info: Redefining \dots on input line 242.
+LaTeX Info: Redefining \degres on input line 246.
+LaTeX Info: Redefining \dots on input line 246.
 Package frenchb.ldf Info: Setting StandardItemizeEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 242.
+(frenchb.ldf)             reported on input line 246.
 Package frenchb.ldf Info: Setting StandardEnumerateEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 242.
-LaTeX Info: Redefining \up on input line 242.
+(frenchb.ldf)             reported on input line 246.
+LaTeX Info: Redefining \up on input line 246.
 \AtBeginShipoutBox=\box65
-Package hyperref Info: Link coloring OFF on input line 242.
+Package hyperref Info: Link coloring OFF on input line 246.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1569,34 +1575,34 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count156
 )
-LaTeX Info: Redefining \ref on input line 242.
-LaTeX Info: Redefining \pageref on input line 242.
-LaTeX Info: Redefining \nameref on input line 242.
+LaTeX Info: Redefining \ref on input line 246.
+LaTeX Info: Redefining \pageref on input line 246.
+LaTeX Info: Redefining \nameref on input line 246.
  (rapport_2i013.out) (rapport_2i013.out)
 \@outlinefile=\write4
 \openout4 = `rapport_2i013.out'.
 
-LaTeX Font Info:    Try loading font information for OT1+jkp on input line 249.
+LaTeX Font Info:    Try loading font information for OT1+jkp on input line 253.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ot1jkp.fd
 File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
 )
-LaTeX Font Info:    Try loading font information for U+jkpsya on input line 249.
+LaTeX Font Info:    Try loading font information for U+jkpsya on input line 253.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 249.
+LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 253.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpmia on input line 249.
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 253.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 249.
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 253.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
@@ -1607,48 +1613,75 @@ File: ujkpsyc.fd 2006/08/15 v1.0
  [1
 
 {C:/Users/arian/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+jkptt on input line 255.
+LaTeX Font Info:    Try loading font information for T1+jkptt on input line 259.
  (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\t1jkptt.fd
 File: t1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for T1/jkptt.
 )
 [2]
-Overfull \hbox (1.12494pt too wide) in paragraph at lines 265--266
+Overfull \hbox (1.12494pt too wide) in paragraph at lines 269--270
 []\T1/jkp/m/n/12 Comme nous n'avions au-cune ex-pé-rience sur la concep-tion de stra-té-gies, nous avons
  []
 
-[3] (flux_fonceur.tex) [4] [5] [6] <param_search_chalenge.pdf, id=94, 439.94362pt x 371.28712pt>
-File: param_search_chalenge.pdf Graphic file (type pdf)
+[3] (flux_fonceur.tex) [4] (flux_dribbleur.tex) (schema_dribble.tex) [5] [6]
+<dribble1_coupe.png, id=110, 301.125pt x 188.20313pt>
+File: dribble1_coupe.png Graphic file (type png)
+ <use dribble1_coupe.png>
+Package pdftex.def Info: dribble1_coupe.png used on input line 330.
+(pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
 
-<use param_search_chalenge.pdf>
-Package pdftex.def Info: param_search_chalenge.pdf used on input line 333.
+<dribble2_coupe.png, id=111, 301.125pt x 188.20313pt>
+File: dribble2_coupe.png Graphic file (type png)
+ <use dribble2_coupe.png>
+Package pdftex.def Info: dribble2_coupe.png used on input line 331.
+(pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
+
+<dribble3_coupe.png, id=112, 301.125pt x 188.20313pt>
+File: dribble3_coupe.png Graphic file (type png)
+ <use dribble3_coupe.png>
+Package pdftex.def Info: dribble3_coupe.png used on input line 332.
+(pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
+
+<dribble4_coupe.png, id=113, 301.125pt x 188.20313pt>
+File: dribble4_coupe.png Graphic file (type png)
+ <use dribble4_coupe.png>
+Package pdftex.def Info: dribble4_coupe.png used on input line 333.
+(pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
+ (flux_defenseur.tex) [7 <./dribble1_coupe.png> <./dribble2_coupe.png> <./dribble3_coupe.png> <./dribble4_coupe.png>] (s
+chema_defenseur.tex) [8]
+(flux_attaquant.tex) [9] <param_search_chalenge.pdf, id=136, 439.94362pt x 371.28712pt>
+File: param_search_chalenge.pdf Graphic file (type pdf)
+ <use param_search_chalenge.pdf>
+Package pdftex.def Info: param_search_chalenge.pdf used on input line 401.
 (pdftex.def)             Requested size: 294.76068pt x 248.76108pt.
- [7 <./param_search_chalenge.pdf>] [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
+
+[10 <./param_search_chalenge.pdf>] [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 419.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 419.
  (rapport_2i013.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 419.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 419.
 Package rerunfilecheck Info: File `rapport_2i013.out' has not changed.
-(rerunfilecheck)             Checksum: D4AA474DE2AB3559178AC5B3E88CD659;652.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 351.
+(rerunfilecheck)             Checksum: 28F34229A36B335BB3F86A7B7C9F382D;775.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 419.
  ) 
 Here is how much of TeX's memory you used:
- 22601 strings out of 493323
- 431239 string characters out of 3139066
- 520077 words of memory out of 3000000
- 25661 multiletter control sequences out of 15000+200000
- 96010 words of font info for 128 fonts, out of 3000000 for 9000
+ 22998 strings out of 493323
+ 440409 string characters out of 3139066
+ 530545 words of memory out of 3000000
+ 26018 multiletter control sequences out of 15000+200000
+ 102859 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,71p,1337b,781s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,10n,71p,1337b,954s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/kp
 fonts/kpfonts-expert.enc}<C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpbn8a.pfb><C:/Users/ari
-an/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmit8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/t
-ype1/public/kpfonts/jkpmn8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmne.pfb><C:/Use
-rs/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmsc8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/f
-onts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on rapport_2i013.pdf (8 pages, 97954 bytes).
+an/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmi.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type
+1/public/kpfonts/jkpmit8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmn8a.pfb><C:/User
+s/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmne.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/font
+s/type1/public/kpfonts/jkpmsc8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpsy.pfb><C:/
+Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
+Output written on rapport_2i013.pdf (11 pages, 134131 bytes).
 PDF statistics:
- 172 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 222 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 

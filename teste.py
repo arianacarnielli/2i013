@@ -22,9 +22,9 @@ pyteam = SoccerTeam(name = "GermanyWins")
 thon = SoccerTeam(name = "BRBRBR")
 
 #pyteam.add("P1", module.DribleStratOpt())
-pyteam.add("P1b", module.DefStratOpt(p =0.1))
-thon.add("P2", module.Def2StratOpt())
-thon.add("P3", module.DribleStratOpt2())
+pyteam.add("D", module.DribleStratOpt2(accShoot = 0.64, accDrible = 0.15, vit = 1, n = 0, maxAngle = 0.76, tooFar = 53, rSurfBut = 45, AngleHyst = 0.07, distShoot = 50))
+        
+thon.add("Adv", module.ShootStrat())
 
 
 #Creation d'une partie
