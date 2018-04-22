@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.8)  20 APR 2018 01:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.8)  23 APR 2018 01:36
 entering extended mode
 **./rapport_2i013.tex
 (rapport_2i013.tex
@@ -432,91 +432,10 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count114
 \LT@p@ftn=\toks29
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks30
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
-Package: amstext 2000/06/29 v2.01 AMS text
- ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks31
-\ex@=\dimen167
-)) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amscd.sty"
-Package: amscd 2017/04/14 v2.1 AMS Commutative Diagrams
-\athelp@=\toks32
-\minaw@=\dimen168
-\bigaw@=\dimen169
-\minCDarrowwidth=\dimen170
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\bezier.sty") ("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
-Package: amsthm 2015/03/04 v2.20.2
-\thm@style=\toks33
-\thm@bodyfont=\toks34
-\thm@headfont=\toks35
-\thm@notefont=\toks36
-\thm@headpunct=\toks37
-\thm@preskip=\skip49
-\thm@postskip=\skip50
-\thm@headsep=\skip51
-\dth@everypar=\toks38
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
-Package: amsmath 2016/11/05 v2.16a AMS math features
-\@mathmargin=\skip52
-
-For additional information on amsmath, use the `?' option.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen171
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count115
-LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count116
-\leftroot@=\count117
-LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count118
-\DOTSCASE@=\count119
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box61
-\strutbox@=\box62
-\big@size=\dimen172
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count120
-\c@MaxMatrixCols=\count121
-\dotsspace@=\muskip10
-\c@parentequation=\count122
-\dspbrk@lvl=\count123
-\tag@help=\toks39
-\row@=\count124
-\column@=\count125
-\maxfields@=\count126
-\andhelp@=\toks40
-\eqnshift@=\dimen173
-\alignsep@=\dimen174
-\tagshift@=\dimen175
-\tagwidth@=\dimen176
-\totwidth@=\dimen177
-\lineht@=\dimen178
-\@envbody=\toks41
-\multlinegap=\skip53
-\multlinetaggap=\skip54
-\mathdisplay@stack=\toks42
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks43
-\inpenc@posthook=\toks44
+\inpenc@prehook=\toks30
+\inpenc@posthook=\toks31
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 Now handling font encoding OML ...
@@ -848,40 +767,35 @@ Language: frenchb 2017/04/30 v3.3a French support from the babel system
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
 File: babel.def 2017/05/19 3.10 Babel common definitions
-\babel@savecnt=\count127
-\U@D=\dimen179
+\babel@savecnt=\count115
+\U@D=\dimen167
 )
 \l@acadian = a dialect from \language\l@french 
 \l@canadien = a dialect from \language\l@french 
-\FB@nonchar=\count128
-\FBcolonsp=\toks45
-\FBthinsp=\toks46
+\FB@nonchar=\count116
+\FBcolonsp=\toks32
+\FBthinsp=\toks33
 Package babel Info: Making : an active character on input line 362.
 Package babel Info: Making ; an active character on input line 363.
 Package babel Info: Making ! an active character on input line 364.
 Package babel Info: Making ? an active character on input line 365.
-\FBguillsp=\toks47
-\FBguill@level=\count129
-\FB@everypar=\toks48
-\FB@Mht=\dimen180
-\mc@charclass=\count130
-\mc@charfam=\count131
-\mc@charslot=\count132
-\std@mcc=\count133
-\dec@mcc=\count134
-\listindentFB=\skip55
-\descindentFB=\skip56
-\labelwidthFB=\skip57
-\leftmarginFB=\skip58
-\parindentFFN=\dimen181
-\FBfnindent=\skip59
+\FBguillsp=\toks34
+\FBguill@level=\count117
+\FB@everypar=\toks35
+\FB@Mht=\dimen168
+\mc@charclass=\count118
+\mc@charfam=\count119
+\mc@charslot=\count120
+\std@mcc=\count121
+\dec@mcc=\count122
+\listindentFB=\skip49
+\descindentFB=\skip50
+\labelwidthFB=\skip51
+\leftmarginFB=\skip52
+\parindentFFN=\dimen169
+\FBfnindent=\skip53
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
-(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\cite\cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
-)
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\kpfonts.sty
 Package: kpfonts  2010/08/20 v3.31
 
@@ -1039,6 +953,60 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2016/11/05 v2.16a AMS math features
+\@mathmargin=\skip54
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks36
+\ex@=\dimen170
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen171
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count123
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count124
+\leftroot@=\count125
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count126
+\DOTSCASE@=\count127
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box61
+\strutbox@=\box62
+\big@size=\dimen172
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count128
+\c@MaxMatrixCols=\count129
+\dotsspace@=\muskip10
+\c@parentequation=\count130
+\dspbrk@lvl=\count131
+\tag@help=\toks37
+\row@=\count132
+\column@=\count133
+\maxfields@=\count134
+\andhelp@=\toks38
+\eqnshift@=\dimen173
+\alignsep@=\dimen174
+\tagshift@=\dimen175
+\tagwidth@=\dimen176
+\totwidth@=\dimen177
+\lineht@=\dimen178
+\@envbody=\toks39
+\multlinegap=\skip55
+\multlinetaggap=\skip56
+\mathdisplay@stack=\toks40
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
 )
 \c@mv@rm=\count135
 \c@mv@boldrm=\count136
@@ -1193,7 +1161,7 @@ LaTeX Font Info:    Overwriting symbol font `letters' in version `sf'
 (Font)                  OML/jkp/m/it --> OML/jkpss/m/it on input line 428.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `boldsf'
 (Font)                  OML/jkp/m/it --> OML/jkpss/bx/it on input line 429.
-\symlettersA=\mathgroup6
+\symlettersA=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
 (Font)                  U/jkpmia/m/it --> U/jkpmia/bx/it on input line 439.
 LaTeX Font Info:    Overwriting symbol font `lettersA' in version `rm'
@@ -1204,7 +1172,6 @@ LaTeX Font Info:    Overwriting symbol font `lettersA' in version `sf'
 (Font)                  U/jkpmia/m/it --> U/jkpssmia/m/it on input line 443.
 LaTeX Font Info:    Overwriting symbol font `lettersA' in version `boldsf'
 (Font)                  U/jkpmia/m/it --> U/jkpssmia/bx/it on input line 444.
-LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 447.
 LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 456.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/cmsy/m/n --> OMS/jkp/m/n on input line 456.
@@ -1228,19 +1195,7 @@ LaTeX Font Info:    Overwriting symbol font `symbols' in version `sf'
 (Font)                  OMS/jkp/m/n --> OMS/jkp/m/n on input line 461.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `boldsf'
 (Font)                  OMS/jkp/m/n --> OMS/jkp/bx/n on input line 462.
-LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `rm'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldrm'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `sf'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
-LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldsf'
-(Font)                  U/msa/m/n --> U/jkpsya/m/n on input line 475.
+\symAMSa=\mathgroup5
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
 (Font)                  U/jkpsya/m/n --> U/jkpsya/bx/n on input line 476.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `rm'
@@ -1251,19 +1206,7 @@ LaTeX Font Info:    Overwriting symbol font `AMSa' in version `sf'
 (Font)                  U/jkpsya/m/n --> U/jkpsya/m/n on input line 479.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldsf'
 (Font)                  U/jkpsya/m/n --> U/jkpsya/bx/n on input line 480.
-LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `rm'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldrm'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `sf'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
-LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldsf'
-(Font)                  U/msb/m/n --> U/jkpsyb/m/n on input line 528.
+\symAMSb=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
 (Font)                  U/jkpsyb/m/n --> U/jkpsyb/bx/n on input line 529.
 LaTeX Font Info:    Overwriting symbol font `AMSb' in version `rm'
@@ -1387,7 +1330,7 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen182
+\@linkdim=\dimen179
 \Hy@linkcounter=\count139
 \Hy@pagecounter=\count140
 
@@ -1410,10 +1353,10 @@ Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4751.
 \c@Hy@tempcnt=\count142
 LaTeX Info: Redefining \url on input line 5104.
-\XeTeXLinkMargin=\dimen183
+\XeTeXLinkMargin=\dimen180
 \Fld@menulength=\count143
-\Field@Width=\dimen184
-\Fld@charsize=\dimen185
+\Field@Width=\dimen181
+\Fld@charsize=\dimen182
 Package hyperref Info: Hyper figures OFF on input line 6358.
 Package hyperref Info: Link nesting OFF on input line 6363.
 Package hyperref Info: Hyper index ON on input line 6366.
@@ -1439,60 +1382,52 @@ File: hpdftex.def 2017/03/14 v6.85a Hyperref driver for pdfTeX
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
 )
-\Hy@SectionHShift=\skip60
-)
-(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\enumitem\enumitem.sty
-Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip61
-\enit@outerparindent=\dimen186
-\enit@toks=\toks49
-\enit@inbox=\box63
-\enitdp@description=\count149
+\Hy@SectionHShift=\skip57
 ) (rapport_2i013.aux)
 \openout1 = `rapport_2i013.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 246.
-LaTeX Font Info:    Try loading font information for OML+jkp on input line 246.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 82.
+LaTeX Font Info:    Try loading font information for OML+jkp on input line 82.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 246.
-LaTeX Font Info:    Try loading font information for OMS+jkp on input line 246.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 82.
+LaTeX Font Info:    Try loading font information for OMS+jkp on input line 82.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 246.
-LaTeX Font Info:    Try loading font information for OMX+jkp on input line 246.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 82.
+LaTeX Font Info:    Try loading font information for OMX+jkp on input line 82.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 246.
-LaTeX Font Info:    Try loading font information for U+jkpexa on input line 246.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 82.
+LaTeX Font Info:    Try loading font information for U+jkpexa on input line 82.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 246.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 246.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 82.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Try loading font information for T1+jkp on input line 246.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Try loading font information for T1+jkp on input line 82.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\t1jkp.fd
 File: t1jkp.fd 2007/01/24 Fontinst v1.928 font definitions for T1/jkp.
@@ -1506,14 +1441,14 @@ File: t1jkp.fd 2007/01/24 Fontinst v1.928 font definitions for T1/jkp.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
-* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=455.24411pt
-* \textheight=674.33032pt
+* \textheight=702.78308pt
 * \oddsidemargin=-1.1381pt
 * \evensidemargin=-1.1381pt
-* \topmargin=-23.91173pt
+* \topmargin=-38.1381pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -1533,17 +1468,17 @@ File: t1jkp.fd 2007/01/24 Fontinst v1.928 font definitions for T1/jkp.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count150
-\scratchdimen=\dimen187
-\scratchbox=\box64
-\nofMPsegments=\count151
-\nofMParguments=\count152
-\everyMPshowfont=\toks50
-\MPscratchCnt=\count153
-\MPscratchDim=\dimen188
-\MPnumerator=\count154
-\makeMPintoPDFobject=\count155
-\everyMPtoPDFconversion=\toks51
+\scratchcounter=\count149
+\scratchdimen=\dimen183
+\scratchbox=\box63
+\nofMPsegments=\count150
+\nofMParguments=\count151
+\everyMPshowfont=\toks41
+\MPscratchCnt=\count152
+\MPscratchDim=\dimen184
+\MPnumerator=\count153
+\makeMPintoPDFobject=\count154
+\everyMPtoPDFconversion=\toks42
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1555,17 +1490,11 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 ) ABD: EveryShipout initializing macros
-LaTeX Info: Redefining \degres on input line 246.
-LaTeX Info: Redefining \dots on input line 246.
-Package frenchb.ldf Info: Setting StandardItemizeEnv=true for
-(frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 246.
-Package frenchb.ldf Info: Setting StandardEnumerateEnv=true for
-(frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)             reported on input line 246.
-LaTeX Info: Redefining \up on input line 246.
-\AtBeginShipoutBox=\box65
-Package hyperref Info: Link coloring OFF on input line 246.
+LaTeX Info: Redefining \degres on input line 82.
+LaTeX Info: Redefining \dots on input line 82.
+LaTeX Info: Redefining \up on input line 82.
+\AtBeginShipoutBox=\box64
+Package hyperref Info: Link coloring OFF on input line 82.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1573,36 +1502,36 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count156
+\c@section@level=\count155
 )
-LaTeX Info: Redefining \ref on input line 246.
-LaTeX Info: Redefining \pageref on input line 246.
-LaTeX Info: Redefining \nameref on input line 246.
+LaTeX Info: Redefining \ref on input line 82.
+LaTeX Info: Redefining \pageref on input line 82.
+LaTeX Info: Redefining \nameref on input line 82.
  (rapport_2i013.out) (rapport_2i013.out)
 \@outlinefile=\write4
 \openout4 = `rapport_2i013.out'.
 
-LaTeX Font Info:    Try loading font information for OT1+jkp on input line 253.
+LaTeX Font Info:    Try loading font information for OT1+jkp on input line 89.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ot1jkp.fd
 File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
 )
-LaTeX Font Info:    Try loading font information for U+jkpsya on input line 253.
-
-(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsya.fd
-File: ujkpsya.fd 2006/08/15 v1.0
-)
-LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 253.
-
-(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsyb.fd
-File: ujkpsyb.fd 2006/08/15 v1.0
-)
-LaTeX Font Info:    Try loading font information for U+jkpmia on input line 253.
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 89.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 253.
+LaTeX Font Info:    Try loading font information for U+jkpsya on input line 89.
+
+(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsya.fd
+File: ujkpsya.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 89.
+
+(C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsyb.fd
+File: ujkpsyb.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 89.
 
 (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
@@ -1613,65 +1542,82 @@ File: ujkpsyc.fd 2006/08/15 v1.0
  [1
 
 {C:/Users/arian/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+jkptt on input line 259.
+LaTeX Font Info:    Try loading font information for T1+jkptt on input line 100.
  (C:\Users\arian\AppData\Roaming\MiKTeX\2.9\tex\latex\kpfonts\t1jkptt.fd
 File: t1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for T1/jkptt.
 )
-[2]
-Overfull \hbox (1.12494pt too wide) in paragraph at lines 269--270
+Overfull \hbox (1.12494pt too wide) in paragraph at lines 110--111
 []\T1/jkp/m/n/12 Comme nous n'avions au-cune ex-pé-rience sur la concep-tion de stra-té-gies, nous avons
  []
 
-[3] (flux_fonceur.tex) [4] (flux_dribbleur.tex) (schema_dribble.tex) [5] [6]
+[1] [2] (flux_fonceur.tex) [3] (flux_dribbleur.tex) (schema_dribble.tex) [4] [5]
 <dribble1_coupe.png, id=110, 301.125pt x 188.20313pt>
 File: dribble1_coupe.png Graphic file (type png)
  <use dribble1_coupe.png>
-Package pdftex.def Info: dribble1_coupe.png used on input line 330.
+Package pdftex.def Info: dribble1_coupe.png used on input line 172.
 (pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
 
 <dribble2_coupe.png, id=111, 301.125pt x 188.20313pt>
 File: dribble2_coupe.png Graphic file (type png)
  <use dribble2_coupe.png>
-Package pdftex.def Info: dribble2_coupe.png used on input line 331.
+Package pdftex.def Info: dribble2_coupe.png used on input line 173.
 (pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
 
 <dribble3_coupe.png, id=112, 301.125pt x 188.20313pt>
 File: dribble3_coupe.png Graphic file (type png)
  <use dribble3_coupe.png>
-Package pdftex.def Info: dribble3_coupe.png used on input line 332.
+Package pdftex.def Info: dribble3_coupe.png used on input line 174.
 (pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
 
 <dribble4_coupe.png, id=113, 301.125pt x 188.20313pt>
 File: dribble4_coupe.png Graphic file (type png)
  <use dribble4_coupe.png>
-Package pdftex.def Info: dribble4_coupe.png used on input line 333.
+Package pdftex.def Info: dribble4_coupe.png used on input line 175.
 (pdftex.def)             Requested size: 109.26108pt x 68.2872pt.
- (flux_defenseur.tex) [7 <./dribble1_coupe.png> <./dribble2_coupe.png> <./dribble3_coupe.png> <./dribble4_coupe.png>] (s
-chema_defenseur.tex) [8]
-(flux_attaquant.tex) [9] <param_search_chalenge.pdf, id=136, 439.94362pt x 371.28712pt>
+ (flux_defenseur.tex) [6 <./dribble1_coupe.png> <./dribble2_coupe.png> <./dribble3_coupe.png> <./dribble4_coupe.png>] (s
+chema_defenseur.tex) [7]
+(flux_attaquant.tex) [8] [9] <param_search_chalenge.pdf, id=144, 439.94362pt x 371.28712pt>
 File: param_search_chalenge.pdf Graphic file (type pdf)
- <use param_search_chalenge.pdf>
-Package pdftex.def Info: param_search_chalenge.pdf used on input line 401.
-(pdftex.def)             Requested size: 294.76068pt x 248.76108pt.
 
-[10 <./param_search_chalenge.pdf>] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 419.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 419.
+<use param_search_chalenge.pdf>
+Package pdftex.def Info: param_search_chalenge.pdf used on input line 238.
+(pdftex.def)             Requested size: 294.76068pt x 248.76108pt.
+ [10 <./param_search_chalenge.pdf>] [11]
+<score_moyen.pdf, id=195, 361.35pt x 359.9046pt>
+File: score_moyen.pdf Graphic file (type pdf)
+ <use score_moyen.pdf>
+Package pdftex.def Info: score_moyen.pdf used on input line 264.
+(pdftex.def)             Requested size: 227.62206pt x 226.71364pt.
+
+<diversite_moyenne.pdf, id=196, 361.35pt x 359.9046pt>
+File: diversite_moyenne.pdf Graphic file (type pdf)
+ <use diversite_moyenne.pdf>
+Package pdftex.def Info: diversite_moyenne.pdf used on input line 264.
+(pdftex.def)             Requested size: 227.62206pt x 226.71364pt.
+ [12 <./score_moyen.pdf> <./diversite_moyenne.pdf>] [13] <test_arbre.pdf, id=276, 1763.58875pt x 1223.57124pt>
+File: test_arbre.pdf Graphic file (type pdf)
+ <use test_arbre.pdf>
+Package pdftex.def Info: test_arbre.pdf used on input line 291.
+(pdftex.def)             Requested size: 455.24411pt x 315.84326pt.
+ [14 <./test_arbre.pdf>]
+[15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 308.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 308.
  (rapport_2i013.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 419.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 419.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 308.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 308.
 Package rerunfilecheck Info: File `rapport_2i013.out' has not changed.
 (rerunfilecheck)             Checksum: 28F34229A36B335BB3F86A7B7C9F382D;775.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 419.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 308.
  ) 
 Here is how much of TeX's memory you used:
- 22998 strings out of 493323
- 440409 string characters out of 3139066
- 530545 words of memory out of 3000000
- 26018 multiletter control sequences out of 15000+200000
+ 22532 strings out of 493323
+ 433137 string characters out of 3139066
+ 519747 words of memory out of 3000000
+ 25565 multiletter control sequences out of 15000+200000
  102859 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,10n,71p,1337b,954s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,15n,71p,1636b,954s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/kp
 fonts/kpfonts-expert.enc}<C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpbn8a.pfb><C:/Users/ari
 an/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmi.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type
@@ -1679,9 +1625,9 @@ an/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmi.pfb><C:/Users/ari
 s/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpmne.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/font
 s/type1/public/kpfonts/jkpmsc8a.pfb><C:/Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpsy.pfb><C:/
 Users/arian/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on rapport_2i013.pdf (11 pages, 134131 bytes).
+Output written on rapport_2i013.pdf (16 pages, 195309 bytes).
 PDF statistics:
- 222 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 335 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

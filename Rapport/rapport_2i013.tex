@@ -6,8 +6,7 @@
 %-----------------------------------------------------------------------------------%
 % LAYOUT DA PÁGINA                                                                  %
 %-----------------------------------------------------------------------------------%
-\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
-%\usepackage{fancyhdr} % Permite controlar como são exibidos os cabeçalhos
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 
 %-----------------------------------------------------------------------------------%
 % FORMATAÇÃO DO TEXTO                                                               %
@@ -28,30 +27,7 @@
 % PACOTES DE TABELAS                                                                %
 %-----------------------------------------------------------------------------------%
 \usepackage{array} % Facilita a formatação de tabelas
-%\usepackage{multirow} % Permite criar células que ocupam várias linhas em uma tabela
 \usepackage{longtable} % Permite criar tabelas que quebram de página
-
-%-----------------------------------------------------------------------------------%
-% PACOTES MATEMÁTICOS DE BASE                                                       %
-%-----------------------------------------------------------------------------------%
-\usepackage{amsfonts,amstext,amscd,bezier,amsthm,amssymb}
-\usepackage[centertags]{amsmath}
-
-%-----------------------------------------------------------------------------------%
-% PACOTES DE SÍMBOLOS MATEMÁTICOS                                                   %
-%-----------------------------------------------------------------------------------%
-%\usepackage{mathtools} % Símbolos matemáticos extras. (ex.: \xrightharpoon)
-%\usepackage[integrals]{wasysym} % Muda o estilo das integrais, além de outros
-%                                 símbolos extras
-%\usepackage[nice]{nicefrac} % Permite o uso de frações "melhores". Usar \nicefrac{}{}
-
-%-----------------------------------------------------------------------------------%
-% PACOTES DE FONTES MATEMÁTICAS                                                     %
-%-----------------------------------------------------------------------------------%
-%\usepackage{mathbbol} % Quase todos os símbolos com \mathbb
-%\usepackage{bbm} % Extensão dos símbolos de \mathbb. Usar comando \mathbbm
-%\usepackage{calrsfs} % Muda o estilo de \mathcal
-%\usepackage[mathcal]{euscript} % Muda o estilo de \mathcal
 
 %-----------------------------------------------------------------------------------%
 % PACOTES DE CODIFICAÇÃO DE FONTES                                                  %
@@ -71,99 +47,18 @@
 \NoAutoSpaceBeforeFDP % Utilizar em francês se quiser evitar espaços antes de :
 
 %-----------------------------------------------------------------------------------%
-% PACOTES DE BIBLIOGRAFIA                                                           %
-%-----------------------------------------------------------------------------------%
-%\usepackage{babelbib} % Permite definir a língua das entradas da bibliografia. Usar
-%                       [fixlanguage] para uma mesma língua para todas as entradas e
-%                       \selectbiblanguage{} para definir a língua. Um estilo compa-
-%                       tível com babelbib deve ser usado (ex: babplain)
-\usepackage{cite} % Organiza os elementos citados dentro de um mesmo \cite.
-
-%-----------------------------------------------------------------------------------%
 % PACOTES DE FONTES                                                                 %
 %-----------------------------------------------------------------------------------%
-% Computer Modern (fonte padrão)                                                    %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{ae} % A usar com a fonte padrão do LaTeX quando forem gerados PDFs, para
-%                 corrigir erros de visualização
-
-% Computer Modern Bright (sans serif)                                               %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{cmbright}
-
-% Times New Roman                                                                   %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{mathptmx} % Muda texto e modo matemático
-%\usepackage{times} % Apenas texto, não muda modo matemático
-
-% Arial                                                                             %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage[scaled]{uarial} % Arial como fonte sans serif padrão
-
-% Palatino                                                                          %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{mathpazo} % Muda texto e modo matemático
-%\usepackage{palatino} % Apenas texto, não muda modo matemático
-
-% Concrete                                                                          %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{ccfonts} % Texto: Concrete; Matemático: Concrete Math
-%\usepackage{ccfonts, eulervm} % Texto: Concrete; Matemático: Euler
-
-% Iwona                                                                             %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage[math]{iwona} % Texto e modo matemático: Iwona
-
-% Kurier                                                                            %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage[math]{kurier} % Texto e modo matemático: Kurier
-
-% Antykwa Póltawskiego                                                              %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-%\usepackage{antpolt} % Texto: Antykwa Póltawskiego; Matemático: nenhum
-                     % Usar fontenc = QX ou OT4
-
-% Utopia                                                                            %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %                     
-%\usepackage{fourier} % Texto: Utopia; Matemático: Fourier
-
 % KP Serif                                                                          %
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
 \usepackage{kpfonts}
-
-%-----------------------------------------------------------------------------------%
-% CORES                                                                             %
-%-----------------------------------------------------------------------------------%
-\usepackage{color}
-\definecolor{darkgreen}{rgb}{0,0.5,0}
-\definecolor{darkmagenta}{rgb}{0.5,0,0.5}
-\definecolor{darkgray}{rgb}{0.5,0.5,0.5}
-\definecolor{darkblue}{rgb}{0.2,0.2,0.4}
-\definecolor{darkred}{rgb}{0.6,0.15,0.15}
-\definecolor{gray}{rgb}{0.65,0.65,0.65}
-\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
-\definecolor{lightblue}{rgb}{0.5,0.5,1}
-\definecolor{lightgreen}{rgb}{0.5,1,0.5}
-\definecolor{deadred}{rgb}{0.7, 0.2, 0.2}
-\definecolor{deadblue}{rgb}{0.2, 0.2, 0.7}
 
 %-----------------------------------------------------------------------------------%
 % PACOTES DIVERSOS                                                                  %
 %-----------------------------------------------------------------------------------%
 \usepackage{icomma} % Permite uso de vírgula como separador decimal
 \usepackage{url} % Pacote para não ter problemas com URLs. Usar \url{}
-%\usepackage{randtext} % Troca a ordem de letras de uma frase (útil com e-mails em
-                      % PDFs a serem publicados on-line.
 \usepackage[hidelinks]{hyperref}
-%\usepackage{showkeys} % Para mostrar o nome dos labels
-\usepackage{enumitem} % Facilita o uso de listas, inclusive referências a itens de
-                      % listas.
-%\usepackage[absolute]{textpos} % Posição absoluta de texto na página
-%\usepackage{pdfpages} % Permite incluir documentos em PDF no arquivo
-%\usepackage{refcheck} % Verifica as referências procurando por
-%                      % labels não usados ou equações numeradas sem labels.
-%                      % Verificar o arquivo .log e procurar por RefCheck.
-%\usepackage[french]{algorithm2e}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURAÇÕES                                                                     %
@@ -175,70 +70,11 @@
 %\onehalfspacing % Espaçamento 1 1/2 (definido no pacote setspace)
 \setstretch{1.1}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
-%-----------------------------------------------------------------------------------%
-% DEFINIÇÃO DE AMBIENTES MATEMÁTICOS                                                %
-%-----------------------------------------------------------------------------------%
-%\theoremstyle{plain}
-%\newtheorem{theo}{Teorema}[section]
-%\newtheorem{lemm}[theo]{Lema}
-%\newtheorem{coro}[theo]{Corolário}
-%\newtheorem{prop}[theo]{Proposição}
-%\theoremstyle{definition}
-%\newtheorem{defi}[theo]{Definição}
-%\newtheorem{remq}[theo]{Observação}
-%%\newtheorem{expl}[theo]{Exemplo}
-%\newenvironment{expl}%
-%  {\refstepcounter{theo}%
-%    \begin{list}{}{%
-%    \setlength{\topsep}{0pt}%
-%    \setlength{\leftmargin}{\parindent}%
-%    \setlength{\rightmargin}{0pt}%
-%    \setlength{\listparindent}{\parindent}%
-%    \setlength{\itemindent}{0pt}%
-%    \setlength{\parsep}{\parskip}}%
-%    \item[]{\bf Exemplo \thetheo. }}%
-%  {\hspace*{\fill} $\square$ \end{list} \medskip}
-%\newenvironment{solu}%
-%  {\noindent {\bf Solução. }\small}%
-%  {\hspace*{\fill} $\square$ \normalsize \medskip}
-%\newenvironment{dems}[1][Demonstração]%
-%  {\begin{list}{}{%
-%    \setlength{\topsep}{0pt}%
-%    \setlength{\leftmargin}{\parindent}%
-%    \setlength{\rightmargin}{0pt}%
-%    \setlength{\listparindent}{\parindent}%
-%    \setlength{\itemindent}{0pt}%
-%    \setlength{\parsep}{\parskip}}%
-%    \item[]{\bf #1. }}%
-%  {\hspace*{\fill} $\blacksquare$ \end{list} \medskip}
-
-
-%-----------------------------------------------------------------------------------%
-% DEFINIÇÃO DE COMANDOS MATEMÁTICOS                                                 %
-%-----------------------------------------------------------------------------------%
-%\newcommand*\diff{\mathop{}\!\mathrm{d}}
-
-%\newcommand{\norm}[1]{\left\lVert #1\right\lVert} % Norma
-%\newcommand{\abs}[1]{\left\lvert #1\right \rvert} % Valor absoluto
-%\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % Arredondar para baixo
-%\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil} % Arredondar para cima
 
 \renewcommand{\floatpagefraction}{0.99}
 \renewcommand{\topfraction}{0.99}
 \renewcommand{\bottomfraction}{0.99}
 \renewcommand{\textfraction}{0.01}
-
-%-----------------------------------------------------------------------------------%
-% NUMERAÇÃO DE ELEMENTOS                                                            %
-%-----------------------------------------------------------------------------------%
-%\numberwithin{table}{section}
-%\numberwithin{table}{subsection}
-%\numberwithin{figure}{section}
-%\numberwithin{figure}{subsection}
-\numberwithin{equation}{section}
-%\numberwithin{equation}{subsection}
-%\numberwithin{theo}{chapter}
-%\numberwithin{theo}{subsection}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ESTRUTURA DO DOCUMENTO                                                            %
@@ -250,9 +86,14 @@
 \date{}
 
 \maketitle
+\thispagestyle{empty}
+\pagenumbering{Alph}
 
 \tableofcontents
 \newpage
+
+\pagestyle{plain}
+\pagenumbering{arabic}
 
 \section{Introduction}
 
@@ -281,6 +122,7 @@ Après quelques séances nous nous sommes rendu compte que la meilleure façon d
 En revanche, il n’était pas toujours facile de trouver une riposte contre les stratégies des autres groupes. Certaines stratégies étaient si bien codées qu’il fallait du temps pour d’abord mettre au point de nouvelles stratégies pour contrer une attaque ou intercepter la balle par exemple, d’autant plus que ces tests devaient être réalisés contre l’ensemble des autres binômes. En outre, certaines étaient mises en ligne quelques instants avant les résultats finaux, nous empêchant ainsi de pouvoir travailler sur les stratégies récentes. En utilisant la recherche exhaustive et l'algorithme génétique nous avons enfin automatisé une partie du processus d’amélioration de nos stratégies, dont la démarche sera présenté dans la Section \ref{4}.
 
 \section{Présentation des stratégies}
+\label{3}
 
 Cette section présente les principales \og familles \fg{} de stratégies que nous avons codées à la main pour ce projet : Fonceur, Dribbleur, Défenseur et Attaquant. Cette division suit l'évolution de notre code dans le sens où le Fonceur et ses améliorations ont été les premières stratégies codées, suivies par le Dribleur et le Défenseur qui nous ont permis de passer aux matchs 2 contre 2 et enfin l'Attaquant qui a été crée pour les matchs 4 contre 4.   
 
@@ -367,6 +209,8 @@ Enfin, lorsque le Défenseur a le ballon et ne peut pas faire une passe, plutôt
 
 \subsection{Attaquant}
 
+La stratégie d'Attaquant différemment des autres n'est pas une famille mais une seule stratégie codée spécifiquement pour les matchs 4 contre 4. Nous nous sommes appuyés sur le Défenseur et son arbre de décision représentatif est donné sur la Figure \ref{Figure7}. 
+
 \begin{figure}[ht]
 \centering
 \input{flux_attaquant}
@@ -374,27 +218,20 @@ Enfin, lorsque le Défenseur a le ballon et ne peut pas faire une passe, plutôt
 \label{Figure7}
 \end{figure}
 
+Comme pour le Défenseur, l'Attaquant a une position par défaut s'il ne peut pas tirer, même si le test pour qu'il aille vers cette position n'est pas le même. Cette position est aussi définie par un paramètre de pondération $\alpha$ et se situe dans le segment reliant le ballon et le centre de la cage adverse. Il court vers le ballon seulement s'il est le joueur le plus proche parmi tous (y compris les joueurs adverses). Lorsqu'il a le ballon, il décide entre tirer vers le centre du but ou faire une passe, d'après les positions de ses co-équipiers, avec le même mécanisme de passe du Défenseur.
 
-
-
-
-
-
-\noindent \textcolor{red}{\rule{\textwidth}{0.5cm}}
-
-
-
-
-
-
+Cette stratégie a été fondamentale pour avoir des résultats satisfaisants dans les matchs à 4 joueurs. En effet, avant de la coder, notre équipe avait des difficultés pour marquer des buts car toutes nos stratégies non défensives avaient comme comportement par défaut de courir vers le ballon si elles n'en avaient pas possession. Comme conséquence tous les joueurs couraient vers le ballon et, si l'équipe en récupérait la possession, l'attaque était difficile à cause du mauvais positionnement des joueurs. Dans un premier moment nous avons cru que l'optimisation par l'algorithme génétique de 4 joueurs (2 Dribbleurs et 2 Défenseurs) serait suffisante pour régler ce problème, ce qui n'a pas été le cas, nous motivant donc à créer cette nouvelle stratégie.
 
 \section{Optimisation des stratégies}
 \label{4}
 
+Les familles de stratégies décrites dans la Section \ref{3} ont été créées toutes avec des paramètres passés en argument au constructeur de la \texttt{Strategy} correspondante, pour faciliter leur optimisation. Si dans un premier moment cette optimisation était faite à la main cela est devenu vite impraticable avec la quantité grandissant de paramètres. Dans cette section nous présentons les 3 techniques d'optimisation utilisés dans ce projet : Les 2 techniques de recherche de paramètres optimaux --- recherche exhaustive et recherche par l'algorithme génétique --- et la création automatique des arbres de décision, comme celles de la section précédente, à partir des stratégies très simples.  
 
 \subsection{Recherche exhaustive}
 
-Pour le chalenge consistant à faire le nombre maximal de buts en 10000 pas de temps (sans joueur adverse), nous avons utilisé ce Fonceur sans prévision de la position du ballon et avec accélération de course maximale mais avec optimisation de l'accélération de tir. Cette optimisation a été faite par une recherche exhaustive en discrétisant l’intervalle d'accélérations possibles et cherchant à minimiser le temps nécessaire pour marquer 10 buts. Comme celle-ci a été fait avant la partie du cours sur la recherche exhaustive, nous avons dû coder par nous mêmes tous les fonctions nécessaires. Le résultat de cette optimisation est présenté dans la Figure \ref{Figure2}. 
+La recherche exhaustive d'un optimum consiste à tester toutes les possibilités des paramètres afin de voir quelle est la meilleure combinaison entre eux. Pour ce faire les paramètres continus doivent être discrétisés pour avoir une quantité finie de cas à tester. Cette recherche a une complexité exponentielle par rapport à la quantité de paramètres car il faut chercher sur le produit cartésien des intervalles de valeurs de chaque paramètre. Ainsi pour $n$ paramètres chacun avec $m$ valeurs possibles, nous avons une complexité de $m^n$ cas à tester. 
+
+Le premier moment où nous avons eu besoin de l'optimisation dans ce projet a été lors du chalenge consistant à faire le nombre maximal de buts en 10000 pas de temps (sans joueur adverse). Pour ce chalenge nous avons utilisé le Fonceur de la Section \ref{3} sans prévision de la position du ballon et accélération de course maximale et comme seule variable d'optimisation l'accélération de tir. Cette optimisation a été faite par une recherche exhaustive en discrétisant l’intervalle d'accélérations possibles et cherchant à minimiser le temps nécessaire pour marquer 10 buts. Comme celle-ci a été fait avant la partie du cours sur la recherche exhaustive, nous avons dû coder par nous-mêmes tous les fonctions nécessaires. Le résultat de cette optimisation est présenté dans la Figure \ref{Figure2}. 
 
 \begin{figure}[ht]
 \centering
@@ -405,15 +242,67 @@ Pour le chalenge consistant à faire le nombre maximal de buts en 10000 pas de t
 
 L'accélération est donné en fraction de l'accélération maximale d'un tir. Nous pouvons voir sur la figure que sa valeur optimale est 0.64. En réalisant de simulations nous avons pu constater que, avec cette accélération, 2 tirs sont nécessaires pour marquer un but. Nous avons donc codé une recherche exhaustive sur 2 paramètres (correspondant chacun à l’accélération d'un tir) mais le résultat était que 2 tirs de la même intensité étaient l'optimum. Par contre, la accélération optimale pour cette chalenge n'est pas bonne pour les matchs.
 
+Cette technique n'est pas adaptée pour la plupart des optimisations que nous avons dû faire dans ce projet car nous avions une dizaine de paramètres environ par stratégie et la complexité exponentielle rendait cela impraticable. Nous nous sommes alors appuyés sur des méthodes plus adaptées à cette quantité de paramètres.
 
 \subsection{Algorithme génétique}
 
+La recherche génétique est, comme la recherche exhaustive, une méthode pour trouver un optimum sur un ensemble donné de paramètres, mais, différemment de celle-ci, on ne teste pas toutes les combinaisons possibles de paramètres afin d'avoir une recherche dans un temps raisonnable, ce qui conduit à un optimum approché.
+
+Nous avons implémenté l'algorithme génétique de la façon suivante : on commence par choisir une taille de population \texttt{nb\_players}, chaque \emph{individu} de cette population étant un vecteur de paramètres choisi initialement de façon aléatoire en respectant les intervalles de valeurs de chaque paramètre. Même s'il n'est pas nécessaire de discrétiser les paramètres continus, nous avons choisi de le faire dans ce projet après avoir remarqué que des petites variations de paramètres ne changent pas le comportement d'un joueur. Une fois les individus choisis, il faut, pour chaque individu, tester le critère à optimiser. Dans notre implémentation, nous avons cherché à optimiser le nombre de points obtenus au total après un nombre donné de matchs \texttt{trials} contre chacune des équipes adverses codées par les autres binômes. Un match gagné donne 3 points, un match nul donne 1 point, et un match perdu ne donne pas de points. Nous avons ainsi un score pour chaque individu.
+
+Une fois le score de tous les individus calculé, nous créons une nouvelle génération d'individus. Un pourcentage \texttt{pourcent\_meilleurs} de cette génération correspond aux individus de la génération précédente ayant eu les plus grands scores. Parmi les individus restants, on garde dans la nouvelle génération un pourcentage \texttt{pourcent\_autres} afin de garder une diversité de paramètres dans la population et essayer d'éviter la convergence vers un optimum local. La somme des pourcentages \texttt{pourcent\_meilleurs} et \texttt{pourcent\_autres} doit être inférieure à $100 \%$, et les individus restants seront crées par reproduction des individus déjà choisis. Pour la reproduction, on choisit de façon aléatoire deux individus, appelés \emph{parents}. Ensuite, chaque paramètre du nouvel individu est choisi parmi les paramètres correspondants de ses deux parents de façon aléatoire. On implémente également la possibilité d'avoir une \emph{mutation}, c'est-à-dire que le paramètre soit une valeur aléatoire plutôt qu'une copie de la valeur d'un parent, cette mutation ayant lieu avec une probabilité de \texttt{proba\_mut} pour chaque paramètre.
+
+Le calcul du score est refait avec cette nouvelle population, et on répète cette procédure un nombre donné \texttt{nb\_generations} de fois. À la fin, on choisi l'individu avec le meilleur score de la dernière population. Ses paramètres sont ainsi ceux qui seront utilisés dans le tournoi. Il est à noter qu'un individu de notre population est un vecteur contenant les paramètres de \emph{tous} les joueurs de l'équipe, le calcul du score étant donc différent selon le nombre de joueurs car, bien sûr, le nombre de paramètres augmente avec la quantité de joueurs. Nous avons choisi d'avoir un seul vecteur avec les paramètres de tous les joueurs pour optimiser l'ensemble de l'équipe plutôt que des joueurs individuellement.
+
+Depuis que l'algorithme génétique a été codé, nous l'avons utilisé systématiquement à chaque semaine pour améliorer nos équipes. Bien que son temps d'exécution soit long, il a été essentiel pour nos bons résultats, car il permettait d'adapter nos stratégies à celles des autres binômes. Cette optimisation, bien que nécessaire, n'était pas suffisante à chaque semaine pour avoir un bon rang, et a été accompagnée par des améliorations des stratégies jusqu'à ce qu'elles arrivent aux formes finales présentées dans la Section \ref{3}. Il est aussi intéressant à noter que, dans les matchs 4 contre 4, même si nous avons mis 2 Défenseurs, l'algorithme génétique a choisi des paramètres assez diverses pour eux, ce qui a donné des joueurs différents et complémentaires avec la même stratégie de base.
+
+Pour illustrer le fonctionnement de l'algorithme génétique, nous représentons dans la Figure \ref{Figure9} l'évolution du score moyen des individus et de leurs diversités moyennes en fonction de l'indice de la génération. La diversité d'un paramètre a été calculée comme le nombre de valeurs différentes que ce paramètre prend sur la génération donnée, et la diversité moyenne correspond à la moyenne des diversités de tous les paramètres dans cette génération. Cette figure correspond à une simulation de matchs 4 contre 4, pour lesquels nous avons 29 paramètres. Elle a été réalisée pour le tournoi de la semaine 10, le premier à avoir des matchs 4 contre 4 et utilise une population de 20 individus, avec 5 matchs contre chaque équipe et 11 générations, ce qui a pris un temps de calcul de 26h.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{@{} >{\centering} m{0.5\textwidth} @{} >{\centering} m{0.5\textwidth} @{}}
+\includegraphics[width=0.5\textwidth]{score_moyen} & \includegraphics[width=0.5\textwidth]{diversite_moyenne} \tabularnewline
+(a) & (b) \tabularnewline
+\end{tabular}
+\caption{Évolution en fonction des générations (a) du score moyen et (b) de la diversité moyenne}
+\label{Figure9}
+\end{figure}
+
+On remarque sur la Figure \ref{Figure9}(a) la croissance du score moyen, comme attendu. Pour cette simulation, avec 9 autres binômes et 5 matchs par binôme, la quantité maximale de points possible est de 135, ce qui montre que les résultats obtenus sont très satisfaisants, avec un nombre moyen de points de 122,7 et un nombre maximal de 133. Remarquons que 133 points correspond à 44 victoires et un match nul, sans défaites. Ce sont les paramètres correspondants au score de 133 points qui ont été utilisés pour la semaine 10, ce qui est cohérent avec notre classement cette semaine.
+
+La Figure \ref{Figure9}(b) montre que la diversité moyenne décroit avec le nombre de générations. Ainsi, comme espéré, les individus convergent vers une situation où plusieurs joueurs partagent les mêmes valeurs de paramètres. Il est à noter que, comme on a une population de 20 individus, la diversité est nécessairement inférieure ou égale à 20. Cependant, certains paramètres sont discrétisés en moins de 20 valeurs possibles, ce qui explique la diversité d'environ 14 pour la première génération.
+
 \subsection{Arbres de décision}
 
+Différemment de l'optimisation par recherche exhaustive ou par l'algorithme génétique, l'optimisation par arbre de décision ne cherche pas à trouver les meilleurs paramètres pour une stratégie ou une équipe donnée, mais plutôt à construire de façon intelligente, à partir du comportement attendu des joueurs, un arbre de décision, similaire à ceux des Figures \ref{Figure1}, \ref{Figure3}, \ref{Figure6} et \ref{Figure7}. Pour cela, il faut d'abord coder des stratégies simples, correspondant essentiellement aux blocs en bleu des arbres représentés précédemment. Pour notre implémentation, nous avons codé 6 stratégies élémentaires : fonceur, gardien, défenseur, dribbleur, passe et attaquant. L'enjeu est de choisir automatiquement les blocs de décision, c'est-à-dire les blocs en rouge des arbres précédents.
 
+L'objectif est, à la fin, d'avoir une fonction qui, étant donné un état du jeu du type \texttt{SoccerState}, renvoie l'une des 6 stratégies, celle la plus adaptée pour cet état. Comme un \texttt{SoccerState} contient trop d'informations, nous avons choisi des caractéristiques, ou \emph{features}, qui seront les données prises en compte par cette fonction. Nous avons sélectionné 9 caractéristiques pour les matchs 1 contre 1 et 13 pour les matchs 2 contre 2, comprenant, par exemple, la distance du joueur au ballon, la distance du ballon à la cage adverse, ou encore des booléens comme l'existence d'un gardien adversaire.
+
+L'apprentissage par arbre de décision est une méthode dite supervisée, c'est-à-dire qu'il faut lui fournir un ensemble très grand de données comportant un couple composée de valeurs pour les features et la stratégie à choisir pour ces valeurs. Il faut donc avoir deux étapes : une première pour crées ces couples features--stratégies et une deuxième pour apprendre l'arbre à partir de ces données. Le code pour la deuxième étape a été fourni, il s'agit d'un code se basant sur la bibliothèque \texttt{sklearn} de Python et ses fonctions spécifiques pour les arbres de décision disponibles dans \texttt{sklearn.tree}.
+
+Pour la première étape, nous avons utilisé deux méthodes. La première, basée sur le code fourni, consiste à \og jouer \fg. Plus précisément, le code fourni présentait un moyen d'associer, à chaque stratégie élémentaire, une touche du clavier, et de lancer une simulation où l'on peut alterner entre ces stratégies à l'aide de ces touches. À chaque fois que l'on appuie sur une touche, on enregistre les valeurs des features et la stratégie choisie pour ces valeurs. Nous avons modifié le code fourni, pour permettre par exemple de charger un fichier avec des couples features--stratégies déjà enregistrés et y ajouter des nouveaux couples obtenus par une nouvelle simulation, ainsi que de n'enregistrer que les couples correspondants aux matchs gagnés. Une mini-interface utilisant le terminal a été également mise en place pour faciliter les simulations, permettant par exemple de choisir facilement contre quelle stratégie jouer.
+
+La deuxième méthode utilisée pour construire des couples features--stratégies con\-siste à créer un état au hasard et demander sur le terminal quelles stratégies doivent être choisies pour cet état, enregistrant ensuite le couple features--stratégie correspondant. Cette implémentation a été utilisée uniquement pour les matchs 2 contre 2, où l'on enregistre les couples séparément pour les deux joueurs. En effet, pour les matchs 2 contre 2, la méthode de lancer une simulation est plus difficile à utiliser car il faut contrôler deux joueurs en même temps.
+
+Un exemple d'arbre de décision crée par notre code est donné sur la Figure \ref{Figure10}. Il s'agit d'un petit arbre, entrainé avec uniquement 74 couples features--stratégies, présenté ici car les arbres avec des centaines de couples deviennent illisibles.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{test_arbre}
+\caption{Exemple d'arbre de décision}
+\label{Figure10}
+\end{figure}
+
+Pour les matchs en 1 contre 1, les arbres de décision obtenus avec notre code marchait de façon satisfaisante quand elles étaient entrainées contre une même stratégie adverse. Par contre, en essayant de coder un même arbre en jouant contre des stratégies de plusieurs binômes, nous n'avons pas obtenu de bons résultats, même après avoir fourni environ 500 couples features--stratégies pour l'entrainement de l'arbre. Cela peut être expliqué par deux difficultés que nous avons rencontrées. D'une part, les stratégies des autres binômes étaient assez différentes entre elles, ce que veut dire que nos choix de stratégies élémentaires pour chaque ensemble de features était assez diverse. Cela a conduit à un joueur qui, à la fin, était optimisé contre une sorte de \og stratégie moyenne \fg{} des autres binômes, mais sans être particulièrement effectif contre aucune stratégie adverse. D'autre part, nous avons constaté que, dans certaines situations, le choix de la bonne stratégie n'était pas évident et pourrait changer si l'état était légèrement différent. Pour avoir un arbre capable de trancher correctement, il faudrait probablement avoir beaucoup plus de couples features--stratégies. Or, ces couples étant crées à la main en jouant à des matchs, en créer plusieurs milliers prend un temps impraticable. Il faut cependant noter que le joueur par arbre de décision créé était plutôt bien performant en défense, mais, une fois qu'il récupérait le ballon, il le perdait en attaque systématiquement sans être capable de faire un but.
+
+Pour les matchs en 2 contre 2, nous avions la difficulté supplémentaire de devoir jouer avec deux joueurs en même temps pour créer les couples features--stratégies des deux joueurs. Cela a conduit à plusieurs matchs où nos choix nous conduisaient à la défaite. Or, un arbre de décision ne pourra pas jouer beaucoup mieux que la personne qui lui a fourni les données. D'autre part, la difficulté avec la deuxième méthode pour construire des couples features--stratégies était que, avec uniquement une image de l'état et sans voir l'évolution du jeu, il était difficile de choisir la stratégie optimale pour cet état.
+
+À cause de ces difficultés, nous avons priorisé l'optimisation par l'algorithme génétique. Bien que cette méthode ne permette pas d'aller au-delà des structures simples d'arbres de décision de la Section \ref{3}, l'optimisation des paramètres nous a permis en pratique d'avoir des joueurs plus performants que nous-même lors de la création à la main des couples features--stratégies pour l'arbre de décision.
 
 \section{Conclusion}
 
-Ce projet a été l’occasion de s’intéresser au développement de stratégies en Python, et à comprendre certains principes sur le Football. Je pense que c’est un thème qu’il faut étudier, et que très peu de personnes connaissent. La réalisation des expériences nous a permis de comprendre les difficultés du projet en soi, notamment avec la prise en main de Github, à repenser aux stratégies qu’il faut utiliser… Mais au-delà d’un grand apport de connaissances, le projet a été l’opportunité de chercher seules des solutions à nos problèmes. Le travail d’équipe a, je pense aussi nouer des liens entre nous. Nous avons fait d’énormes progrès en informatique, en particulier avec la programmation en Python, à travers les stratégies.
+Ce projet a été l'occasion, d'une part, de s'entrainer à la programmation orientée objet en Python, en réfléchissant à un problème pour proposer des algorithmes qui le résolvent. Nous avons pratiqué la réflexion en binôme et le travail en équipe, en décomposant notre problème en tâches plus simples et les partageant. L'évolution de notre code nous a permis de comprendre des difficultés du projet en soi, comme les questions d'organisation générale du code ou les difficultés inhérentes au jeu SoccerSimulator et à la compétition hebdomadaire entre binômes.
+
+D'autre part, ce projet nous a également permis de connaitre des méthodes importantes en intelligence artificielle et optimisation, comme l'algorithme génétique, qui permet le choix des paramètres quasi-optimaux sans supervision, et les arbres de décision, qui ont l'avantage de ne pas avoir besoin d'une structure pré-définie avec paramètres mais nécessitent un apprentissage supervisée avec une très grande quantité de données. Le contact avec les méthodes précédentes nous donne envie d'approfondir nos connaissances sur ce domaine.
 
 \end{document}

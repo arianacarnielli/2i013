@@ -4,7 +4,7 @@
 \begin{tikzpicture}
 \node[decision] (tirer) at (0, 0) {\parbox[c][\height][c]{4cm}{\centering Peut tirer? }};
 \node[decision, anchor = north] (tirer_oui) at (-3, -0.6) {\parbox[c][\height][c]{4cm}{\centering Très proche de la \\ cage adverse?}};
-\node[decision, anchor = north] (tirer_non) at ( 3, -0.6) {\parbox[c][\height][c]{4cm}{\centering Il est le plus proche du ballon?}};
+\node[decision, anchor = north] (tirer_non) at ( 3, -0.6) {\parbox[c][\height][c]{4cm}{\centering Il est le plus proche\\ du ballon?}};
 
 \draw[thick, -Stealth] (tirer) -- node[midway, above left]{\small Oui} (tirer_oui);
 \draw[thick, -Stealth] (tirer) -- node[midway, above right]{\small Non} (tirer_non);
@@ -15,7 +15,7 @@
 \draw[thick, -Stealth] (tirer_oui) -- node[midway, above left]{\small Oui} (passe_oui);
 \draw[thick, -Stealth] (tirer_oui) -- node[midway, above right]{\small Non} (passe_non);
 
-\node[decision, anchor = north] (ennemi_oui) at (-3, -6.0) {\parbox[c][\height][c]{4cm}{\centering Peut lui faire une passe?}};
+\node[decision, anchor = north] (ennemi_oui) at (-3, -6.0) {\parbox[c][\height][c]{4cm}{\centering Peut lui faire\\ une passe?}};
 
 \draw[thick, -Stealth] (passe_non) -- node[midway, above left]{\small Oui} (ennemi_oui);
 \draw[thick, -Stealth] (passe_non) -- node[midway, above]{\small Non} (passe_oui);
