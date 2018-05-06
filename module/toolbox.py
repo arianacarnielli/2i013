@@ -125,6 +125,9 @@ class ToolBox(object):
         return False
         
     def ExistAdvProcheAmi(self, pos_ami, rayon = 15):
+        """
+        determine s'il y a un adversaire proche de la position du joueur passe en argument.
+        """
         pos_advs = self.GetPosAdversaires
         for pos_adv in pos_advs:
             if (pos_ami - pos_adv).norm <= rayon:
@@ -138,7 +141,7 @@ class ToolBox(object):
           
     def PosBall(self, n = 0):
         """
-        retourne le vecteur position du ballon position prevu du ballon en n etapes.
+        retourne le vecteur position du ballon, position prevu du ballon en n etapes.
         """
 
         loc_ball = self.state.ball.position
@@ -155,7 +158,7 @@ class ToolBox(object):
     
     def PosDefense(self, pos_x = 0.5):
         """
-        retourne le vecteur donnant une position defensive pour intercepter la balle si l'ennemi tire droit vers le but.
+        retourne le vecteur donnant une position defensive pour intercepter le ballon si l'ennemi tire droit vers le but.
         """
         VecBallGoalDef = self.PosCageDef - self.PosBall()
         x = pos_x * GAME_WIDTH/2
@@ -171,7 +174,8 @@ class ToolBox(object):
         
     def PosDefenseProportionnelle(self, alpha = 0.6):
         """
-        retourne le vecteur donnant une position defensive pour intercepter la balle si l'ennemi tire droit vers le but.
+        retourne le vecteur donnant une position defensive pour intercepter le ballon si l'ennemi tire droit vers le but. 
+        Le plus proche de 1 est alpha, le plus proche on est du ballon.
         """
         pos_cage = self.PosCageDef
         pos_ball = self.PosBall()
@@ -179,7 +183,8 @@ class ToolBox(object):
     
     def PosAtkProportionnelle(self, alpha = 0.6):
         """
-        retourne le vecteur donnant une position d'attaque pour intercepter la balle plus facilement.
+        retourne le vecteur donnant une position d'attaque pour intercepter le ballon plus facilement.
+                Le plus proche de 1 est alpha, le plus proche on est du ballon.
         """
         pos_cage = self.PosCageAtk
         pos_ball = self.PosBall()
@@ -210,7 +215,6 @@ class ToolBox(object):
         """
         if(self.id_team == 1):
             return Vector2D(0, GAME_HEIGHT/2)
-            
         return Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
     
     @property    
@@ -254,7 +258,7 @@ class ToolBox(object):
 
     def VecPosGoal(self, norm_acc = None):
         """
-        retourne le vecteur du joueur au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        retourne le vecteur du joueur au milieu du but adverse. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
         """
         loc_goal = self.PosCageAtk
         vec_goal = loc_goal - self.PosJoueur
@@ -264,7 +268,7 @@ class ToolBox(object):
         
     def VecPosBallToGoal(self, n = 0, norm_acc = None):
         """
-        retourne le vecteur du joueur au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        retourne le vecteur du ballon au milieu du but. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
         """
         loc_ball = self.PosBall(n)
         vec_goal = self.PosCageAtk - loc_ball 
@@ -274,7 +278,7 @@ class ToolBox(object):
     
     def VecPosCoinGoal(self, norm_acc = None):
         """
-        retourne le vecteur du joueur au coin du but le plus proche de lui. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
+        retourne le vecteur du joueur au coin du but adverse le plus proche de lui. Si norm_acc est donnéé, le vecteur renvoye est normalise a cette valeur.
         """
         loc_goal = self.PosCageAtk
         if self.PosJoueur.y > GAME_HEIGHT/2:
@@ -300,7 +304,7 @@ class ToolBox(object):
         
     def VecShoot(self,norm_acc = maxBallAcceleration):
         """
-        retourne un vecteur d'acceleration vers le champ opposé. Si norm_acc n'est pas donnée la norme du vecteur est definie comme maxBallAcceleration.
+        retourne un vecteur vers le champ opposé. Si norm_acc n'est pas donnée la norme du vecteur est definie comme maxBallAcceleration.
         """
         return Vector2D(angle = (1 - self.id_team) * math.pi, norm = norm_acc)
         
@@ -316,10 +320,9 @@ class ToolBox(object):
 
     def VecAngle(self, angle = 0, norm_acc = maxBallAcceleration):
         """
-        retourne un vecteur d'acceleration avec l'angle passé en paramètre.
+        retourne un vecteur avec l'angle passé en paramètre.
         """
         return Vector2D(angle = angle, norm = norm_acc)
-    
     
     def VecAtk(self, pos_x = 0.5, norm_acc = None):
         """
@@ -417,7 +420,7 @@ class ToolBox(object):
 
     def VecPosAdvPlusProcheDeLaBalle(self):
         """
-        retourne le vecteur de l'adversaire plus proche de la balle à la balle.
+        retourne le vecteur de l'adversaire plus proche du ballon au ballon.
         """
         return self.PosBall() - self.PosAdvPlusProcheDeLaBalle
         

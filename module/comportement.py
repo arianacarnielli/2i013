@@ -69,22 +69,7 @@ class Comportement(object):
     def ComDribleSimple(self, accShoot = 0.64, accDrible = 0.15, vit = 1, n = 4, maxAngle = math.pi/4, tooFar = 8*maxBallAcceleration):
         """
         Comportement de base d'attaque avec drible.
-        """
-#        if self.action.tools.CanShoot():
-#            
-#            minPos = self.action.tools.VecPosAdvPlusProche()
-#            posGoal = self.action.tools.VecPosGoal()
-#            
-#            theta = minPos.angle - posGoal.angle
-#            if abs(theta) > maxAngle or minPos.norm > tooFar:
-#                return self.action.ShootGoal(accShoot)
-#            elif theta > 0:
-#                return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
-#            else:
-#                return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
-#        else:
-#            return self.action.RunToBall(vit, n)   
-#        
+        """       
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAdvPlusProcheDevant()
          
@@ -93,10 +78,18 @@ class Comportement(object):
                 
                 # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
                 posGoal = self.action.tools.VecPosGoal()
-                theta = minPos.angle - posGoal.angle
+                if self.action.tools.id_team == 1:
+                    theta = minPos.angle - posGoal.angle
+                else:
+                    minPos.x = -minPos.x
+                    posGoal.x = -posGoal.x
+                    theta = minPos.angle - posGoal.angle
+                    minPos.x = -minPos.x
+                    posGoal.x = -posGoal.x
+
                 if abs(theta) > maxAngle or minPos.norm > tooFar:
                     return self.action.ShootGoal(accShoot)
-                elif theta > 0:
+                elif (theta > 0 and self.action.tools.id_team == 1) or (theta <= 0 and self.action.tools.id_team == 2) :
                     return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
                 else:
                     return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
@@ -238,61 +231,59 @@ class Comportement(object):
          
             # S'il y a un joueur entre moi et mon but
             if not (minPos is None):
-                # Si l'autre joueur peut lui aussi tirer, essayer de tirer plus fort
-                #if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
-                #    return self.action.ShootGoal()
                 
                 # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
                 posGoal = self.action.tools.VecPosGoal()
-                theta = minPos.angle - posGoal.angle
+                if self.action.tools.id_team == 1:
+                    theta = minPos.angle - posGoal.angle
+                else:
+                    minPos.x = -minPos.x
+                    posGoal.x = -posGoal.x
+                    theta = minPos.angle - posGoal.angle
+                    minPos.x = -minPos.x
+                    posGoal.x = -posGoal.x
+
                 if abs(theta) > maxAngle or minPos.norm > tooFar:
                     return self.action.ShootGoal(accShoot)
-                elif theta > 0:
+                elif (theta > 0 and self.action.tools.id_team == 1) or (theta <= 0 and self.action.tools.id_team == 2) :
                     return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
                 else:
                     return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
             else:
                 return self.action.ShootGoal(accShoot)
         else:
-            return self.action.RunToBall(vit, n)   
+            return self.action.RunToBall(vit, n)  
         
-
     
     def ComDrible2(self, accShoot = 0.64, accDrible = 0.25, vit = 1, n = 4, maxAngle = math.pi/6, tooFar = 5*maxBallAcceleration, rSurfBut = 40, AngleHyst = math.pi/12, distShoot = 50):
         """
-        Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi si il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
+        Comportement d'attaque avec drible, prend en consideration la position du joueur ennemi le plus proche devant et aussi s'il est un gardien ou non, applique l'hysterese pour determiner l'angle de drible. 
         """
-        
         
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAdvPlusProcheDevant()
-            Posgoal = self.action.tools.PosCageAtk
-            Posjoueur = self.action.tools.PosJoueur
+            vecGoal = self.action.tools.VecPosGoal()
             
-            if abs(Posjoueur.x - Posgoal.x) < distShoot:
+            if abs(vecGoal.x) < distShoot:
                 return self.action.ShootGoal(accShoot)
-                
-#            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 and Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
-#                return self.action.ShootGoal(accShoot)
-                        
+
             # S'il y a un joueur entre moi et mon but
             if not (minPos is None):
                 # Si l'autre joueur peut lui aussi tirer, essayer de tirer plus fort
                 if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
                     return self.action.ShootAtk()
-                if self.action.tools.AdvAGardien() and self.action.tools.VecPosGoal().norm < rSurfBut:
+                if self.action.tools.AdvAGardien() and vecGoal.norm < rSurfBut:
                     return self.action.ShootCoinGoal()
                 else:                    
                     # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
-                    posGoal = self.action.tools.VecPosGoal()
                     if self.action.tools.id_team == 1:
-                        theta = minPos.angle - posGoal.angle
+                        theta = minPos.angle - vecGoal.angle
                     else:
                         minPos.x = -minPos.x
-                        posGoal.x = -posGoal.x
-                        theta = minPos.angle - posGoal.angle
+                        vecGoal.x = -vecGoal.x
+                        theta = minPos.angle - vecGoal.angle
                         minPos.x = -minPos.x
-                        posGoal.x = -posGoal.x
+                        vecGoal.x = -vecGoal.x
                     if abs(theta) > maxAngle or minPos.norm > tooFar:
                         return self.action.ShootGoal(accShoot)
                     elif theta > AngleHyst or (self.dernierdrible == "down" and abs(theta) <= AngleHyst):
@@ -358,34 +349,40 @@ class Comportement(object):
         """
         if self.action.tools.CanShoot():
             minPos = self.action.tools.VecPosAdvPlusProcheDevant()
-            Posgoal = self.action.tools.PosCageAtk
-            Posjoueur = self.action.tools.PosJoueur
-            
-            if abs(Posjoueur.x - Posgoal.x) < 5 and (Posjoueur.y <= Posgoal.y + GAME_GOAL_HEIGHT/2 and Posjoueur.y >= Posgoal.y - GAME_GOAL_HEIGHT/2) : 
-                return self.action.ShootGoal(accShoot)
-                        
+            vecGoal = self.action.tools.VecPosGoal()
             # S'il y a un joueur entre moi et mon but
             if not (minPos is None):
                 # Si l'autre joueur peut lui aussi tirer, essayer de tirer plus fort
                 if (self.action.tools.VecPosBall() - minPos).norm < PLAYER_RADIUS + BALL_RADIUS:
                     return self.action.ShootAtk()
-                if self.action.tools.VecPosGoal().norm < rSurfBut:
-                    return self.action.ShootCoinGoal(accShoot)
+                if self.action.tools.AdvAGardien() and vecGoal.norm < rSurfBut:
+                    return self.action.ShootCoinGoal()
                 else:                    
                     # Si l'autre est un peu plus loin (mais pas trop), on essaie de le dribler
-                    posGoal = self.action.tools.VecPosGoal()
-                    theta = minPos.angle - posGoal.angle
+                    if self.action.tools.id_team == 1:
+                        theta = minPos.angle - vecGoal.angle
+                    else:
+                        minPos.x = -minPos.x
+                        vecGoal.x = -vecGoal.x
+                        theta = minPos.angle - vecGoal.angle
+                        minPos.x = -minPos.x
+                        vecGoal.x = -vecGoal.x
                     if abs(theta) > maxAngle or minPos.norm > tooFar:
                         return self.action.ShootGoal(accShoot)
                     elif theta > AngleHyst or (self.dernierdrible == "down" and abs(theta) <= AngleHyst):
                         self.dernierdrible = "down"
-                        return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
+                        if self.action.tools.id_team == 1:
+                            return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
+                        else:
+                            return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
                     else:
                         self.dernierdrible = "up"
-                        return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
+                        if self.action.tools.id_team == 1:
+                            return self.action.ShootAngle(minPos.angle + maxAngle, accDrible)
+                        else:
+                            return self.action.ShootAngle(minPos.angle - maxAngle, accDrible)
             else:
                 return self.action.ShootGoal(accShoot)
-
         
         elif self.position_ennemi_x == self.action.tools.PosAdvPlusProcheDeLaBalle.x and self.position_ennemi_y == self.action.tools.PosAdvPlusProcheDeLaBalle.y:
                 self.position_ennemi_x = self.action.tools.PosAdvPlusProcheDeLaBalle.x

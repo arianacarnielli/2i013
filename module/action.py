@@ -25,7 +25,7 @@ class Action(object):
         
     def ShootAtk(self, acc = 1):
         """
-        Renvoie une SoccerAction de tir droit vers le champ adversaire. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
+        Renvoie une SoccerAction de tir droit vers le champ adverse. Si acc n'est pas donne, le tir est fait avec l'acceleration maximale.
         """
         return SoccerAction(self.tools.VecPosBall(0, maxPlayerAcceleration), shoot = self.tools.VecShoot(acc * maxBallAcceleration))
 
@@ -49,7 +49,7 @@ class Action(object):
     
     def ShootAngle(self, angle = 0, acc = 1):
         """
-        Renvoie une SoccerAction de tir avec acceleration donnée et angle par rapport à sa direction d'attaque.
+        Renvoie une SoccerAction de tir avec acceleration et angle donnés.
         """
         return SoccerAction(shoot = self.tools.VecAngle(angle, acc * maxBallAcceleration))
     
@@ -62,7 +62,6 @@ class Action(object):
         Renvoie une SoocerAction de courir vers la position prevue du ballon en n etapes. Vit determine l'acceleration du joueur. 
         """
         return SoccerAction(self.tools.VecPosBall(n, vit * maxPlayerAcceleration))
-        
         
     def RunToDefGoal(self):
         """
