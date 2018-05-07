@@ -424,3 +424,24 @@ class ToolBox(object):
         """
         return self.PosBall() - self.PosAdvPlusProcheDeLaBalle
         
+        
+
+###############################################################################
+### TME Solo                                                                ###
+###############################################################################
+
+    def FindClosestBall(self, ballPos):
+        """
+        Cherche la balle la plus proche de la balle qu'on peut frapper.
+        """
+               
+        list_balls = self.state.balls
+        min_ball = list_balls[0]
+        min_pos = ballPos.distance(min_ball.position)
+        for ball in list_balls:
+            if ballPos.distance(ball.position) < min_pos:
+                min_ball = ball
+                min_pos =  ballPos.distance(ball.position)
+        return min_ball
+
+        

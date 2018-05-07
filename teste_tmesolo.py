@@ -7,6 +7,7 @@ Created on Mon May  7 10:58:21 2018
 
 from soccersimulator import SoccerAction,Vector2D,settings ,SoccerTeam,Billard,show_simu,Strategy
 import module
+import math
 
 
 class FonceurLent(Strategy):
@@ -27,6 +28,9 @@ class FonceurLent(Strategy):
 
 
 class Fonceur_test1(Strategy):
+    """
+    Copie de la strategie donne mais avec mes fonctions auxiliaires.
+    """
     def __init__(self):
         super(Fonceur_test1,self).__init__("test1")
     def compute_strategy(self,state,idteam,idplayer):
@@ -48,10 +52,38 @@ class Fonceur_test1(Strategy):
 
 
 
+class Fonceur_test2(Strategy):
+    """
+    On cherche a fraper la balle la plus proche. 
+    """
+    def __init__(self):
+        super(Fonceur_test2,self).__init__("test2")
+    def compute_strategy(self,state,idteam,idplayer):
+        ball = state.ball
+        me = state.player_state(1,0)
+        alpha = math.pi/4
+        
+        tol = module.ToolBox(state,idteam,idplayer)
+        act = module.Action(tol)
+        
+        oth = tol.FindClosestBall(tol.PosBall())
+        
+        if (tol.CanShoot()) and  me.vitesse.norm < 0.5:
+            
+            return act.ShootPasse(oth.position)
+            
+        vecposball = tol.VecPosBall()
+        if vecposball.norm<5:
+            vecposball.norm=0.1
+        return SoccerAction(acceleration=vecposball)
+
+
+
+
 
 
 myt = SoccerTeam("teste")
-myt.add("N",Fonceur_test1())
-b = Billard(myt,type_game=0)
+myt.add("N",Fonceur_test2())
+b = Billard(myt,type_game=1)
 show_simu(b)
 
