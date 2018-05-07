@@ -87,19 +87,92 @@ class Fonceur_test3(Strategy):
     def compute_strategy(self,state,idteam,idplayer):
         ball = state.ball
         me = state.player_state(1,0)
-        alpha = math.pi/4
+
         
         tol = module.ToolBox(state,idteam,idplayer)
         act = module.Action(tol)
         
         oth = tol.FindClosestBall(tol.PosBall())
-        
-        if (tol.CanShoot()) and  me.vitesse.norm < 0.5:
+        if (tol.CanShoot()) and me.vitesse.norm < 0.5:
             if (abs(me.position.norm - oth.position.norm) < settings.BALL_RADIUS * 20):
                 return act.ShootPasse(oth.position)
             else:
-                return act. ShootPasse(oth.position, acc = 0.1)
-        vecposball = tol.VecPosBall()
+                return act. ShootPasse(oth.position, acc = 0.2)
+            
+        vecposball = tol.VecPosBall()        
+        if vecposball.norm<5:
+            vecposball.norm=0.1
+        return SoccerAction(acceleration=vecposball)
+
+
+
+class Fonceur_test4(Strategy):
+    """
+    On essaye de se raprocher de la balle gris foncé la plus proche du but avant de la frapper avec plus de vitesse.
+    """
+    def __init__(self):
+        super(Fonceur_test4,self).__init__("test4")
+    def compute_strategy(self,state,idteam,idplayer):
+        ball = state.ball
+        me = state.player_state(1,0)
+        
+        tol = module.ToolBox(state,idteam,idplayer)
+        act = module.Action(tol)
+        
+        posGoal = Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+        oth = tol.FindClosestBall(posGoal)
+
+        if(tol.CanShoot()) and  me.vitesse.norm < 0.5:
+            if(abs(me.position.norm - oth.position.norm) < settings.BALL_RADIUS * 10):
+                if tol.ExisteBallDevant:
+                    return act.ShootGoal()                
+                else:
+                    return act.ShootPasse(oth.position)
+            else:
+                return act.ShootPasse(oth.position, acc = 0.2)
+            
+        vecposball = tol.VecPosBall()        
+        if vecposball.norm<5:
+            vecposball.norm=0.1
+        return SoccerAction(acceleration=vecposball)
+
+
+class Fonceur_test5(Strategy):
+    """
+    L'idée de la stratégie est de viser non pas le centre de la balle, mais légèrement plus haut lorsque la balle se trouve au-dessus du but pour qu'elle aille vers le bas, 
+    ou légèrement plus bas lorsqu'elle se trouve au-dessous pour qu'elle monte. 
+    Le sens de "légèrement" est défini par le paramètre theta, qui ne peut pas être trop grand pour ne pas rater la balle.
+    """
+    def __init__(self):
+        super(Fonceur_test5,self).__init__("test5")
+    def compute_strategy(self,state,idteam,idplayer):
+        ball = state.ball
+        me = state.player_state(1,0)
+        
+        tol = module.ToolBox(state,idteam,idplayer)
+        act = module.Action(tol)
+        
+        posGoal = Vector2D(GAME_WIDTH, GAME_HEIGHT/2)
+        oth = tol.FindClosestBall(posGoal)
+
+        vecBallToOth = oth.position - ball.position    
+        vecBallToGoal = posGoal - ball.position
+        theta = 0.05
+        vecShoot = vecBallToOth * 10
+        
+        if(tol.CanShoot()) and  me.vitesse.norm < 0.5:
+            if vecBallToGoal.angle > vecBallToOth.angle:
+                vecShoot.angle = vecShoot.angle - theta
+                vecShoot = vecShoot + me
+                return act.ShootPasse(vecShoot, acc = 0.2)
+            else:
+                vecShoot.angle = vecShoot.angle + theta
+                vecShoot = vecShoot + me
+                return act.ShootPasse(vecShoot, acc = 0.2)
+
+            return act.ShootPasse(oth.position, acc = 0.2)
+            
+        vecposball = tol.VecPosBall()        
         if vecposball.norm<5:
             vecposball.norm=0.1
         return SoccerAction(acceleration=vecposball)
@@ -107,12 +180,8 @@ class Fonceur_test3(Strategy):
 
 
 
-
-
-
-
 myt = SoccerTeam("teste")
-myt.add("N",Fonceur_test3())
-b = Billard(myt,type_game=0)
+myt.add("N",Fonceur_test5())
+b = Billard(myt,type_game=1)
 show_simu(b)
 

@@ -439,25 +439,18 @@ class ToolBox(object):
         min_ball = list_balls[0]
         min_pos = ballPos.distance(min_ball.position)
         for ball in list_balls:
-            if ballPos.distance(ball.position) < min_pos:
+            if ballPos.distance(ball.position) < min_pos and (ball.position.x != GAME_WIDTH):
                 min_ball = ball
                 min_pos =  ballPos.distance(ball.position)
         return min_ball
         
         
-#    def ClosetoBall(self):
-#  
-#        ballsPos = self.state.balls
-#        for pos in ballsPos:
-#           newVec = self.VecPosJoueur(pos)
-#           if minPos is None or newVec.norm < minPos.norm:
-#                    minPos = newVec
-#        if not (minPos is None) and not (norm_acc is None):
-#            minPos.norm = norm_acc
-#        return minPos
-#
-#        
-#        
-#                posAutres = self.GetPosAdversaires + self.GetPosAmis
-#        posBall = self.PosBall(n)
-#        return self.PosJoueur.distance(posBall) < min([posAutre.distance(posBall) for posAutre in posAutres])
+    def ExisteBallDevant(self):
+        """
+        determine s'il existe une balle gris foncé devant le joueur actuel.
+        """
+        list_balls = self.state.balls
+        for ball in list_balls:
+            if self.EstDevant(ball.position):
+                return True
+        return False
