@@ -443,5 +443,21 @@ class ToolBox(object):
                 min_ball = ball
                 min_pos =  ballPos.distance(ball.position)
         return min_ball
-
         
+        
+#    def ClosetoBall(self):
+#  
+#        ballsPos = self.state.balls
+#        for pos in ballsPos:
+#           newVec = self.VecPosJoueur(pos)
+#           if minPos is None or newVec.norm < minPos.norm:
+#                    minPos = newVec
+#        if not (minPos is None) and not (norm_acc is None):
+#            minPos.norm = norm_acc
+#        return minPos
+#
+#        
+#        
+#                posAutres = self.GetPosAdversaires + self.GetPosAmis
+#        posBall = self.PosBall(n)
+#        return self.PosJoueur.distance(posBall) < min([posAutre.distance(posBall) for posAutre in posAutres])

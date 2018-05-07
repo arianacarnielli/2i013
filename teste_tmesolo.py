@@ -54,14 +54,13 @@ class Fonceur_test1(Strategy):
 
 class Fonceur_test2(Strategy):
     """
-    On cherche a fraper la balle la plus proche. 
+    On cherche a fraper la balle la plus proche. Il fonctionne donc pour le cas avec 2 balles. 
     """
     def __init__(self):
         super(Fonceur_test2,self).__init__("test2")
     def compute_strategy(self,state,idteam,idplayer):
         ball = state.ball
         me = state.player_state(1,0)
-        alpha = math.pi/4
         
         tol = module.ToolBox(state,idteam,idplayer)
         act = module.Action(tol)
@@ -79,11 +78,41 @@ class Fonceur_test2(Strategy):
 
 
 
+class Fonceur_test3(Strategy):
+    """
+    On essaye de se raprocher de la balle gris foncé avant de la frapper avec plus de vitesse.
+    """
+    def __init__(self):
+        super(Fonceur_test3,self).__init__("test3")
+    def compute_strategy(self,state,idteam,idplayer):
+        ball = state.ball
+        me = state.player_state(1,0)
+        alpha = math.pi/4
+        
+        tol = module.ToolBox(state,idteam,idplayer)
+        act = module.Action(tol)
+        
+        oth = tol.FindClosestBall(tol.PosBall())
+        
+        if (tol.CanShoot()) and  me.vitesse.norm < 0.5:
+            if (abs(me.position.norm - oth.position.norm) < settings.BALL_RADIUS * 20):
+                return act.ShootPasse(oth.position)
+            else:
+                return act. ShootPasse(oth.position, acc = 0.1)
+        vecposball = tol.VecPosBall()
+        if vecposball.norm<5:
+            vecposball.norm=0.1
+        return SoccerAction(acceleration=vecposball)
+
+
+
+
+
 
 
 
 myt = SoccerTeam("teste")
-myt.add("N",Fonceur_test2())
-b = Billard(myt,type_game=1)
+myt.add("N",Fonceur_test3())
+b = Billard(myt,type_game=0)
 show_simu(b)
 
