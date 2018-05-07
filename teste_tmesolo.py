@@ -108,7 +108,7 @@ class Fonceur_test3(Strategy):
 
 class Fonceur_test4(Strategy):
     """
-    On essaye de se raprocher de la balle gris foncé la plus proche du but avant de la frapper avec plus de vitesse.
+    On essaye de se raprocher de la balle gris foncé la plus proche du but avant de la frapper avec plus de vitesse. Si la balle gris foncé est devant le joueur, if fait un shoot vers la cage.
     """
     def __init__(self):
         super(Fonceur_test4,self).__init__("test4")
@@ -157,20 +157,21 @@ class Fonceur_test5(Strategy):
 
         vecBallToOth = oth.position - ball.position    
         vecBallToGoal = posGoal - ball.position
-        theta = 0.05
+        theta = 0.01
         vecShoot = vecBallToOth * 10
         
         if(tol.CanShoot()) and  me.vitesse.norm < 0.5:
-            if vecBallToGoal.angle > vecBallToOth.angle:
-                vecShoot.angle = vecShoot.angle - theta
-                vecShoot = vecShoot + me
-                return act.ShootPasse(vecShoot, acc = 0.2)
-            else:
-                vecShoot.angle = vecShoot.angle + theta
-                vecShoot = vecShoot + me
-                return act.ShootPasse(vecShoot, acc = 0.2)
+            if(abs(me.position.norm - oth.position.norm) > settings.BALL_RADIUS * 10):
+                if vecBallToGoal.angle > vecBallToOth.angle:
+                    vecShoot.angle = vecShoot.angle - theta
+                    vecShoot = vecShoot + me.position
+                    return act.ShootPasse(vecShoot, acc = 0.2)
+                else:
+                    vecShoot.angle = vecShoot.angle + theta
+                    vecShoot = vecShoot + me.position
+                    return act.ShootPasse(vecShoot, acc = 0.2)
 
-            return act.ShootPasse(oth.position, acc = 0.2)
+            return act.ShootPasse(oth.position, acc = 0.5)
             
         vecposball = tol.VecPosBall()        
         if vecposball.norm<5:
@@ -182,6 +183,6 @@ class Fonceur_test5(Strategy):
 
 myt = SoccerTeam("teste")
 myt.add("N",Fonceur_test5())
-b = Billard(myt,type_game=1)
+b = Billard(myt,type_game=2)
 show_simu(b)
 
