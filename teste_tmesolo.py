@@ -182,7 +182,7 @@ class Fonceur_test5(Strategy):
 
 
 myt = SoccerTeam("teste")
-myt.add("N",Fonceur_test5())
-b = Billard(myt,type_game=2)
+myt.add("N",Fonceur_test4())
+b = Billard(myt,type_game=1)
 show_simu(b)
 
