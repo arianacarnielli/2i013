@@ -34,19 +34,24 @@ class Fonceur_test1(Strategy):
         me = state.player_state(1,0)
         oth = state.balls[0]
         shoot = (oth.position-ball.position)*100
-        if (me.position.distance(ball.position)<(settings.BALL_RADIUS + settings.PLAYER_RADIUS)) and  me.vitesse.norm<0.5:
-            return SoccerAction(shoot=shoot)
-        acc = ball.position-me.position
-        if acc.norm<5:
-            acc.norm=0.1
-        return SoccerAction(acceleration=acc)
+        
+        tol = module.ToolBox(state,idteam,idplayer)
+        act = module.Action(tol)
+        
+        if (tol.CanShoot()) and  me.vitesse.norm < 0.5:
+            return act.ShootPasse(oth.position)
+            
+        vecposball = tol.VecPosBall()
+        if vecposball.norm<5:
+            vecposball.norm=0.1
+        return SoccerAction(acceleration=vecposball)
 
 
 
 
 
 myt = SoccerTeam("teste")
-myt.add("N",module.Fonceur_test1())
+myt.add("N",Fonceur_test1())
 b = Billard(myt,type_game=0)
 show_simu(b)
 
