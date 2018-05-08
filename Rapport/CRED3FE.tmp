@@ -1,0 +1,15 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, arrows.meta, angles, quotes}
+%\usetikzlibrary{external, arrows, arrows.meta}
+
+%\tikzset{external/system call={latex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource" && dvips -o "\image".ps "\image".dvi && ps2eps "\image".ps}}
+%\tikzexternalize[shell escape=-enable-write18]
+
+\begin{document}
+
+%\tikzsetnextfilename{schema_dribble_fig}
+\input{schema_dribble}
+
+\end{document}

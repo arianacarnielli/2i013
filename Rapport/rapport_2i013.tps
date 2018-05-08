@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=rapport_2i013.tex
 
 [Frame0_View0,0]
-TopLine=64
-Cursor=5253
+TopLine=0
+Cursor=1560
 
 [Frame1]
 Flags=0
